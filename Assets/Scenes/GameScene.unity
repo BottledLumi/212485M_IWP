@@ -309,11 +309,12 @@ GameObject:
   - component: {fileID: 720542220}
   - component: {fileID: 720542219}
   - component: {fileID: 720542222}
-  - component: {fileID: 720542221}
-  - component: {fileID: 720542224}
-  - component: {fileID: 720542223}
-  - component: {fileID: 720542226}
   - component: {fileID: 720542225}
+  - component: {fileID: 720542221}
+  - component: {fileID: 720542226}
+  - component: {fileID: 720542224}
+  - component: {fileID: 720542228}
+  - component: {fileID: 720542227}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -421,18 +422,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &720542223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720542218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b1b993e46ff92428013f24f26cd8d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &720542224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,7 +438,6 @@ MonoBehaviour:
   defence: 0
   attackSpeed: 0
   movementSpeed: 8
-  statsText: {fileID: 0}
 --- !u!61 &720542225
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -489,7 +477,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  healthText: {fileID: 1429875015}
+--- !u!114 &720542227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720542218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ce21ed714d46b46a13aa3b027ec6f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &720542228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720542218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8528bb19177a4baf51562fe6e1173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: fabfde7b9b17a5747b7050c164cd75da, type: 2}
 --- !u!1 &1055726168
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,9 +786,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 95c4eb5a3a297eb4092535df54cb0e9f, type: 2}
   - {fileID: 11400000, guid: 77999c46fc36a1349b9c537f1bf39584, type: 2}
   numPaths: 4
-  numRooms: 20
+  numRooms: 25
   numCauldronRooms: 1
-  numTreasureRooms: 1
+  numTreasureRooms: 2
   numBossRooms: 1
 --- !u!114 &1244647363
 MonoBehaviour:
