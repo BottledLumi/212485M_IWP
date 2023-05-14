@@ -29,7 +29,7 @@ public class Weapon : ScriptableObject
         }
         // Wait until the animation has finished playing
         float animationLength = attackAnimator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(animationLength);
+        //yield return new WaitForSeconds(animationLength);
 
         // Destroy the attack object
         Destroy(attackObject);
