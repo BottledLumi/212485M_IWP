@@ -4,9 +4,10 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float health;
-    [SerializeField] private TMP_Text healthText;
 
-    public void Start()
+    private TMP_Text healthText;
+
+    void Start()
     {
         healthText = GameObject.Find("UI").transform.Find("PlayerHealth_Text").GetComponent<TMP_Text>();
         UpdateHealthText();

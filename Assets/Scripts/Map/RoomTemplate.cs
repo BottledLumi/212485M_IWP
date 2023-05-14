@@ -24,6 +24,7 @@ public class RoomTemplate : ScriptableObject
     public RoomType getRoomType() { return roomType; }
 
     [SerializeField] private Sprite roomIcon;
+    public Sprite getRoomIcon() { return roomIcon; }
 
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class RoomTemplate : ScriptableObject
                 roomIcon = null;
                 break;
             default:
-                Debug.LogError("Invalid room type!");
+                Debug.LogError("Invalid room type");
                 break;
         }
     }
