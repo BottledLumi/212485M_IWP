@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: HuntingBow
   m_EditorClassIdentifier: 
   weaponIcon: {fileID: 0}
-  weaponAttack: {fileID: 0}
-  attack: 0
-  attackSpeed: 0
-  magazineSize: 0
-  range: 0
-  knockback: 0
+  weaponAttack: {fileID: 1317443994989195078, guid: 7ea84774cb06ac4438e720780f8439c4, type: 3}
+  attack: 5
+  attackSpeed: 1.2
+  magazineSize: 6
+  range: 10
+  knockback: 1
+  bulletSpeed: 2
+  bulletSize: 1

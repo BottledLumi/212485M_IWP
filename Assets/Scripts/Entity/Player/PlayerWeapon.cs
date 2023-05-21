@@ -6,6 +6,10 @@ public class PlayerWeapon : MonoBehaviour
 {
     [SerializeField] Weapon weapon;
     List<GameObject> weaponPool;
+
+    bool canAttack = true;
+    float totalAttack, totalRange, totalAttackSpeed;
+    float totalBulletSpeed, totalBulletSize; // For ranged weapons only
     private void Start()
     {
         if (!weapon)
@@ -16,7 +20,7 @@ public class PlayerWeapon : MonoBehaviour
     void Update()
     {
         // Attack input
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canAttack)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); mousePosition.z = 0;
@@ -24,26 +28,42 @@ public class PlayerWeapon : MonoBehaviour
             GameObject activeWeapon = getInactiveWeapon();
             if (activeWeapon != null)
             {
+                // Register item effects, weapon base stats, etc.
+                totalAttack = weapon.getAttack();
+                totalRange = weapon.getRange();
+                totalAttackSpeed = weapon.getAttackSpeed();
+
+                StartCoroutine(AttackSpeedCoroutine());
                 switch (weapon.weaponType)
                 {
                     case Weapon.WEAPON_TYPE.MELEE:
-                        MeleeWeaponAttack meleeWeaponAttack = activeWeapon.GetComponent<MeleeWeaponAttack>();
-                        if (!meleeWeaponAttack)
-                            break;
-                        meleeWeaponAttack.SetAttackAttributes(weapon.getAttack(), weapon.getRange(), weapon.getAttackSpeed());
+                        {
+                            MeleeWeaponAttack meleeWeaponAttack = activeWeapon.GetComponent<MeleeWeaponAttack>();
+                            if (!meleeWeaponAttack)
+                                break;
+                            meleeWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalAttackSpeed);
 
-                        Vector3 weaponOffset = (mousePosition - transform.position).normalized * (weapon.getRange()/2+0.5f);
-                        activeWeapon.transform.position = transform.position + weaponOffset;
-                        activeWeapon.transform.rotation = transform.rotation;
-                        activeWeapon.SetActive(true);
-                        break;
+                            Vector3 weaponOffset = (mousePosition - transform.position).normalized * (weapon.getRange() / 2 + 0.5f);
+                            activeWeapon.transform.position = transform.position + weaponOffset;
+                            activeWeapon.transform.rotation = transform.rotation;
+                            activeWeapon.SetActive(true);
+                            break;
+                        }
                     case Weapon.WEAPON_TYPE.RANGED:
-                        RangedWeaponAttack rangedWeaponAttack = activeWeapon.GetComponent<RangedWeaponAttack>();
-                        if (!rangedWeaponAttack)
-                            break;
+                        {
+                            RangedWeaponAttack rangedWeaponAttack = activeWeapon.GetComponent<RangedWeaponAttack>();
+                            if (!rangedWeaponAttack)
+                                break;
+                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalBulletSpeed, totalBulletSize);
 
-                        break;
+                            Vector3 weaponOffset = (mousePosition - transform.position).normalized * 0.5f;
+                            activeWeapon.transform.position = transform.position + weaponOffset;
+                            activeWeapon.transform.rotation = transform.rotation;
+                            activeWeapon.SetActive(true);
+                            break;
+                        }
                 }
+                canAttack = false;
             }
         }
     }
@@ -68,8 +88,9 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    //IEnumerator AttackSpeedCoroutine()
-    //{
-        //yield return new WaitForSeconds(weapon.);
-    //}
+    IEnumerator AttackSpeedCoroutine()
+    {
+        yield return new WaitForSeconds(totalAttackSpeed);
+        canAttack = true;
+    }
 }

@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedWeaponAttack : MonoBehaviour
+public class MeleeWeaponAttack : MonoBehaviour
 {
+    [SerializeField] bool mobile;
     List<GameObject> hitEnemies = new List<GameObject>();
-    private float expireTime = 10;
-    private float totalAttack;
-    private float totalRange;
-    private float totalAttackSpeed;
+    private float totalAttack, totalRange, totalAttackSpeed;
     public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalAttackSpeed)
     {
         totalAttack = _totalAttack;
@@ -16,17 +14,17 @@ public class RangedWeaponAttack : MonoBehaviour
         totalAttackSpeed = _totalAttackSpeed;
     }
 
-    //public Animator animator;
+    public Animator animator;
     PolygonCollider2D weaponCollider;
 
     private void Awake()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         weaponCollider = GetComponent<PolygonCollider2D>();
     }
     IEnumerator AttackCoroutine()
     {
-        yield return new WaitForSeconds(expireTime);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length / animator.speed);
         gameObject.SetActive(false);
     }
     private void Hit()
@@ -37,6 +35,7 @@ public class RangedWeaponAttack : MonoBehaviour
 
     private void OnEnable()
     {
+        animator.speed = (1/totalAttackSpeed);
         transform.localScale = new Vector3(totalRange, totalRange, 0);
 
         Hit();
