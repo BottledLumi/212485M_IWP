@@ -54,9 +54,19 @@ public class PlayerWeapon : MonoBehaviour
                             RangedWeaponAttack rangedWeaponAttack = activeWeapon.GetComponent<RangedWeaponAttack>();
                             if (!rangedWeaponAttack)
                                 break;
-                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalBulletSpeed, totalBulletSize);
+                            RangedWeapon rangedWeapon = weapon as RangedWeapon;
+                            if (rangedWeapon != null)
+                            {
+                                totalBulletSpeed = rangedWeapon.getBulletSpeed();
+                                totalBulletSize = rangedWeapon.getBulletSize();
+                            }
+                            Vector3 direction = new Vector3(
+                                mousePosition.x - transform.position.x,
+                                mousePosition.y - transform.position.y, 0).normalized;
 
-                            Vector3 weaponOffset = (mousePosition - transform.position).normalized * 0.5f;
+                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalBulletSpeed, totalBulletSize, direction);
+
+                            Vector3 weaponOffset = (mousePosition - transform.position).normalized;
                             activeWeapon.transform.position = transform.position + weaponOffset;
                             activeWeapon.transform.rotation = transform.rotation;
                             activeWeapon.SetActive(true);

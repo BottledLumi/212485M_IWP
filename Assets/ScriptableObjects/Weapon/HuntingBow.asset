@@ -19,5 +19,5 @@ MonoBehaviour:
   magazineSize: 6
   range: 10
   knockback: 1
-  bulletSpeed: 2
+  bulletSpeed: 15
   bulletSize: 1

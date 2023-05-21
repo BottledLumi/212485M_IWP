@@ -5,16 +5,18 @@ using UnityEngine;
 public class RangedWeaponAttack : MonoBehaviour
 {
     List<GameObject> hitEnemies = new List<GameObject>();
-    private float expireTime = 10;
+    private float expireTime = 6;
     private float totalAttack, totalRange, totalAttackSpeed;
     float totalBulletSpeed, totalBulletSize;
+    Vector3 direction;
 
-    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalBulletSpeed, float _totalBulletSize)
+    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalBulletSpeed, float _totalBulletSize, Vector3 _direction)
     {
         totalAttack = _totalAttack;
         totalRange = _totalRange;
         totalBulletSpeed = _totalBulletSpeed;
         totalBulletSize = _totalBulletSize;
+        direction = _direction;
     }
 
     //public Animator animator;
@@ -22,12 +24,11 @@ public class RangedWeaponAttack : MonoBehaviour
 
     private void Awake()
     {
-        //animator = GetComponent<Animator>();
         weaponCollider = GetComponent<PolygonCollider2D>();
     }
     private void Update()
     {
-        transform.position += transform.forward * totalBulletSpeed;
+        transform.position += direction * totalBulletSpeed * Time.deltaTime;
     }
     IEnumerator AttackCoroutine()
     {
