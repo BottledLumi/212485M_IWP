@@ -445,7 +445,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720542218}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c8528bb19177a4baf51562fe6e1173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: fabfde7b9b17a5747b7050c164cd75da, type: 2}
+  weapon: {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
 --- !u!1 &1055726168
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +785,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6accd09f8c1dd234893a0153d28534e1, type: 2}
   - {fileID: 11400000, guid: 95c4eb5a3a297eb4092535df54cb0e9f, type: 2}
   - {fileID: 11400000, guid: 77999c46fc36a1349b9c537f1bf39584, type: 2}
-  numPaths: 4
+  numPaths: 3
   numRooms: 25
   numCauldronRooms: 1
   numTreasureRooms: 2

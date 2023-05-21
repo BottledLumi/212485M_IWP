@@ -5,29 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Ranged Weapon")]
 public class RangedWeapon : Weapon
 {
-    void Awake()
-    {
-        for (int i = 0; i < magazineSize; i++)
-        {
-            GameObject newWeaponAttack = Instantiate(weaponAttack); newWeaponAttack.SetActive(false);
-            weaponAttackPool.Add(newWeaponAttack);
-        }
-    }
-
-    override public List<GameObject> Attack(Vector3 userPos, Vector3 clickPos)
-    {
-        // Hitbox + SFX + VFX
-        GameObject attackObject = Instantiate(weaponAttack, clickPos, Quaternion.identity);
-        Animator attackAnimator = attackObject.GetComponent<Animator>();
-
-        if (attackAnimator != null)
-        {
-            attackAnimator.SetTrigger("Attack");
-        }
-        List<GameObject> targets = new List<GameObject>();
-        // TODO: Add hit detection code here and add targets to the list
-
-        // return targets
-        return targets;
-    }
+    public override WEAPON_TYPE weaponType => WEAPON_TYPE.RANGED;
+    public readonly float reloadSpeed = 1.4f;
+    [SerializeField] private float bulletSpeed; public float getBulletSpeed() { return bulletSpeed; }
+    [SerializeField] private float bulletSize; public float getBulletSize() { return bulletSize; }
 }
