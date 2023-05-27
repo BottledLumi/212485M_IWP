@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4915409395836992832}
   - component: {fileID: 6705097242714514487}
   m_Layer: 0
-  m_Name: LeftDoor
+  m_Name: RightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,4 +274,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b39146c9f87aa4c95ae36fbbfcfe06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
+  direction: 1

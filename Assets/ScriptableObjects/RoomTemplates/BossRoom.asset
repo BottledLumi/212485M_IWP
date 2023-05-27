@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4a296283142b2419eaa94dc87f12be, type: 3}
   m_Name: BossRoom
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 5192640063505386111, guid: d81e9c96b1c2e4e4abc167b8789e7471, type: 3}
+  roomPrefab: {fileID: 5192640063505386111, guid: 17e8de64aa67d6d4ab43918bb3b5e06c, type: 3}
   roomType: 4
   roomIcon: {fileID: 0}

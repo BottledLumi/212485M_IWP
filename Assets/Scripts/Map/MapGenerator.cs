@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 using RoomSettings;
 public struct Coord2D
@@ -93,6 +94,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
+        // Cauldron rooms
         for (int i = 0; i < numCauldronRooms; i++)
         {
             if (isolatedRooms.Count < 1)
@@ -106,6 +108,8 @@ public class MapGenerator : MonoBehaviour
 
             isolatedRooms.Remove(randomPath);
         }
+
+        // Treasure rooms
         for (int i = 0; i < numTreasureRooms; i++)
         {
             if (isolatedRooms.Count < 1)
@@ -119,6 +123,8 @@ public class MapGenerator : MonoBehaviour
             
             isolatedRooms.Remove(randomPath);
         }
+
+        // Boss rooms
         for (int i = 0; i < numBossRooms; i++)
         {
             if (isolatedRooms.Count < 1)

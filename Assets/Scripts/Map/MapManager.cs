@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class MapManager : MonoBehaviour
 {
     private MapGenerator mapGenerator;
-    [SerializeField] private GameObject world;
+    [SerializeField] private GameObject world, rooms, doors;
     [SerializeField] private GameObject roomSpawn;
 
     private Grid grid;
@@ -15,21 +15,26 @@ public class MapManager : MonoBehaviour
     [SerializeField] private uint roomWidth, roomHeight;
 
     public List<RoomTemplate[,]> floorLayouts = new List<RoomTemplate[,]>();
+    private List<GameObject[,]> floors = new List<GameObject[,]>();
+
+    [SerializeField] GameObject leftDoor, rightDoor, upDoor, downDoor; // Door prefabs
+    [SerializeField] private GameObject doorSpawn;
     void Start()
     {
         grid = world.GetComponent<Grid>();
         mapGenerator = GetComponent<MapGenerator>();
 
         floorLayouts.Add(mapGenerator.GenerateFloorLayout());
-        GenerateFloor(0);
+        GenerateFloor(0); GenerateDoors(0);
     }
 
-    void GenerateFloor(int floorNum)
+    void GenerateFloor(int floorNum) // god please optimise this and the door spawning another day, im so tired
     {
         Transform roomPos = roomSpawn.transform;
         RoomTemplate[,] floor = floorLayouts[floorNum];
         if (floor == null)
             return;
+        GameObject[,] floorRooms = new GameObject[floor.GetLength(0),floor.GetLength(1)];
         for (int row = 0; row < floor.GetLength(0); row++)
         {
             for (int col = 0; col < floor.GetLength(1); col++)
@@ -42,7 +47,71 @@ public class MapManager : MonoBehaviour
                                                    (col-floor.GetLength(1)/2+1) * (tilesBetweenRooms + grid.cellSize.y * roomHeight), 0);
                     
                     GameObject newRoom = Instantiate(floor[row, col].getRoomPrefab(), roomPos.position, Quaternion.identity);
-                    newRoom.transform.SetParent(world.transform);
+                    newRoom.transform.SetParent(rooms.transform);
+
+                    floorRooms[row, col] = newRoom;
+                }
+            }
+        }
+
+        // !!! INCORRECT !!! just for testing, this is not aligned with floorNum!!
+        floors.Add(floorRooms);
+    }
+
+    // Add doors
+    void GenerateDoors(int floorNum)
+    {
+        GameObject[,] floorRooms = floors[floorNum];
+        for (int row = 0; row < floorRooms.GetLength(0); row++)
+        {
+            for (int col = 0; col < floorRooms.GetLength(1); col++)
+            {
+                if (floorRooms[row, col])
+                {
+                    GameObject room = floorRooms[row, col];
+                    Tilemap tilemap = room.transform.Find("Walls").GetComponent<Tilemap>();
+                    if (tilemap)
+                    {
+                        int roomWidthInTiles = tilemap.size.x; int roomHeightInTiles = tilemap.size.y;
+                        Transform transform = doorSpawn.transform;
+                        if (floorRooms[row + 1,col])
+                        {
+                            Vector3 doorPos = new Vector3(room.transform.position.x+roomWidthInTiles/2, room.transform.position.y, room.transform.position.z);
+                            transform.position = doorPos;
+                            GameObject newDoor = Instantiate(rightDoor, transform);
+                            newDoor.transform.SetParent(doors.transform);
+
+                            // do a check for if room component is present
+                            room.GetComponent<Room>().AddDoor(newDoor.GetComponent<Door>());
+                        }
+                        if (floorRooms[row - 1, col])
+                        {
+                            Vector3 doorPos = new Vector3(room.transform.position.x - roomWidthInTiles / 2, room.transform.position.y, room.transform.position.z);
+                            transform.position = doorPos;
+                            GameObject newDoor = Instantiate(leftDoor, transform);
+                            newDoor.transform.SetParent(doors.transform);
+
+                            room.GetComponent<Room>().AddDoor(newDoor.GetComponent<Door>());
+                        }
+                        if (floorRooms[row, col + 1])
+                        {
+                            Vector3 doorPos = new Vector3(room.transform.position.x, room.transform.position.y + roomHeightInTiles/2, room.transform.position.z);
+                            transform.position = doorPos;
+                            GameObject newDoor = Instantiate(upDoor, transform);
+                            newDoor.transform.SetParent(doors.transform);
+
+                            room.GetComponent<Room>().AddDoor(newDoor.GetComponent<Door>());
+                        }
+                        if (floorRooms[row, col - 1])
+                        {
+                            Vector3 doorPos = new Vector3(room.transform.position.x, room.transform.position.y - roomHeightInTiles / 2, room.transform.position.z);
+                            transform.position = doorPos;
+                            GameObject newDoor = Instantiate(downDoor, transform);
+                            newDoor.transform.SetParent(doors.transform);
+
+                            room.GetComponent<Room>().AddDoor(newDoor.GetComponent<Door>());
+                        }
+                    }
                 }
             }
         }

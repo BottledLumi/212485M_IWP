@@ -10,17 +10,12 @@ public class Room : MonoBehaviour
         public bool explored; // Player has entered the room
         public bool cleared; // Room has been cleared
     }
-    private List<GameObject> enemies;
+    private List<GameObject> enemies = new List<GameObject>();
+    private List<Door> doors = new List<Door>();
     ROOM_STATUS status;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void AddDoor(Door door)
     {
-        
-    }
+        doors.Add(door);
+    }    
 }
