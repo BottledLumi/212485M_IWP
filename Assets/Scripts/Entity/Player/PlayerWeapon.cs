@@ -34,6 +34,8 @@ public class PlayerWeapon : MonoBehaviour
                 totalAttackSpeed = weapon.getAttackSpeed();
 
                 StartCoroutine(AttackSpeedCoroutine());
+
+                float playerOffset = gameObject.transform.localScale.y; // degree of weapon offset from player
                 switch (weapon.weaponType)
                 {
                     case Weapon.WEAPON_TYPE.MELEE:
@@ -43,7 +45,7 @@ public class PlayerWeapon : MonoBehaviour
                                 break;
                             meleeWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalAttackSpeed);
 
-                            Vector3 weaponOffset = (mousePosition - transform.position).normalized * (weapon.getRange() / 2 + 0.5f);
+                            Vector3 weaponOffset = (mousePosition - transform.position).normalized * (weapon.getRange() / 2 + 0.5f * playerOffset);
                             activeWeapon.transform.position = transform.position + weaponOffset;
                             activeWeapon.transform.rotation = transform.rotation;
                             activeWeapon.SetActive(true);
@@ -66,7 +68,7 @@ public class PlayerWeapon : MonoBehaviour
 
                             rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalBulletSpeed, totalBulletSize, direction);
 
-                            Vector3 weaponOffset = (mousePosition - transform.position).normalized;
+                            Vector3 weaponOffset = (mousePosition - transform.position).normalized * playerOffset;
                             activeWeapon.transform.position = transform.position + weaponOffset;
                             activeWeapon.transform.rotation = transform.rotation;
                             activeWeapon.SetActive(true);

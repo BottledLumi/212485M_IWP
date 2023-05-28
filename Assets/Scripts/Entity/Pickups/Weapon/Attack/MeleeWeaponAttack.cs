@@ -14,7 +14,7 @@ public class MeleeWeaponAttack : MonoBehaviour
         totalAttackSpeed = _totalAttackSpeed;
     }
 
-    public Animator animator;
+    [HideInInspector] public Animator animator;
     PolygonCollider2D weaponCollider;
 
     private void Awake()
@@ -24,6 +24,7 @@ public class MeleeWeaponAttack : MonoBehaviour
     }
     IEnumerator AttackCoroutine()
     {
+        // theres some shyt bug where if i spam the goddamn attack too much eventually you can see a frame's worth of animation that shouldn't be there
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length / animator.speed);
         gameObject.SetActive(false);
     }
