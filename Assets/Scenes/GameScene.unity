@@ -152,7 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 402314704}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &402314703
 GameObject:
@@ -183,7 +183,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 916456053}
   - {fileID: 248921396}
   - {fileID: 2026518414}
   - {fileID: 859944171}
@@ -257,7 +256,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 40
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -555,38 +554,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 402314704}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &916456052
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 916456053}
-  m_Layer: 0
-  m_Name: DoorSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &916456053
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 916456052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 402314704}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1055726168
 GameObject:
@@ -894,12 +862,11 @@ MonoBehaviour:
   roomSpawn: {fileID: 248921395}
   tilesBetweenRooms: 8
   roomWidth: 37
-  roomHeight: 24
+  roomHeight: 25
   leftDoor: {fileID: 1853473122347217151, guid: 07e398f88a5d31742abf5df023395c6a, type: 3}
-  rightDoor: {fileID: 1853473122347217151, guid: 853a0b06afd476f4ab2dfca8660412e3, type: 3}
-  upDoor: {fileID: 1853473122347217151, guid: c84c732d7d4c15947ba0c34077755433, type: 3}
+  rightDoor: {fileID: 1853473122347217151, guid: a1c2fe7666a7fdc469194dcb1ee8179e, type: 3}
+  upDoor: {fileID: 1853473122347217151, guid: eadd72cd40459bf42baf698d387b6975, type: 3}
   downDoor: {fileID: 1853473122347217151, guid: bec2a95882efd33418c2408ff6256299, type: 3}
-  doorSpawn: {fileID: 916456052}
 --- !u!4 &1244647364
 Transform:
   m_ObjectHideFlags: 0
@@ -1079,7 +1046,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 402314704}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2026518414 stripped
 Transform:
@@ -4243,7 +4210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5192640063505386108, guid: da7cf6382ba20974ea096185c4edd831, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5192640063505386108, guid: da7cf6382ba20974ea096185c4edd831, type: 3}
       propertyPath: m_LocalPosition.x

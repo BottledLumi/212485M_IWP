@@ -5,6 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     bool open;
+    Door linkedDoor;
     enum DIRECTION
     {
         LEFT,

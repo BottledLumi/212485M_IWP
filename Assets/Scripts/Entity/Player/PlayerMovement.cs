@@ -10,10 +10,14 @@ public class PlayerMovement : MonoBehaviour
 
     private float movementSpeed;
 
+    private Animator animator;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         movementSpeed = GetComponent<PlayerAttributes>().movementSpeed;
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -24,12 +28,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (horizontal != 0 && vertical != 0) // Check for diagonal movement
+        bool isWalking = horizontal != 0 || vertical != 0;
+        if (isWalking) // Check for diagonal movement
         {
             // limit movement speed diagonally, so you move at 70% speed
             horizontal *= moveLimiter;
             vertical *= moveLimiter;
         }
+        animator.SetBool("isWalking", isWalking);
 
         body.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
 
