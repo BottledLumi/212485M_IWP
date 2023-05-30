@@ -5,8 +5,8 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     bool open;
-    Door linkedDoor;
-    enum DIRECTION
+    [HideInInspector] public Door linkedDoor = null;
+    public enum DIRECTION
     {
         LEFT,
         RIGHT,
@@ -15,27 +15,31 @@ public class Door : MonoBehaviour
     }
 
     [SerializeField] DIRECTION direction;
+    public DIRECTION getDirection()
+    {
+        return direction;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collision");
         if (!collision.gameObject.CompareTag("Player"))
             return;
-        Debug.Log("player collision");
+        Vector3 newPos = linkedDoor.transform.Find("Door").position;
         switch (direction)
         {
             case DIRECTION.LEFT:
-                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x - 10, collision.gameObject.transform.position.y, collision.gameObject.transform.position.z);
+                newPos.x -= 3;
                 break;
             case DIRECTION.RIGHT:
-                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x + 10, collision.gameObject.transform.position.y, collision.gameObject.transform.position.z);
+                newPos.x += 3;
                 break;
             case DIRECTION.UP:
-                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y+10, collision.gameObject.transform.position.z);
+                newPos.y += 3;
                 break;
             case DIRECTION.DOWN:
-                collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y-10, collision.gameObject.transform.position.z);
+                newPos.y -= 3;
                 break;
         }
+        collision.gameObject.transform.position = newPos;
     }
 }
