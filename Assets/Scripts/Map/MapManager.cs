@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.AI;
 
 public class MapManager : MonoBehaviour
 {
     private MapGenerator mapGenerator;
-    private NavMeshGenerator navMeshGenerator;
     [SerializeField] private GameObject world, rooms, doors;
     [SerializeField] private GameObject roomSpawn;
 
@@ -23,7 +23,6 @@ public class MapManager : MonoBehaviour
     {
         grid = world.GetComponent<Grid>();
         mapGenerator = GetComponent<MapGenerator>();
-        navMeshGenerator = GetComponent<NavMeshGenerator>();
 
         floorLayouts.Add(1, mapGenerator.GenerateFloorLayout()); // Generate first floor layout
         GenerateFloor(1); // Generate first floor
@@ -166,10 +165,10 @@ public class MapManager : MonoBehaviour
         if (doorToLink)
             ConnectDoors(door, doorToLink);
     }
+
     public void GenerateFloor(int floorNum)
     {
         GenerateRooms(floorNum); GenerateDoors(floorNum);
-        navMeshGenerator.GenerateNavMesh();
     }
 }
 

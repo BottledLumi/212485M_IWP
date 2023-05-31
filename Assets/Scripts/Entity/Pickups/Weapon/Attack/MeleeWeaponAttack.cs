@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeleeWeaponAttack : MonoBehaviour
 {
     [SerializeField] bool mobile;
-    List<GameObject> hitEnemies = new List<GameObject>();
+    List<Enemy> hitEnemies = new List<Enemy>();
     private float totalAttack, totalRange, totalAttackSpeed;
     public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalAttackSpeed)
     {
@@ -31,7 +31,32 @@ public class MeleeWeaponAttack : MonoBehaviour
     private void Hit()
     {
         //// Hitbox + SFX + VFX
-        // TODO: Add hit detection code here and add targets to the list
+
+        // Set up the parameters for the overlap check
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(LayerMask.GetMask("Enemy")); // Set the layer mask to include only the enemy layer
+        filter.useLayerMask = true;
+
+        // Perform the overlap check
+        Collider2D[] results = new Collider2D[10]; // Adjust the size based on the maximum number of expected enemies
+        int numColliders = Physics2D.OverlapCollider(weaponCollider, filter, results);
+
+        // Iterate through the colliders and check if they belong to enemy objects
+        for (int i = 0; i < numColliders; i++)
+        {
+            Enemy enemy = results[i].GetComponent<Enemy>();
+            if (enemy != null && !hitEnemies.Contains(enemy))
+            {
+                // Enemy detected, add it to the list
+                hitEnemies.Add(enemy);
+            }
+        }
+
+        // TODO: Perform actions on the detected enemies (e.g., deal damage, play sound effects, etc.)
+        foreach (Enemy enemy in hitEnemies)
+        {
+            enemy.TakeDamage(totalAttack);
+        }
     }
 
     private void OnEnable()

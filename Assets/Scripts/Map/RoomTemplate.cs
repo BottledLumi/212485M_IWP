@@ -14,7 +14,6 @@ namespace RoomSettings
 }
 
 [CreateAssetMenu(fileName = "New Room Template", menuName = "Room Template")]
-
 public class RoomTemplate : ScriptableObject
 {
     [SerializeField] private GameObject roomPrefab;
