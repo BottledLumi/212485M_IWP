@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] PlayerData playerData;
     Rigidbody2D body;
 
     float horizontal;
@@ -15,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        movementSpeed = GetComponent<PlayerAttributes>().movementSpeed;
+        movementSpeed = playerData.movementSpeed;
 
         animator = GetComponent<Animator>();
     }

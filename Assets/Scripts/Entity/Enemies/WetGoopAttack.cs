@@ -30,10 +30,10 @@ public class WetGoopAttack : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player") || !canAttack)
             return;
-        PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-        if (playerHealth)
+        Player player = collision.gameObject.GetComponent<Player>();
+        if (player)
         {
-            playerHealth.TakeDamage(enemy.getAttack());
+            player.TakeDamage(enemy.getAttack());
             canAttack = false;
         }
 

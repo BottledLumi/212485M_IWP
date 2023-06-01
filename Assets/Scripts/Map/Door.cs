@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    bool open;
+    private bool open;
     [HideInInspector] public Door linkedDoor = null;
     public enum DIRECTION
     {
@@ -20,9 +20,14 @@ public class Door : MonoBehaviour
         return direction;
     }
 
+    public void SetOpen(bool _open)
+    {
+        open = _open;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player"))
+        if (!collision.gameObject.CompareTag("Player") || !open)
             return;
         Vector3 newPos = linkedDoor.transform.Find("Door").position;
         switch (direction)

@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0bd080252dd81c45828034c20c0be9b, type: 3}
-  m_Name: Knife
+  m_Script: {fileID: 11500000, guid: e3d109b5d7d823a4bbd928479defc5ea, type: 3}
+  m_Name: PlayerData
   m_EditorClassIdentifier: 
-  weaponIcon: {fileID: 0}
-  weaponAttack: {fileID: 2666802197143146413, guid: e65ac0798bff2644693efcf84e034573, type: 3}
-  attack: 30
-  attackSpeed: 1
-  magazineSize: 1
-  range: 3
-  knockback: 2
+  health: 0
+  attack: 0
+  defence: 0
+  attackSpeed: 0
+  movementSpeed: 8

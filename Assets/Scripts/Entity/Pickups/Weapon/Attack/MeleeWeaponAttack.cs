@@ -61,12 +61,24 @@ public class MeleeWeaponAttack : MonoBehaviour
 
     private void OnEnable()
     {
-        animator.speed = (1/totalAttackSpeed);
+        animator.speed = (3/totalAttackSpeed);
         transform.localScale = new Vector3(totalRange, totalRange, 0);
 
-        Hit();
+        //Hit();
 
         StartCoroutine(AttackCoroutine());
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            if (enemy && !hitEnemies.Contains(enemy))
+            {
+                enemy.TakeDamage(totalAttack);
+                hitEnemies.Add(enemy);
+            }
+        }
     }
 
     public void OnDisable()
