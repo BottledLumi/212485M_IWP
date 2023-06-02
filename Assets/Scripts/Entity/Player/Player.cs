@@ -1,17 +1,22 @@
 using UnityEngine;
-using TMPro;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour // Temporary script to handle some functionality
 {
-    [SerializeField] PlayerData playerData;
+    [SerializeField] private float initialHealth, initialAttack, initialDefence, initialAttackSpeed, initialMovementSpeed;
+    PlayerData playerData;
+    private void Start()
+    {
+        playerData = PlayerData.Instance;
+        InitialisePlayerStats();
+    }
     public void Heal(float amount) {
-        playerData.health += amount;
+        playerData.Health += amount;
     }
 
     public void TakeDamage(float amount)
     {
-        playerData.health -= amount;
-        if (playerData.health <= 0)
+        playerData.Health -= amount;
+        if (playerData.Health <= 0)
             PlayerDeath();
     }
 
@@ -19,5 +24,14 @@ public class Player : MonoBehaviour
     private void PlayerDeath()
     {
         // Lose
+    }
+
+    private void InitialisePlayerStats()
+    {
+        playerData.Health = initialHealth;
+        playerData.Attack = initialAttack;
+        playerData.Defence = initialDefence;
+        playerData.AttackSpeed = initialAttackSpeed;
+        playerData.MovementSpeed = initialMovementSpeed;
     }
 }

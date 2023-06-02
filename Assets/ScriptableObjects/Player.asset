@@ -10,10 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3d109b5d7d823a4bbd928479defc5ea, type: 3}
-  m_Name: PlayerData
+  m_Name: Player
   m_EditorClassIdentifier: 
-  health: 0
-  attack: 0
-  defence: 0
-  attackSpeed: 0
-  movementSpeed: 8

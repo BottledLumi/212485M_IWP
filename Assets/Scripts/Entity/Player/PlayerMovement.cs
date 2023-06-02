@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] PlayerData playerData;
     Rigidbody2D body;
 
     float horizontal;
@@ -15,9 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
-        movementSpeed = playerData.movementSpeed;
+        PlayerData.Instance.MovementSpeedChangedEvent += OnMovementSpeedChanged;
 
+        body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
@@ -49,5 +48,10 @@ public class PlayerMovement : MonoBehaviour
         );
 
         transform.up = direction;
+    }
+
+    private void OnMovementSpeedChanged(float _movementSpeed)
+    {
+        movementSpeed = _movementSpeed;
     }
 }
