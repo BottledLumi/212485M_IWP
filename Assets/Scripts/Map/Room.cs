@@ -6,10 +6,47 @@ public class Room : MonoBehaviour
 {
     public struct ROOM_STATUS
     {
-        public bool active; // Player is in the room
-        public bool explored; // Player has entered the room
-        public bool cleared; // Room has been cleared
+        private int status;
+
+        private const int ACTIVE_MASK = 1;     // Bit 0: Active flag
+        private const int EXPLORED_MASK = 2;   // Bit 1: Explored flag
+        private const int CLEARED_MASK = 4;    // Bit 2: Cleared flag
+
+        public bool active
+        {
+            get { return (status & ACTIVE_MASK) != 0; }
+            set
+            {
+                if (value)
+                    status |= ACTIVE_MASK;
+                else
+                    status &= ~ACTIVE_MASK;
+            }
+        }
+        public bool explored
+        {
+            get { return (status & EXPLORED_MASK) != 0; }
+            set
+            {
+                if (value)
+                    status |= EXPLORED_MASK;
+                else
+                    status &= ~EXPLORED_MASK;
+            }
+        }
+        public bool cleared
+        {
+            get { return (status & CLEARED_MASK) != 0; }
+            set
+            {
+                if (value)
+                    status |= CLEARED_MASK;
+                else
+                    status &= ~CLEARED_MASK;
+            }
+        }
     }
+
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     private List<Door> doors = new List<Door>();
     ROOM_STATUS status;

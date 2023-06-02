@@ -16,6 +16,10 @@ public class MapManager : MonoBehaviour
 
     public Dictionary<int, RoomTemplate[,]> floorLayouts = new Dictionary<int, RoomTemplate[,]>();
     private Dictionary<int, GameObject[,]> floors = new Dictionary<int, GameObject[,]>();
+    public GameObject[,] getFloor(int floorNum)
+    {
+        return floors[floorNum];
+    }
 
     [SerializeField] GameObject leftDoor, rightDoor, upDoor, downDoor; // Door prefabs
 
