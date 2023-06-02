@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float amount)
     {
         playerData.health -= amount;
+        Debug.Log(playerData.health);
         if (playerData.health <= 0)
             PlayerDeath();
     }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.AI;
 
 public class MapManager : MonoBehaviour
 {
@@ -19,6 +18,7 @@ public class MapManager : MonoBehaviour
     private Dictionary<int, GameObject[,]> floors = new Dictionary<int, GameObject[,]>();
 
     [SerializeField] GameObject leftDoor, rightDoor, upDoor, downDoor; // Door prefabs
+
     void Start()
     {
         grid = world.GetComponent<Grid>();
