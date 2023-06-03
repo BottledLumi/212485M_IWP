@@ -50,6 +50,10 @@ public class Room : MonoBehaviour
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     private List<Door> doors = new List<Door>();
     ROOM_STATUS status;
+    public ROOM_STATUS Status
+    {
+        get { return status; }
+    }
     public void AddDoor(Door door)
     {
         doors.Add(door);
@@ -64,6 +68,7 @@ public class Room : MonoBehaviour
         if (EnemiesActive())
             CloseDoors();
         Debug.Log("Player has entered room");
+        MapManager.Instance.RoomEntered();
     }
 
     private void OnTriggerExit2D(Collider2D collision)

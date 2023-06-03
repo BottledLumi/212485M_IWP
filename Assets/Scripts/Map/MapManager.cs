@@ -5,6 +5,28 @@ using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
+    private static MapManager instance;
+    public static MapManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                // Find the existing instance in the scene
+                instance = FindObjectOfType<MapManager>();
+
+                // If no instance exists, create a new one
+                if (instance == null)
+                {
+                    GameObject mapManagerGO = new GameObject("MapManager");
+                    instance = mapManagerGO.AddComponent<MapManager>();
+                }
+            }
+
+            return instance;
+        }
+    }
+
     private MapGenerator mapGenerator;
     [SerializeField] private GameObject world, rooms, doors;
     [SerializeField] private GameObject roomSpawn;
@@ -22,14 +44,20 @@ public class MapManager : MonoBehaviour
     }
 
     [SerializeField] GameObject leftDoor, rightDoor, upDoor, downDoor; // Door prefabs
-
+    int activeFloor = 1;
+    public int ActiveFloor
+    {
+        get { return activeFloor; }
+    }
+    public event System.Action RoomEnteredEvent; // Event for when player enters a room
     void Start()
     {
+        instance = gameObject.GetComponent<MapManager>();
         grid = world.GetComponent<Grid>();
         mapGenerator = GetComponent<MapGenerator>();
 
-        floorLayouts.Add(1, mapGenerator.GenerateFloorLayout()); // Generate first floor layout
-        GenerateFloor(1); // Generate first floor
+        floorLayouts.Add(activeFloor, mapGenerator.GenerateFloorLayout()); // Generate first floor layout
+        GenerateFloor(activeFloor); // Generate first floor
     }
 
     void GenerateRooms(int floorNum) // Generate rooms for floor
@@ -69,35 +97,27 @@ public class MapManager : MonoBehaviour
         {
             for (int col = 0; col < floorRooms.GetLength(1); col++)
             {
-                if (floorRooms[row, col])
+                if (!floorRooms[row, col])
+                    continue;
+                
+                GameObject room = floorRooms[row, col];
+                Room roomComponent = room.GetComponent<Room>();
+
+                Tilemap tilemap = room.transform.Find("Walls").GetComponent<Tilemap>();
+                if (tilemap && roomComponent)
                 {
-                    GameObject room = floorRooms[row, col];
-                    Room roomComponent = room.GetComponent<Room>();
+                    int roomWidthInTiles = tilemap.size.x; int roomHeightInTiles = tilemap.size.y+1; // +1 to y to solve odd-even discrepancy
+                    if (floorRooms[row + 1, col])
+                        CreateDoor(roomComponent, room.transform.position + new Vector3(roomWidthInTiles / 2, 0, 0), rightDoor);
 
-                    Tilemap tilemap = room.transform.Find("Walls").GetComponent<Tilemap>();
-                    if (tilemap && roomComponent)
-                    {
-                        int roomWidthInTiles = tilemap.size.x; int roomHeightInTiles = tilemap.size.y+1; // +1 to y to solve odd-even discrepancy
-                        if (floorRooms[row + 1, col])
-                        {
-                            CreateDoor(roomComponent, room.transform.position + new Vector3(roomWidthInTiles / 2, 0, 0), rightDoor);
-                        }
+                    if (floorRooms[row - 1, col])
+                        CreateDoor(roomComponent, room.transform.position + new Vector3(-roomWidthInTiles / 2, 0, 0), leftDoor);
 
-                        if (floorRooms[row - 1, col])
-                        {
-                            CreateDoor(roomComponent, room.transform.position + new Vector3(-roomWidthInTiles / 2, 0, 0), leftDoor);
-                        }
+                    if (floorRooms[row, col + 1])
+                        CreateDoor(roomComponent, room.transform.position + new Vector3(0, roomHeightInTiles / 2, 0), upDoor);
 
-                        if (floorRooms[row, col + 1])
-                        {
-                            CreateDoor(roomComponent, room.transform.position + new Vector3(0, roomHeightInTiles / 2, 0), upDoor);
-                        }
-
-                        if (floorRooms[row, col - 1])
-                        {
-                            CreateDoor(roomComponent, room.transform.position + new Vector3(0, -roomHeightInTiles / 2, 0), downDoor);
-                        }
-                    }
+                    if (floorRooms[row, col - 1])
+                        CreateDoor(roomComponent, room.transform.position + new Vector3(0, -roomHeightInTiles / 2, 0), downDoor);
                 }
             }
         }
@@ -173,6 +193,11 @@ public class MapManager : MonoBehaviour
     public void GenerateFloor(int floorNum)
     {
         GenerateRooms(floorNum); GenerateDoors(floorNum);
+    }
+
+    public void RoomEntered()
+    {
+        RoomEnteredEvent?.Invoke();
     }
 }
 
