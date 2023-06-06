@@ -31,6 +31,7 @@ public class Minimap : MonoBehaviour
             return;
         if (minimap == null)
             minimap = new Image[map.GetLength(0), map.GetLength(1)];
+
         //ClearMinimap();
         for (int row = 0; row < minimap.GetLength(0); row++)
         {
@@ -47,9 +48,14 @@ public class Minimap : MonoBehaviour
                     image = Instantiate(imagePrefab, transform);
                 image.sprite = spriteToInstantiate;
                 RectTransform rectTransform = image.rectTransform;
-                image.transform.position = new Vector3((row - minimap.GetLength(0) / 2 + 1) * (rectTransform.rect.width * 2 + pixelsInBetween),
-                                                       (col - minimap.GetLength(1) / 2 + 1) * (rectTransform.rect.height * 2 + pixelsInBetween), 0) + transform.position;
+                image.transform.position = new Vector3((row - minimap.GetLength(0) / 2 + 1) * (rectTransform.rect.width + pixelsInBetween),
+                                                        (col - minimap.GetLength(1) / 2 + 1) * (rectTransform.rect.height + pixelsInBetween),0f) + transform.position;
                 image.gameObject.SetActive(map[row,col].GetComponent<Room>().Status.explored); // Set active if the room has been explored
+
+                if (!RectTransformUtility.RectangleContainsScreenPoint(rectTransform, image.transform.position))
+                {
+                    image.gameObject.SetActive(false);
+                }
 
                 minimap[row, col] = image;
             }

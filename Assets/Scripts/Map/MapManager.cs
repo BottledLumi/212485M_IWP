@@ -107,16 +107,16 @@ public class MapManager : MonoBehaviour
                 if (tilemap && roomComponent)
                 {
                     int roomWidthInTiles = tilemap.size.x; int roomHeightInTiles = tilemap.size.y+1; // +1 to y to solve odd-even discrepancy
-                    if (floorRooms[row + 1, col])
+                    if (row+1 < floorRooms.GetLength(0) && floorRooms[row + 1, col])
                         CreateDoor(roomComponent, room.transform.position + new Vector3(roomWidthInTiles / 2, 0, 0), rightDoor);
 
-                    if (floorRooms[row - 1, col])
+                    if (row - 1 > 0 && floorRooms[row - 1, col])
                         CreateDoor(roomComponent, room.transform.position + new Vector3(-roomWidthInTiles / 2, 0, 0), leftDoor);
 
-                    if (floorRooms[row, col + 1])
+                    if (col + 1 < floorRooms.GetLength(1) && floorRooms[row, col + 1])
                         CreateDoor(roomComponent, room.transform.position + new Vector3(0, roomHeightInTiles / 2, 0), upDoor);
 
-                    if (floorRooms[row, col - 1])
+                    if (col - 1 > 0 && floorRooms[row, col - 1])
                         CreateDoor(roomComponent, room.transform.position + new Vector3(0, -roomHeightInTiles / 2, 0), downDoor);
                 }
             }
