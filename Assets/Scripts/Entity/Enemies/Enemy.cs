@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] EnemyAttributes enemyAttributes;
     private int level;
     private float health, attack, defence, attackSpeed, movementSpeed;
+    private bool isDead = false;
     public float getHealth()
     {
         return health;
@@ -40,7 +41,15 @@ public class Enemy : MonoBehaviour
         health -= amount;
         Debug.Log(health);
         if (health <= 0)
+        {
+            isDead = true;
             gameObject.SetActive(false);
+        }
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 
     private void OnEnable()

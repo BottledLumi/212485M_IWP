@@ -64,9 +64,8 @@ public class Room : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player"))
             return;
-        status.active = true; status.explored = true;
-        if (EnemiesActive())
-            CloseDoors();
+
+        OnRoomEntered();
         Debug.Log("Player has entered room");
         MapManager.Instance.RoomEntered();
     }
@@ -85,6 +84,14 @@ public class Room : MonoBehaviour
             RoomCleared();
     }
 
+    private void SetEnemiesActive(bool _active)
+    {
+        foreach (GameObject enemy in enemies)
+        {
+            if (!enemy.GetComponent<Enemy>().IsDead())
+                enemy.SetActive(_active);
+        }
+    }
     bool EnemiesActive()
     {
         foreach (GameObject enemy in enemies)
@@ -99,6 +106,14 @@ public class Room : MonoBehaviour
     {
         foreach (Door door in doors)
             door.SetOpen(false);
+    }
+
+    private void OnRoomEntered()
+    {
+        status.active = true; status.explored = true;
+        SetEnemiesActive(true);
+        if (EnemiesActive())
+            CloseDoors();
     }
 
     void RoomCleared()

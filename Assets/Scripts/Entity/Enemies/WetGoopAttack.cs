@@ -6,6 +6,7 @@ public class WetGoopAttack : MonoBehaviour
 {
     Enemy enemy;
     bool canAttack = true;
+
     void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -17,15 +18,16 @@ public class WetGoopAttack : MonoBehaviour
         if (enemy.target)
         {
             // Calculate the direction from the enemy to the player
-            Vector3 direction = enemy.target.transform.position - transform.position;
+            Vector2 direction = enemy.target.transform.position - transform.position;
             direction.Normalize(); // Normalize the direction vector to have a magnitude of 1
 
             transform.rotation = Quaternion.LookRotation(Vector3.forward, direction); //Rotate the enemy towards player
+
             // Move the enemy towards the player if enemy can attack
             if (canAttack)
-                transform.Translate(direction * enemy.getMovementSpeed() * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, enemy.target.transform.position, enemy.getMovementSpeed() * Time.deltaTime);
             else
-                transform.Translate(-direction * enemy.getMovementSpeed()/2 * Time.deltaTime); //Run away if enemy can't attack
+                transform.position = Vector2.MoveTowards(transform.position, -enemy.target.transform.position, enemy.getMovementSpeed()/2 * Time.deltaTime); //Run away if enemy can't attack
         }
     }
 
