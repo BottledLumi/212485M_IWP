@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public abstract class Weapon : ScriptableObject
+public abstract class Weapon : Item
 {
     public enum WEAPON_TYPE
     {
         MELEE,
         RANGED
     }
-    [SerializeField] protected Sprite weaponIcon;
-    protected Sprite getWeaponIcon() { return weaponIcon; }
 
     [SerializeField] protected GameObject weaponAttack;
     public GameObject getWeaponAttack() { return weaponAttack; }

@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+[CreateAssetMenu(fileName = "New Item", menuName = "Item")]
+public class Item : Pickup
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum Rarity
     {
-        
+        Common,
+        Uncommon,
+        Rare,
+        Mythic
     }
-
-    // Update is called once per frame
-    void Update()
+    [SerializeField] Rarity rarity;
+    public Rarity itemRarity
     {
-        
+        get { return rarity; }
     }
+        
 }

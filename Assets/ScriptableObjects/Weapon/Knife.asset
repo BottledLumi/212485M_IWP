@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bd080252dd81c45828034c20c0be9b, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  weaponIcon: {fileID: 0}
+  index: 301
+  itemName: Knife
+  description: 
+  icon: {fileID: 21300000, guid: 20a9bc0f96823034abad80d0ce68477b, type: 3}
+  rarity: 0
   weaponAttack: {fileID: 2666802197143146413, guid: e65ac0798bff2644693efcf84e034573, type: 3}
   attack: 30
   attackSpeed: 1

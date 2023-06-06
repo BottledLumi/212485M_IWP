@@ -9,6 +9,7 @@ public class PlayerData : ScriptableObject
     private static PlayerData instance;
 
     private float health, attack, defence, attackSpeed, movementSpeed;
+    public List<Item> items;
 
     public static PlayerData Instance
     {
