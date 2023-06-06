@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartScreen : MonoBehaviour
@@ -19,7 +20,7 @@ public class StartScreen : MonoBehaviour
     private void Start()
     {
         //Assign the buttons
-        startButton.onClick.AddListener(delegate { DisplayPage(startPage); });
+        startButton.onClick.AddListener(delegate { LoadScene(); });
         settingButton.onClick.AddListener(delegate { DisplayPage(settingsPage); });
         quitButton.onClick.AddListener(delegate { QuitGame(); });
     }
@@ -38,4 +39,8 @@ public class StartScreen : MonoBehaviour
         Application.Quit();
     }
 
+    private void LoadScene()
+    {
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);  //Load game scene as single scene
+    }
 }
