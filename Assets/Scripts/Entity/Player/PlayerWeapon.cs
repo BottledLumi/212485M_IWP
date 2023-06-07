@@ -40,11 +40,6 @@ public class PlayerWeapon : MonoBehaviour
         weapon = playerData.Weapon;
         if (!weapon)
             return;
-        InitWeaponPool();
-
-        totalMagazineSize = weapon.getMagazineSize();
-        currentMagazineSize = totalMagazineSize;
-        CallMagazineChangedEvent();
     }
 
     void Update()
