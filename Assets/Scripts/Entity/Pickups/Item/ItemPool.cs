@@ -11,7 +11,6 @@ public class ItemPool : MonoBehaviour
         get { return item; }
     }
 
-    [SerializeField] GameObject itemImage;
     [SerializeField] float commonChance, uncommonChance, rareChance, mythicChance;
     private void Awake()
     {
@@ -35,10 +34,6 @@ public class ItemPool : MonoBehaviour
                 Debug.Log("item found: " + item.name);
             }
         }
-
-        SpriteRenderer spriteRenderer = itemImage.GetComponent<SpriteRenderer>();
-        if (spriteRenderer)
-            spriteRenderer.sprite = item.Icon;
     }
 
     List<Item> SearchForRarity(Item.Rarity rarity)

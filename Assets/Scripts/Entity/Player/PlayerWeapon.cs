@@ -22,6 +22,18 @@ public class PlayerWeapon : MonoBehaviour
     private void Awake()
     {
         playerData = PlayerData.Instance;
+
+        playerData.WeaponChangedEvent += OnWeaponChange;
+    }
+    void OnWeaponChange(Weapon _weapon)
+    {
+        weapon = playerData.Weapon;
+
+        InitWeaponPool();
+
+        totalMagazineSize = weapon.getMagazineSize();
+        currentMagazineSize = totalMagazineSize;
+        CallMagazineChangedEvent();
     }
     private void Start()
     {

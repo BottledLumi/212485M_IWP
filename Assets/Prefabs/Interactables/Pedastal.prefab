@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8256448555890028896}
   - component: {fileID: 819430359799748701}
-  - component: {fileID: 519415642999144139}
+  - component: {fileID: 7588501870039772894}
+  - component: {fileID: 2272721500936750745}
   m_Layer: 0
   m_Name: Pedastal
   m_TagString: Untagged
@@ -49,28 +50,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPool:
   - {fileID: 11400000, guid: 32ba82a8f297d4147887c5f9f9b205b5, type: 2}
+  - {fileID: 11400000, guid: 32ba82a8f297d4147887c5f9f9b205b5, type: 2}
   - {fileID: 11400000, guid: ceb55e2ef6fadcc40bddffd67d139aa4, type: 2}
   - {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
   item: {fileID: 0}
-  itemImage: {fileID: 5085467381762437160}
-  commonChance: 0
+  commonChance: 100
   uncommonChance: 0
   rareChance: 0
   mythicChance: 0
---- !u!136 &519415642999144139
-CapsuleCollider:
+--- !u!114 &7588501870039772894
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810059176404972933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3de87554fd1d254f8b015370a65581e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 5085467381762437160}
+--- !u!70 &2272721500936750745
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810059176404972933}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.25
-  m_Height: 0.8
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.05, z: 0}
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.15}
+  m_Size: {x: 0.8, y: 0.3}
+  m_Direction: 1
 --- !u!1 &1494983027431612436
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +244,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

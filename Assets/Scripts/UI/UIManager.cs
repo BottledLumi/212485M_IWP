@@ -13,10 +13,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image weaponImage;
     [SerializeField] PlayerWeapon playerWeapon;
 
+    [SerializeField] private TMP_Text inventoryText;
+
     PlayerData playerData;
     private void Awake()
     {
         playerData = PlayerData.Instance;
+
+        playerData.InventoryChangedEvent += OnInventoryChanged;
 
         playerData.HealthChangedEvent += OnHealthChanged;
         playerData.AttackChangedEvent += OnAttackChanged;
@@ -27,6 +31,14 @@ public class UIManager : MonoBehaviour
         playerData.WeaponChangedEvent += OnWeaponChanged;
         if (playerWeapon)
             playerWeapon.MagazineChangedEvent += OnMagazineChanged;
+    }
+
+    private void OnInventoryChanged(List<Item> items)
+    {
+        string newText = "Inventory:";
+        foreach (Item item in items)
+            newText += "\n" + item.name;
+        inventoryText.text = newText;
     }
     private void OnHealthChanged(float health, float maxHealth)
     {

@@ -12,14 +12,18 @@ public class PlayerData : ScriptableObject
     private float health, attack, defence, attackSpeed, movementSpeed;
     private float maxHealth;
     private List<Item> items;
+    public event System.Action<List<Item>> InventoryChangedEvent;
     public List<Item> Items
     {
         get { return items; }
-        set { items = value; }
+        set { items = value; InventoryChangedEvent?.Invoke(items); }
     }
     public void AddItem(Item item)
     {
+        if (items == null)
+            items = new List<Item>();
         items.Add(item);
+        InventoryChangedEvent?.Invoke(items);
     }
 
     public static PlayerData Instance

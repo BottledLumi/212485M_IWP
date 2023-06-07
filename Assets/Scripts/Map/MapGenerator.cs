@@ -156,7 +156,7 @@ public class MapGenerator : MonoBehaviour
         if (roomTemplatesOfType.Count < 1)
             return null;
 
-        int randomRoom = UnityEngine.Random.Range(0, roomTemplatesOfType.Count - 1);
+        int randomRoom = UnityEngine.Random.Range(0, roomTemplatesOfType.Count);
         return roomTemplatesOfType[randomRoom]; 
     }
 

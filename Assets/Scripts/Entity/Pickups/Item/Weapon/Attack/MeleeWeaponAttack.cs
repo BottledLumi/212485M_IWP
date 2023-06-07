@@ -11,15 +11,14 @@ public class MeleeWeaponAttack : MonoBehaviour
     {
         totalAttack = _totalAttack;
         totalRange = _totalRange;
+        totalAttackSpeed = _totalAttackSpeed;
     }
 
     [HideInInspector] public Animator animator;
-    PolygonCollider2D weaponCollider;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        weaponCollider = GetComponent<PolygonCollider2D>();
     }
     IEnumerator AttackCoroutine()
     {
@@ -60,7 +59,7 @@ public class MeleeWeaponAttack : MonoBehaviour
 
     private void OnEnable()
     {
-        animator.speed = (3/totalAttackSpeed);
+        animator.speed = (2.5f/totalAttackSpeed);
         transform.localScale = new Vector3(totalRange, totalRange, 0);
 
         //Hit();

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a4a296283142b2419eaa94dc87f12be, type: 3}
-  m_Name: TreasureRoom
+  m_Name: TreasureRoom_2
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 5192640063505386111, guid: fd55699f54ed7e647b7255a3898ab25d, type: 3}
   roomType: 2
