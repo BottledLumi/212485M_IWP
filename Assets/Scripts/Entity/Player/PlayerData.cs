@@ -8,7 +8,9 @@ public class PlayerData : ScriptableObject
 {
     private static PlayerData instance;
 
+    Weapon weapon;
     private float health, attack, defence, attackSpeed, movementSpeed;
+    private float maxHealth;
     private List<Item> items;
     public List<Item> Items
     {
@@ -31,7 +33,21 @@ public class PlayerData : ScriptableObject
             return instance;
         }
     }
-    public event System.Action<float> HealthChangedEvent, AttackChangedEvent, DefenceChangedEvent, AttackSpeedChangedEvent, MovementSpeedChangedEvent;
+    public event System.Action<float> AttackChangedEvent, DefenceChangedEvent, AttackSpeedChangedEvent, MovementSpeedChangedEvent;
+    public event System.Action<float, float> HealthChangedEvent;
+    public event System.Action<Weapon> WeaponChangedEvent;
+    public Weapon Weapon
+    {
+        get { return weapon; }
+        set
+        {
+            if (value != weapon)
+            {
+                weapon = value;
+                WeaponChangedEvent?.Invoke(weapon);
+            }
+        }
+    }
     public float Health
     {
         get { return health; }
@@ -40,10 +56,11 @@ public class PlayerData : ScriptableObject
             if (value != health)
             {
                 health = value;
-                HealthChangedEvent?.Invoke(health);
+                HealthChangedEvent?.Invoke(health, maxHealth);
             }
         }
     }
+
     public float Attack
     {
         get { return attack; }
@@ -89,6 +106,18 @@ public class PlayerData : ScriptableObject
             {
                 movementSpeed = value;
                 MovementSpeedChangedEvent?.Invoke(movementSpeed);
+            }
+        }
+    }
+    public float MaxHealth
+    {
+        get { return maxHealth; }
+        set
+        {
+            if (value != maxHealth)
+            {
+                maxHealth = value;
+                HealthChangedEvent?.Invoke(health, maxHealth);
             }
         }
     }
