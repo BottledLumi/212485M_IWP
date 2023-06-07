@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private int level;
     private float health, attack, defence, attackSpeed, movementSpeed;
     private bool isDead = false;
+    private SpriteRenderer spriteRenderer;
     public float getHealth()
     {
         return health;
@@ -34,10 +35,14 @@ public class Enemy : MonoBehaviour
     {
         if (!target)
             target = GameObject.Find("Player");
+        gameObject.SetActive(false);
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void TakeDamage(float amount)
     {
+        if (health > 0)
+            StartCoroutine(DamageTakenIndicator());
         health -= amount;
         Debug.Log(health);
         if (health <= 0)
@@ -50,6 +55,15 @@ public class Enemy : MonoBehaviour
     public bool IsDead()
     {
         return isDead;
+    }
+
+    private IEnumerator DamageTakenIndicator()
+    {
+        spriteRenderer.color = Color.red;
+
+        yield return new WaitForSeconds(0.3f);
+
+        spriteRenderer.color = Color.white;
     }
 
     private void OnEnable()
