@@ -10377,7 +10377,6 @@ GameObject:
   - component: {fileID: 5192640063505386109}
   - component: {fileID: 3674448227725794086}
   - component: {fileID: 6430094675117398628}
-  - component: {fileID: 5694881989822584894}
   m_Layer: 0
   m_Name: CombatRoom
   m_TagString: Untagged
@@ -10457,61 +10456,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 37, y: 25}
   m_EdgeRadius: 0
---- !u!114 &5694881989822584894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5192640063505386111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  data:
-    dataString: UEsDBBQAAAgIAABAIey+/NoBXAIAABUFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMzk0HGNKE3lqHkB6SMKGZXHxZpDXWIEsefQRIhv/elWxjl05PLG/f7r79kD+Z1K5G7o1dWikejUD2fcSizb6MeucDHmBr9Fp+YMd5k8KXkQSJ8wJeGsInMcyZCr2V/IfeqkgeExi0LIytFmKLmXHeEVyAckgua3yM1gR9jtiBfq7mMeRI1vQmWh9kzcejE5kctUfbUztiR2tYQXMFVY0iSu7J1+e080TT1EzLiMK5UUq6Vgnzxzp1mkHtAvVBBCGBOkvlJ19nBJQot6WPCYfhz0Xh0LeiLBzvpKURNXnZT9PMrQK3a5S9gwpJwng6S7KarI//EK4myV1YUz10hSfjWMSXku9e4MjB+cFkh/DdQHua0B7UDjYK30rUT2ZpTdCCnN6GGBocTu/6v+feshL5rscbqRdgqP+/n9jDKbV/yJSsNtGVRknAWpk08rR9tLScXyQ43YZrUxAaVbw6/A3b4RG1jntpnSdX26WO8jYm2EhlizSz2E3wmbEaE9yKrlGD8scVpfGXO7zwDcpeeO4hPpe2eOvrXsFFSIJ7/nh84VqZ/XlZrjT7R3Tlc/BKauxFR8cTzSkzWjcnNpxJF7YOtgA+CNsGKf4+LTa/+TaDDcfbAnB2Pd9cFTfT+e212BS3UMw4n7B0e1JTn6BWjdB2PLQ13SfXdGfdV2S0tFCncxcW9kv5UZnByKUuzJpbRP3cZDgLR0tF6GGKhZA0oDV6L3XaN/vMmTJ8hyI/J8pTp4uDt5D3WXJWy3fjI5KzLH02chbh8y2vLL5L3MfiXbITO/0BUEsDBBQAAAgIAABAIexJ7+TxbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSpbmZSWJScqpFWmKqiallkm6auZGlhWlKUppFYppJcrKhUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAABAIey+/NoBXAIAABUFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAABAIexJ7+TxbQAAAHgAAAAJACQAAAAAAAAAAAAAAKkCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAYQMAAAAA
-    upgradeData: 
-    file_cachedStartup: {fileID: 0}
-    data_cachedStartup: 
-    cacheStartup: 0
-  showNavGraphs: 1
-  showUnwalkableNodes: 1
-  debugMode: 0
-  debugFloor: 0
-  debugRoof: 1
-  manualDebugFloorRoof: 0
-  showSearchTree: 0
-  unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
-  maxNearestNodeDistance: 100
-  scanOnStartup: 1
-  fullGetNearestSearch: 0
-  prioritizeGraphs: 0
-  prioritizeGraphsLimit: 1
-  colorSettings:
-    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
-    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
-    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
-    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
-    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
-    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
-    _AreaColors:
-    - {r: 0, g: 0, b: 0, a: 0}
-  tagNames: []
-  heuristic: 2
-  heuristicScale: 1
-  threadCount: 1
-  maxFrameTime: 1
-  batchGraphUpdates: 0
-  graphUpdateBatchingInterval: 0.2
-  euclideanEmbedding:
-    mode: 0
-    seed: 0
-    pivotPointRoot: {fileID: 0}
-    spreadOutCount: 1
-  showGraphs: 1
 --- !u!1 &5192640064232336700
 GameObject:
   m_ObjectHideFlags: 0
