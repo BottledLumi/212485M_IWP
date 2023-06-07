@@ -15,7 +15,7 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
 
     public void TakeDamage(float amount)
     {
-        playerData.Health -= amount;
+        playerData.Health -= amount - playerData.Defence; // Reduce damage by defence
         if (playerData.Health <= 0)
             PlayerDeath();
     }

@@ -6,9 +6,11 @@ public class RangedWeaponAttack : MonoBehaviour
 {
     List<Enemy> hitEnemies = new List<Enemy>();
     private float expireTime = 6;
-    private float totalAttack, totalRange, totalAttackSpeed;
+    private float totalAttack, totalRange;
     float totalBulletSpeed, totalBulletSize;
     Vector3 direction;
+
+    float distanceTravelled = 0;
 
     public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalBulletSpeed, float _totalBulletSize, Vector3 _direction)
     {
@@ -24,6 +26,12 @@ public class RangedWeaponAttack : MonoBehaviour
 
     private void Update()
     {
+        float distance = direction.magnitude * totalBulletSpeed * Time.deltaTime;
+        // Add the distance to the total distance
+        distanceTravelled += distance;
+        if (distanceTravelled > totalRange)
+            gameObject.SetActive(false);
+
         transform.position += direction * totalBulletSpeed * Time.deltaTime;
     }
     IEnumerator AttackCoroutine()
@@ -48,11 +56,13 @@ public class RangedWeaponAttack : MonoBehaviour
     {
         transform.localScale = new Vector3(totalBulletSize, totalBulletSize, 0);
 
+        distanceTravelled = 0;
         StartCoroutine(AttackCoroutine());
     }
 
     public void OnDisable()
     {
+        distanceTravelled = 0;
         hitEnemies.Clear();
     }
 }
