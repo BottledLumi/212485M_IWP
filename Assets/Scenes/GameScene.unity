@@ -587,7 +587,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 30
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 594900859}
   - component: {fileID: 594900861}
   - component: {fileID: 594900860}
+  - component: {fileID: 594900862}
   m_Layer: 5
   m_Name: MinimapFrame
   m_TagString: Untagged
@@ -776,6 +777,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594900858}
   m_CullTransparentMesh: 1
+--- !u!114 &594900862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594900858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 1, y: 1}
 --- !u!1 &720542218
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,10 +927,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHealth: 100
-  initialAttack: 0
-  initialDefence: 0
-  initialAttackSpeed: 0
-  initialMovementSpeed: 9
+  initialAttack: 10
+  initialDefence: 10
+  initialAttackSpeed: 1
+  initialMovementSpeed: 10
 --- !u!114 &720542228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,7 +1300,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pixelsInBetween: 5
   imagePrefab: {fileID: 6399833172043779183, guid: fc5139cfa54daaa47a9578dc4aef6dfe, type: 3}
-  spriteToInstantiate: {fileID: 21300000, guid: 54ea9f47c3efe4642bacce8e0ec9bc80, type: 3}
+  activeNode: {fileID: 21300000, guid: a55c965ca208dbb45884af53dd590d53, type: 3}
+  exploredNode: {fileID: 21300000, guid: 54ea9f47c3efe4642bacce8e0ec9bc80, type: 3}
+  unexploredNode: {fileID: 21300000, guid: b14bddc771f6a744899c5bb37de97ab8, type: 3}
+  bossIcon: {fileID: 21300000, guid: 64a5ae0ff9f7f584fa91a8ae2caaec26, type: 3}
+  treasureIcon: {fileID: 21300000, guid: f966290569aecce4a936c6b422bddd3a, type: 3}
+  cauldronIcon: {fileID: 0}
+  size: 2.5
 --- !u!1 &1197029357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,8 +1656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e361568eb971f44b4716f2fa217ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorWidth: 15
-  floorHeight: 15
+  floorWidth: 10
+  floorHeight: 10
   roomTemplates:
   - {fileID: 11400000, guid: d7e3518597315a545be37f03e2501c77, type: 2}
   - {fileID: 11400000, guid: 04c539c09e46d7d47a8294789e02a3ae, type: 2}
@@ -1644,7 +1665,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 95c4eb5a3a297eb4092535df54cb0e9f, type: 2}
   - {fileID: 11400000, guid: 77999c46fc36a1349b9c537f1bf39584, type: 2}
   numPaths: 3
-  numRooms: 25
+  numRooms: 20
   numCauldronRooms: 1
   numTreasureRooms: 2
   numBossRooms: 1

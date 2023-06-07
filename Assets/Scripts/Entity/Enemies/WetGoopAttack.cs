@@ -42,11 +42,14 @@ public class WetGoopAttack : MonoBehaviour
             player.TakeDamage(enemy.getAttack());
             canAttack = false;
         }
-        StartCoroutine(AttackCoroutine());
+        if (gameObject.activeInHierarchy)
+            StartCoroutine(AttackCoroutine());
     }
 
     IEnumerator AttackCoroutine()
     {
+        if (!gameObject.activeInHierarchy)
+            yield break;
         // theres some shyt bug where if i spam the goddamn attack too much eventually you can see a frame's worth of animation that shouldn't be there
         yield return new WaitForSeconds(enemy.getAttackSpeed());
         canAttack = true;

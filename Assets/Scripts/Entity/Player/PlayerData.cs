@@ -9,7 +9,16 @@ public class PlayerData : ScriptableObject
     private static PlayerData instance;
 
     private float health, attack, defence, attackSpeed, movementSpeed;
-    public List<Item> items;
+    private List<Item> items;
+    public List<Item> Items
+    {
+        get { return items; }
+        set { items = value; }
+    }
+    public void AddItem(Item item)
+    {
+        items.Add(item);
+    }
 
     public static PlayerData Instance
     {
