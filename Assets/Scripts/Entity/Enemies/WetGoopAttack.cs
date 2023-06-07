@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class WetGoopAttack : MonoBehaviour
 {
     Enemy enemy;
     bool canAttack = true;
+    AIDestinationSetter destinationSetter;
+
+    private void Awake()
+    {
+        destinationSetter = GetComponent<AIDestinationSetter>();
+    }
 
     void Start()
     {
@@ -24,10 +31,19 @@ public class WetGoopAttack : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(Vector3.forward, direction); //Rotate the enemy towards player
 
             // Move the enemy towards the player if enemy can attack
+            //if (canAttack)
+            //{
+            //    destinationSetter.target = enemy.target.transform;
+            //}
+            //else
+            //{
+            //    destinationSetter.target = null;
+            //    transform.position = Vector2.MoveTowards(transform.position, -enemy.target.transform.position, enemy.getMovementSpeed() / 2 * Time.deltaTime);
+            //}
             if (canAttack)
                 transform.position = Vector2.MoveTowards(transform.position, enemy.target.transform.position, enemy.getMovementSpeed() * Time.deltaTime);
             else
-                transform.position = Vector2.MoveTowards(transform.position, -enemy.target.transform.position, enemy.getMovementSpeed()/2 * Time.deltaTime); //Run away if enemy can't attack
+                transform.position = Vector2.MoveTowards(transform.position, -enemy.target.transform.position, enemy.getMovementSpeed() / 2 * Time.deltaTime); //Run away if enemy can't attack
         }
     }
 
