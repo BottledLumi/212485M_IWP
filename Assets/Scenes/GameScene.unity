@@ -927,8 +927,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHealth: 100
-  initialAttack: 10
-  initialDefence: 10
+  initialAttack: 25
+  initialDefence: 2
   initialAttackSpeed: 1
   initialMovementSpeed: 10
 --- !u!114 &720542228
@@ -943,7 +943,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c8528bb19177a4baf51562fe6e1173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
+  weapon: {fileID: 11400000, guid: ceb55e2ef6fadcc40bddffd67d139aa4, type: 2}
+  totalReloadSpeed: 1.4
 --- !u!95 &720542229
 Animator:
   serializedVersion: 5

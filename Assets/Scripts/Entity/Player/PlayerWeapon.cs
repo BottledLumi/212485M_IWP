@@ -10,6 +10,20 @@ public class PlayerWeapon : MonoBehaviour
     bool canAttack = true;
     float totalAttack, totalRange, totalAttackSpeed;
     float totalBulletSpeed, totalBulletSize; // For ranged weapons only
+    int totalMagazineSize, currentMagazineSize;
+    [SerializeField] float totalReloadSpeed;
+    bool isReloading = false;
+
+    float timeElapsed; // since last bullet
+
+    PlayerData playerData;
+    private void Awake()
+    {
+        playerData = PlayerData.Instance;
+
+        totalMagazineSize = weapon.getMagazineSize();
+        currentMagazineSize = totalMagazineSize;
+    }
     private void Start()
     {
         if (!weapon)
@@ -20,18 +34,24 @@ public class PlayerWeapon : MonoBehaviour
     void Update()
     {
         // Attack input
-        if (Input.GetMouseButtonDown(0) && canAttack)
+        GameObject activeWeapon = getInactiveWeapon();
+        if (activeWeapon != null)
         {
-            Vector3 mousePosition = Input.mousePosition;
-            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); mousePosition.z = 0;
-
-            GameObject activeWeapon = getInactiveWeapon();
-            if (activeWeapon != null)
+            // Reload
+            if (currentMagazineSize == 0 || (currentMagazineSize < totalMagazineSize && timeElapsed > 3) || (currentMagazineSize < totalMagazineSize && Input.GetKey(KeyCode.R)))
             {
+                if (!isReloading)
+                    StartCoroutine(ReloadCoroutine());
+            }
+            if (Input.GetMouseButtonDown(0) && canAttack && currentMagazineSize > 0)
+            {
+                Vector3 mousePosition = Input.mousePosition;
+                mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); mousePosition.z = 0;
+
                 // Register item effects, weapon base stats, etc.
-                totalAttack = weapon.getAttack();
+                totalAttack = weapon.getAttack() * playerData.Attack;
                 totalRange = weapon.getRange();
-                totalAttackSpeed = weapon.getAttackSpeed();
+                totalAttackSpeed = weapon.getAttackSpeed() * playerData.AttackSpeed;
 
                 StartCoroutine(AttackSpeedCoroutine());
 
@@ -68,6 +88,8 @@ public class PlayerWeapon : MonoBehaviour
 
                             rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalBulletSpeed, totalBulletSize, direction);
 
+                            currentMagazineSize--; // Reduce magazine size by 1
+
                             Vector3 weaponOffset = (mousePosition - transform.position).normalized * playerOffset;
                             activeWeapon.transform.position = transform.position + weaponOffset;
                             activeWeapon.transform.rotation = transform.rotation;
@@ -76,6 +98,7 @@ public class PlayerWeapon : MonoBehaviour
                         }
                 }
                 canAttack = false;
+                
             }
         }
     }
@@ -104,5 +127,18 @@ public class PlayerWeapon : MonoBehaviour
     {
         yield return new WaitForSeconds(totalAttackSpeed);
         canAttack = true;
+    }
+
+    IEnumerator ReloadCoroutine()
+    {
+        isReloading = true;
+        if (Input.GetMouseButtonDown(0) && canAttack && currentMagazineSize > 0)
+        {
+            isReloading = false;
+            yield break;
+        }
+        yield return new WaitForSeconds(totalReloadSpeed);
+        currentMagazineSize = totalMagazineSize;
+        isReloading = false;
     }
 }

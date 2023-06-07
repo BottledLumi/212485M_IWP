@@ -11,7 +11,6 @@ public class MeleeWeaponAttack : MonoBehaviour
     {
         totalAttack = _totalAttack;
         totalRange = _totalRange;
-        totalAttackSpeed = _totalAttackSpeed;
     }
 
     [HideInInspector] public Animator animator;
@@ -28,36 +27,36 @@ public class MeleeWeaponAttack : MonoBehaviour
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length / animator.speed);
         gameObject.SetActive(false);
     }
-    private void Hit()
-    {
-        //// Hitbox + SFX + VFX
+    //private void Hit()
+    //{
+    //    //// Hitbox + SFX + VFX
 
-        // Set up the parameters for the overlap check
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.SetLayerMask(LayerMask.GetMask("Enemy")); // Set the layer mask to include only the enemy layer
-        filter.useLayerMask = true;
+    //    // Set up the parameters for the overlap check
+    //    ContactFilter2D filter = new ContactFilter2D();
+    //    filter.SetLayerMask(LayerMask.GetMask("Enemy")); // Set the layer mask to include only the enemy layer
+    //    filter.useLayerMask = true;
 
-        // Perform the overlap check
-        Collider2D[] results = new Collider2D[10]; // Adjust the size based on the maximum number of expected enemies
-        int numColliders = Physics2D.OverlapCollider(weaponCollider, filter, results);
+    //    // Perform the overlap check
+    //    Collider2D[] results = new Collider2D[10]; // Adjust the size based on the maximum number of expected enemies
+    //    int numColliders = Physics2D.OverlapCollider(weaponCollider, filter, results);
 
-        // Iterate through the colliders and check if they belong to enemy objects
-        for (int i = 0; i < numColliders; i++)
-        {
-            Enemy enemy = results[i].GetComponent<Enemy>();
-            if (enemy != null && !hitEnemies.Contains(enemy))
-            {
-                // Enemy detected, add it to the list
-                hitEnemies.Add(enemy);
-            }
-        }
+    //    // Iterate through the colliders and check if they belong to enemy objects
+    //    for (int i = 0; i < numColliders; i++)
+    //    {
+    //        Enemy enemy = results[i].GetComponent<Enemy>();
+    //        if (enemy != null && !hitEnemies.Contains(enemy))
+    //        {
+    //            // Enemy detected, add it to the list
+    //            hitEnemies.Add(enemy);
+    //        }
+    //    }
 
-        // TODO: Perform actions on the detected enemies (e.g., deal damage, play sound effects, etc.)
-        foreach (Enemy enemy in hitEnemies)
-        {
-            enemy.TakeDamage(totalAttack);
-        }
-    }
+    //    // TODO: Perform actions on the detected enemies (e.g., deal damage, play sound effects, etc.)
+    //    foreach (Enemy enemy in hitEnemies)
+    //    {
+    //        enemy.TakeDamage(totalAttack);
+    //    }
+    //}
 
     private void OnEnable()
     {

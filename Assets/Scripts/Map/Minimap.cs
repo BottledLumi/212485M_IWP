@@ -112,16 +112,16 @@ public class Minimap : MonoBehaviour
         }
     }
 
-    void ClearMinimap()
-    {
-        for (int row = 0; row < minimap.GetLength(0); row++)
-        {
-            for (int col = 0; col < minimap.GetLength(1); col++)
-            {
-                minimap[row, col] = null;
-            }
-        }
-    }
+    //void ClearMinimap()
+    //{
+    //    for (int row = 0; row < minimap.GetLength(0); row++)
+    //    {
+    //        for (int col = 0; col < minimap.GetLength(1); col++)
+    //        {
+    //            minimap[row, col] = null;
+    //        }
+    //    }
+    //}
 
     bool CheckSurroundingRoomsExplored(int row, int col)
     {
