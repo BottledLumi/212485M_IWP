@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour
 {
-    [SerializeField] Weapon weapon;
+    Weapon weapon;
     List<GameObject> weaponPool;
 
     bool canAttack = true;
@@ -14,21 +14,25 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] float totalReloadSpeed;
     bool isReloading = false;
 
+    public event System.Action<int, int> MagazineChangedEvent;
+
     float timeElapsed; // since last bullet
 
     PlayerData playerData;
     private void Awake()
     {
         playerData = PlayerData.Instance;
-
-        totalMagazineSize = weapon.getMagazineSize();
-        currentMagazineSize = totalMagazineSize;
     }
     private void Start()
     {
+        weapon = playerData.Weapon;
         if (!weapon)
             return;
         InitWeaponPool();
+
+        totalMagazineSize = weapon.getMagazineSize();
+        currentMagazineSize = totalMagazineSize;
+        CallMagazineChangedEvent();
     }
 
     void Update()
@@ -89,6 +93,7 @@ public class PlayerWeapon : MonoBehaviour
                             rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalBulletSpeed, totalBulletSize, direction);
 
                             currentMagazineSize--; // Reduce magazine size by 1
+                            CallMagazineChangedEvent();
 
                             Vector3 weaponOffset = (mousePosition - transform.position).normalized * playerOffset;
                             activeWeapon.transform.position = transform.position + weaponOffset;
@@ -139,6 +144,11 @@ public class PlayerWeapon : MonoBehaviour
         }
         yield return new WaitForSeconds(totalReloadSpeed);
         currentMagazineSize = totalMagazineSize;
+        CallMagazineChangedEvent();
         isReloading = false;
+    }
+    void CallMagazineChangedEvent()
+    {
+        MagazineChangedEvent?.Invoke(currentMagazineSize, totalMagazineSize);
     }
 }
