@@ -810,7 +810,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 0}
+  m_BackGroundColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1922,8 +1922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e361568eb971f44b4716f2fa217ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorWidth: 7
-  floorHeight: 7
+  floorWidth: 10
+  floorHeight: 10
   roomTemplates:
   - {fileID: 11400000, guid: 95c4eb5a3a297eb4092535df54cb0e9f, type: 2}
   - {fileID: 11400000, guid: d7e3518597315a545be37f03e2501c77, type: 2}
@@ -1933,7 +1933,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aee32ba9a3859d24c9634c4b70e9863e, type: 2}
   - {fileID: 11400000, guid: 77999c46fc36a1349b9c537f1bf39584, type: 2}
   numPaths: 3
-  numRooms: 10
+  numRooms: 18
   numCauldronRooms: 1
   numTreasureRooms: 2
   numBossRooms: 1

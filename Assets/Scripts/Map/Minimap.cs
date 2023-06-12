@@ -8,9 +8,9 @@ public class Minimap : MonoBehaviour
     [SerializeField] uint pixelsInBetween;
     MapManager mapManager;
 
-    public Image imagePrefab; // Reference to the UI Image prefab
-    public Sprite activeNode, exploredNode, unexploredNode; // Reference to the sprite you want to instantiate
-    public Sprite bossIcon, treasureIcon, cauldronIcon;
+    [SerializeField] private Image imagePrefab; // Reference to the UI Image prefab
+    [SerializeField] private Sprite activeNode, exploredNode, unexploredNode; // Reference to the sprite you want to instantiate
+    [SerializeField] private Sprite bossIcon, treasureIcon, cauldronIcon;
 
     private GameObject[,] map;
     private RoomTemplate[,] roomTypes;
