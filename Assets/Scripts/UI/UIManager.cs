@@ -33,11 +33,11 @@ public class UIManager : MonoBehaviour
             playerWeapon.MagazineChangedEvent += OnMagazineChanged;
     }
 
-    private void OnInventoryChanged(List<Item> items)
+    private void OnInventoryChanged(Dictionary<Item, int> items)
     {
         string newText = "Inventory:";
-        foreach (Item item in items)
-            newText += "\n" + item.name;
+        foreach (Item item in items.Keys)
+            newText += "\n" + item.name + ":" + items[item];
         inventoryText.text = newText;
     }
     private void OnHealthChanged(float health, float maxHealth)

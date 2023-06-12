@@ -1933,9 +1933,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aee32ba9a3859d24c9634c4b70e9863e, type: 2}
   - {fileID: 11400000, guid: 77999c46fc36a1349b9c537f1bf39584, type: 2}
   numPaths: 3
-  numRooms: 18
+  numRooms: 15
   numCauldronRooms: 1
-  numTreasureRooms: 2
+  numTreasureRooms: 3
   numBossRooms: 1
 --- !u!114 &1244647363
 MonoBehaviour:

@@ -11,9 +11,9 @@ public class PlayerData : ScriptableObject
     Weapon weapon;
     private float health, attack, defence, attackSpeed, movementSpeed;
     private float maxHealth;
-    private List<Item> items;
-    public event System.Action<List<Item>> InventoryChangedEvent;
-    public List<Item> Items
+    private Dictionary<Item, int> items;
+    public event System.Action<Dictionary<Item, int>> InventoryChangedEvent;
+    public Dictionary<Item, int> Items
     {
         get { return items; }
         set { items = value; InventoryChangedEvent?.Invoke(items); }
@@ -21,8 +21,12 @@ public class PlayerData : ScriptableObject
     public void AddItem(Item item)
     {
         if (items == null)
-            items = new List<Item>();
-        items.Add(item);
+            items = new Dictionary<Item, int>();
+
+        if (items.ContainsKey(item))
+            items[item]++;
+        else
+            items.Add(item, 1);
         InventoryChangedEvent?.Invoke(items);
     }
 
