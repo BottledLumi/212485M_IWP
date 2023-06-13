@@ -7,6 +7,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private Slider reloadSlider;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TMP_Text healthText, attackText, defenceText, attackSpeedText, movementSpeedText;
     [SerializeField] private TMP_Text weaponText, magazineText;
@@ -30,9 +31,29 @@ public class UIManager : MonoBehaviour
 
         playerData.WeaponChangedEvent += OnWeaponChanged;
         if (playerWeapon)
+        {
             playerWeapon.MagazineChangedEvent += OnMagazineChanged;
+            playerWeapon.ReloadEvent += OnReload;
+        }
     }
+    private void LateUpdate() // Late update for UI
+    {
+        if (reloadSlider.gameObject.activeInHierarchy)
+        {
+            Vector3 newPos = playerWeapon.gameObject.transform.position;
+            newPos.y += 1.5f; // Position in world
+            Vector3 newScreenPos = Camera.main.WorldToScreenPoint(newPos);
+            RectTransform canvasRect = reloadSlider.GetComponentInParent<Canvas>().GetComponent<RectTransform>();
 
+            Vector2 anchoredPosition;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, newScreenPos, null, out anchoredPosition);
+            reloadSlider.transform.localPosition = anchoredPosition;
+
+            reloadSlider.value += Time.deltaTime;
+            if (reloadSlider.value >= reloadSlider.maxValue)
+                reloadSlider.gameObject.SetActive(false);
+        }
+    }
     private void OnInventoryChanged(Dictionary<Item, int> items)
     {
         string newText = "Inventory:";
@@ -68,6 +89,13 @@ public class UIManager : MonoBehaviour
         else
             magazineText.text = currentMagazineSize + "/" + totalMagazineSize;
     }
+    private void OnReload(float reloadTime)
+    {
+        reloadSlider.gameObject.SetActive(true);
+        reloadSlider.maxValue = reloadTime;
+        reloadSlider.value = 0;
+    }
+
     private void OnWeaponChanged(Weapon weapon)
     {
         weaponText.text = weapon.name;

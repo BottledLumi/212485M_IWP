@@ -11,10 +11,11 @@ public class PlayerWeapon : MonoBehaviour
     float totalAttack, totalRange, totalAttackSpeed;
     float totalBulletSpeed, totalBulletSize; // For ranged weapons only
     int totalMagazineSize, currentMagazineSize;
-    [SerializeField] float totalReloadSpeed;
+    float totalReloadTime = 1.4f;
     bool isReloading = false;
 
     public event System.Action<int, int> MagazineChangedEvent;
+    public event System.Action<float> ReloadEvent;
 
     float timeElapsed; // since last bullet
 
@@ -46,14 +47,18 @@ public class PlayerWeapon : MonoBehaviour
     {
         // Attack input
         GameObject activeWeapon = getInactiveWeapon();
+
+        // Reload
+        if (currentMagazineSize == 0 || (currentMagazineSize < totalMagazineSize && timeElapsed > 3) || (currentMagazineSize < totalMagazineSize && Input.GetKey(KeyCode.R)))
+        {
+            if (!isReloading) // Reload
+            {
+                ReloadEvent?.Invoke(totalReloadTime);
+                StartCoroutine(ReloadCoroutine());
+            }
+        }
         if (activeWeapon != null)
         {
-            // Reload
-            if (currentMagazineSize == 0 || (currentMagazineSize < totalMagazineSize && timeElapsed > 3) || (currentMagazineSize < totalMagazineSize && Input.GetKey(KeyCode.R)))
-            {
-                if (!isReloading)
-                    StartCoroutine(ReloadCoroutine());
-            }
             if (Input.GetMouseButtonDown(0) && canAttack && currentMagazineSize > 0)
             {
                 Vector3 mousePosition = Input.mousePosition;
@@ -149,7 +154,7 @@ public class PlayerWeapon : MonoBehaviour
             isReloading = false;
             yield break;
         }
-        yield return new WaitForSeconds(totalReloadSpeed);
+        yield return new WaitForSeconds(totalReloadTime);
         currentMagazineSize = totalMagazineSize;
         CallMagazineChangedEvent();
         isReloading = false;
