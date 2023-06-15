@@ -54,9 +54,10 @@ public class UIManager : MonoBehaviour
                 reloadSlider.gameObject.SetActive(false);
         }
     }
-    private void OnInventoryChanged(Dictionary<Item, int> items)
+    private void OnInventoryChanged()
     {
         string newText = "Inventory:";
+        Dictionary<Item, int> items = playerData.Items;
         foreach (Item item in items.Keys)
             newText += "\n" + item.name + ":" + items[item];
         inventoryText.text = newText;

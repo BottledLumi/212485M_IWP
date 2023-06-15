@@ -6,6 +6,10 @@ using UnityEngine;
 public class Pickup : ScriptableObject
 {
     [SerializeField] int index;
+    public int Index
+    {
+        get { return index; }
+    }
     [SerializeField] string itemName;
     [SerializeField] string description;
     [SerializeField] Sprite icon;

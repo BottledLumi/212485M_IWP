@@ -6,30 +6,12 @@ using TMPro;
 [CreateAssetMenu(fileName = "New Player Data", menuName = "Player Data")]
 public class PlayerData : ScriptableObject
 {
+    public struct PlayerStats
+    {
+        public float health, attack, defence, attackSpeed, movementSpeed;
+        public float maxHealth;
+    }
     private static PlayerData instance;
-
-    Weapon weapon;
-    private float health, attack, defence, attackSpeed, movementSpeed;
-    private float maxHealth;
-    private Dictionary<Item, int> items;
-    public event System.Action<Dictionary<Item, int>> InventoryChangedEvent;
-    public Dictionary<Item, int> Items
-    {
-        get { return items; }
-        set { items = value; InventoryChangedEvent?.Invoke(items); }
-    }
-    public void AddItem(Item item)
-    {
-        if (items == null)
-            items = new Dictionary<Item, int>();
-
-        if (items.ContainsKey(item))
-            items[item]++;
-        else
-            items.Add(item, 1);
-        InventoryChangedEvent?.Invoke(items);
-    }
-
     public static PlayerData Instance
     {
         get
@@ -41,6 +23,56 @@ public class PlayerData : ScriptableObject
             return instance;
         }
     }
+
+    private PlayerStats baseStats;
+    private PlayerStats activeStats;
+    public void InitBaseStats(PlayerStats _baseStats)
+    {
+        baseStats = _baseStats; InventoryChangedEvent += OnInventoryChanged;
+        ChangeStats(baseStats);
+    }
+    void ChangeStats(PlayerStats stats)
+    {
+        Health = stats.health; MaxHealth = stats.maxHealth;
+        Attack = stats.attack;
+        Defence = stats.defence;
+        AttackSpeed = stats.attackSpeed;
+        MovementSpeed = stats.movementSpeed;
+    }
+
+    Weapon weapon;
+    private Dictionary<Item, int> items;
+    public event System.Action InventoryChangedEvent;
+    public Dictionary<Item, int> Items
+    {
+        get { return items; }
+        set { items = value; InventoryChangedEvent?.Invoke(); }
+    }
+    public void AddItem(Item item)
+    {
+        if (items == null)
+            items = new Dictionary<Item, int>();
+
+        if (items.ContainsKey(item))
+            items[item]++;
+        else
+            items.Add(item, 1);
+        InventoryChangedEvent?.Invoke();
+    }
+
+    public void RemoveItem(Item item)
+    {
+        if (!items.ContainsKey(item))
+            return;
+        items[item]--;
+        InventoryChangedEvent?.Invoke();
+    }
+    void OnInventoryChanged()
+    {
+        PlayerStats playerStats = ItemEffects.AdjustStats(baseStats);
+        ChangeStats(playerStats);
+    }
+
     public event System.Action<float> AttackChangedEvent, DefenceChangedEvent, AttackSpeedChangedEvent, MovementSpeedChangedEvent;
     public event System.Action<float, float> HealthChangedEvent;
     public event System.Action<Weapon> WeaponChangedEvent;
@@ -58,74 +90,74 @@ public class PlayerData : ScriptableObject
     }
     public float Health
     {
-        get { return health; }
+        get { return activeStats.health; }
         set
         {
-            if (value != health)
+            if (value != activeStats.health)
             {
-                health = value;
-                HealthChangedEvent?.Invoke(health, maxHealth);
+                activeStats.health = value;
+                HealthChangedEvent?.Invoke(activeStats.health, activeStats.maxHealth);
             }
         }
     }
 
     public float Attack
     {
-        get { return attack; }
+        get { return activeStats.attack; }
         set
         {
-            if (value != attack)
+            if (value != activeStats.attack)
             {
-                attack = value;
-                AttackChangedEvent?.Invoke(attack);
+                activeStats.attack = value;
+                AttackChangedEvent?.Invoke(activeStats.attack);
             }
         }
     }
     public float Defence
     {
-        get { return defence; }
+        get { return activeStats.defence; }
         set
         {
-            if (value != defence)
+            if (value != activeStats.defence)
             {
-                defence = value;
-                DefenceChangedEvent?.Invoke(defence);
+                activeStats.defence = value;
+                DefenceChangedEvent?.Invoke(activeStats.defence);
             }
         }
     }
     public float AttackSpeed
     {
-        get { return attackSpeed; }
+        get { return activeStats.attackSpeed; }
         set
         {
-            if (value != attackSpeed)
+            if (value != activeStats.attackSpeed)
             {
-                attackSpeed = value;
-                AttackSpeedChangedEvent?.Invoke(attackSpeed);
+                activeStats.attackSpeed = value;
+                AttackSpeedChangedEvent?.Invoke(activeStats.attackSpeed);
             }
         }
     }
     public float MovementSpeed
     {
-        get { return movementSpeed; }
+        get { return activeStats.movementSpeed; }
         set
         {
-            if (value != movementSpeed)
+            if (value != activeStats.movementSpeed)
             {
-                movementSpeed = value;
-                MovementSpeedChangedEvent?.Invoke(movementSpeed);
+                activeStats.movementSpeed = value;
+                MovementSpeedChangedEvent?.Invoke(activeStats.movementSpeed);
             }
         }
     }
     public float MaxHealth
     {
-        get { return maxHealth; }
+        get { return activeStats.maxHealth; }
         set
         {
-            if (value != maxHealth)
+            if (value != activeStats.maxHealth)
             {
-                maxHealth = value;
-                HealthChangedEvent?.Invoke(health, maxHealth);
+                activeStats.maxHealth = value;
+                HealthChangedEvent?.Invoke(activeStats.health, activeStats.maxHealth);
             }
         }
     }
