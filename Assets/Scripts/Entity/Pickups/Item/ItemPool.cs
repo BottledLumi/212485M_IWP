@@ -24,9 +24,9 @@ public class ItemPool : MonoBehaviour
                 itemsOfRarity = SearchForRarity(Item.Rarity.Uncommon);
             else if (randomPercentage < commonChance + uncommonChance + rareChance)
                 itemsOfRarity = SearchForRarity(Item.Rarity.Rare);
-            else
+            else 
                 itemsOfRarity = SearchForRarity(Item.Rarity.Mythic);
-
+            //Debug.Log("Chance: " + commonChance + uncommonChance + rareChance + "Got: " + randomPercentage);
             if (itemsOfRarity.Count > 0)
             {
                 int randomIndex = Random.Range(0, itemsOfRarity.Count); // Generate a random index
@@ -38,12 +38,12 @@ public class ItemPool : MonoBehaviour
 
     List<Item> SearchForRarity(Item.Rarity rarity)
     {
-        List<Item> itemsOfRarity = itemPool;
-        foreach (Item item in itemsOfRarity)
+        List<Item> itemsOfRarity = new List<Item>();
+        foreach (Item item in itemPool)
         {
-            if (item.itemRarity != rarity)
-                itemsOfRarity.Remove(item);
+            if (item.itemRarity == rarity)
+                itemsOfRarity.Add(item);
         }
         return itemsOfRarity;
-    }    
+    }
 }

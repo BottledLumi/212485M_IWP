@@ -51,11 +51,14 @@ MonoBehaviour:
   itemPool:
   - {fileID: 11400000, guid: 32ba82a8f297d4147887c5f9f9b205b5, type: 2}
   - {fileID: 11400000, guid: ceb55e2ef6fadcc40bddffd67d139aa4, type: 2}
+  - {fileID: 11400000, guid: 74a6cf3bcd13a4e47b3f6910c8abec96, type: 2}
+  - {fileID: 11400000, guid: d86580c23e1242a4c8b313bac0504a46, type: 2}
+  - {fileID: 11400000, guid: e7c201f02c024f74498541e2d28f8ed2, type: 2}
   item: {fileID: 0}
-  commonChance: 100
-  uncommonChance: 0
-  rareChance: 0
-  mythicChance: 0
+  commonChance: 50
+  uncommonChance: 30
+  rareChance: 16
+  mythicChance: 4
 --- !u!114 &7588501870039772894
 MonoBehaviour:
   m_ObjectHideFlags: 0

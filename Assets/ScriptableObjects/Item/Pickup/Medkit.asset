@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796a987149903f04fb2490c9ed3d9d4f, type: 3}
   m_Name: Medkit
   m_EditorClassIdentifier: 
-  index: 101
+  index: 301
   itemName: 
   description: 
   icon: {fileID: 0}

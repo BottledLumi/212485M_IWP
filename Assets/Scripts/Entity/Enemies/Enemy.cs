@@ -44,7 +44,6 @@ public class Enemy : MonoBehaviour
         if (health > 0)
             StartCoroutine(DamageTakenIndicator());
         health -= amount;
-        Debug.Log(health);
         if (health <= 0)
         {
             isDead = true;

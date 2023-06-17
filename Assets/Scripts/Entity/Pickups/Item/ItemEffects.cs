@@ -13,7 +13,7 @@ public static class ItemEffects
         {
             switch (item.Index)
             {
-                case 201: // Olive
+                case 401: // Olive
                     playerStats.attack += 5f * items[item]; // Temporary item effect 
                     break;
             }
