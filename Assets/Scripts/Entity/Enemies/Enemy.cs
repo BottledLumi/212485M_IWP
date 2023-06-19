@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     private float health, attack, defence, attackSpeed, movementSpeed;
     private bool isDead = false;
     private SpriteRenderer spriteRenderer;
+
+    private Rigidbody2D rigidbody2D;
     public float getHealth()
     {
         return health;
@@ -37,6 +39,8 @@ public class Enemy : MonoBehaviour
             target = GameObject.Find("Player");
         gameObject.SetActive(false);
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     public void TakeDamage(float amount)
@@ -49,6 +53,12 @@ public class Enemy : MonoBehaviour
             isDead = true;
             gameObject.SetActive(false);
         }
+    }
+
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        rigidbody2D.AddForce(direction * force, ForceMode2D.Impulse);
+        Debug.Log(direction * force);
     }
 
     public bool IsDead()

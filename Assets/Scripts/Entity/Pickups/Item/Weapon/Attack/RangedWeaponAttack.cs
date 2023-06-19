@@ -6,16 +6,17 @@ public class RangedWeaponAttack : MonoBehaviour
 {
     List<Enemy> hitEnemies = new List<Enemy>();
     private float expireTime = 6;
-    private float totalAttack, totalRange;
+    private float totalAttack, totalRange, totalKnockback;
     float totalBulletSpeed, totalBulletSize;
     Vector3 direction;
 
     float distanceTravelled = 0;
 
-    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalBulletSpeed, float _totalBulletSize, Vector3 _direction)
+    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalKnockback, float _totalBulletSpeed, float _totalBulletSize, Vector3 _direction)
     {
         totalAttack = _totalAttack;
         totalRange = _totalRange;
+        totalKnockback = _totalKnockback;
         totalBulletSpeed = _totalBulletSpeed;
         totalBulletSize = _totalBulletSize;
         direction = _direction;
@@ -47,6 +48,11 @@ public class RangedWeaponAttack : MonoBehaviour
             if (enemy && !hitEnemies.Contains(enemy))
             {
                 enemy.TakeDamage(totalAttack);
+                // Knockback
+                Vector2 knockbackDirection = other.transform.position - transform.position; // Calculate the knockback direction
+                knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
+                enemy.ApplyKnockback(knockbackDirection, totalKnockback);
+
                 hitEnemies.Add(enemy);
             }
         }

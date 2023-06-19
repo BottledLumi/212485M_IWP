@@ -4,21 +4,35 @@ using UnityEngine;
 
 public static class ItemEffects
 {
-    public static PlayerData.PlayerStats AdjustStats(PlayerData.PlayerStats basePlayerStats)
+    public static PlayerStats AdjustStats(PlayerStats basePlayerStats) // For whole inventory
     {
         Dictionary<Item, int> items = PlayerData.Instance.Items;
-        PlayerData.PlayerStats playerStats = basePlayerStats;
+        PlayerStats playerStats = basePlayerStats;
 
         foreach (Item item in items.Keys)
         {
-            switch (item.Index)
-            {
-                case 401: // Olive
-                    playerStats.attack += 5f * items[item]; // Temporary item effect 
-                    break;
-            }
+            for (int i = 0; i < items[item]; i++)
+                playerStats = RegisterEffect(playerStats, item);
         }
+        return playerStats;
+    }
 
+    public static PlayerStats RegisterEffect(PlayerStats basePlayerStats, Item item)
+    {
+        PlayerStats playerStats = basePlayerStats;
+        switch (item.Index)
+        {
+            case 401: // Olive
+                playerStats.attack += 4f; // Temporary item effect 
+                break;
+            case 402: // Cream
+                break;
+            case 403: // Mashed Potato
+                playerStats.attack += (playerStats.defence * 1.5f);
+                break;
+            case 404: // Alfredo
+                break;
+        }
         return playerStats;
     }
 }

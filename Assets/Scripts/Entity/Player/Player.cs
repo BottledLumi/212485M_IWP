@@ -35,14 +35,7 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
 
     private void InitialisePlayerStats()
     {
-        PlayerData.PlayerStats playerStats;
-        playerStats.health = initialHealth;
-        playerStats.attack = initialAttack;
-        playerStats.defence = initialDefence;
-        playerStats.attackSpeed = initialAttackSpeed;
-        playerStats.movementSpeed = initialMovementSpeed;
-
-        playerStats.maxHealth = initialMaxHealth;
+        PlayerStats playerStats = new PlayerStats(initialHealth, initialAttack, initialDefence, initialAttackSpeed, initialMovementSpeed, initialMaxHealth);
         playerData.InitBaseStats(playerStats);
 
         playerData.Weapon = initialWeapon;

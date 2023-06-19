@@ -6,12 +6,13 @@ public class MeleeWeaponAttack : MonoBehaviour
 {
     [SerializeField] bool mobile;
     List<Enemy> hitEnemies = new List<Enemy>();
-    private float totalAttack, totalRange, totalAttackSpeed;
-    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalAttackSpeed)
+    private float totalAttack, totalRange, totalAttackSpeed, totalKnockback;
+    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalAttackSpeed, float _totalKnockback)
     {
         totalAttack = _totalAttack;
         totalRange = _totalRange;
         totalAttackSpeed = _totalAttackSpeed;
+        totalKnockback = _totalKnockback;
     }
 
     [HideInInspector] public Animator animator;
@@ -74,6 +75,11 @@ public class MeleeWeaponAttack : MonoBehaviour
             if (enemy && !hitEnemies.Contains(enemy))
             {
                 enemy.TakeDamage(totalAttack);
+                // Knockback
+                Vector2 knockbackDirection = other.transform.position - transform.position; // Calculate the knockback direction
+                knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
+                enemy.ApplyKnockback(knockbackDirection, totalKnockback);
+
                 hitEnemies.Add(enemy);
             }
         }

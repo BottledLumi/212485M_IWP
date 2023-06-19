@@ -8,7 +8,7 @@ public class PlayerWeapon : MonoBehaviour
     List<GameObject> weaponPool;
 
     bool canAttack = true;
-    float totalAttack, totalRange, totalAttackSpeed;
+    float totalAttack, totalRange, totalAttackSpeed, totalKnockback;
     float totalBulletSpeed, totalBulletSize; // For ranged weapons only
     int totalMagazineSize, currentMagazineSize;
     float totalReloadTime = 1.4f;
@@ -28,8 +28,13 @@ public class PlayerWeapon : MonoBehaviour
     }
     void OnWeaponChange(Weapon _weapon)
     {
-        weapon = playerData.Weapon;
+        if (weaponPool != null) // Destroy existing weapon pool
+        {
+            foreach (GameObject gameObject in weaponPool) 
+                GameObject.Destroy(gameObject);
+        }
 
+        weapon = playerData.Weapon;
         InitWeaponPool();
 
         totalMagazineSize = weapon.getMagazineSize();
@@ -45,6 +50,8 @@ public class PlayerWeapon : MonoBehaviour
 
     void Update()
     {
+        if (!weapon)
+            return;
         // Attack input
         GameObject activeWeapon = getInactiveWeapon();
 
@@ -68,6 +75,7 @@ public class PlayerWeapon : MonoBehaviour
                 totalAttack = weapon.getAttack() * playerData.Attack;
                 totalRange = weapon.getRange();
                 totalAttackSpeed = weapon.getAttackSpeed() * playerData.AttackSpeed;
+                totalKnockback = weapon.getKnockback();
 
                 StartCoroutine(AttackSpeedCoroutine());
 
@@ -79,7 +87,7 @@ public class PlayerWeapon : MonoBehaviour
                             MeleeWeaponAttack meleeWeaponAttack = activeWeapon.GetComponent<MeleeWeaponAttack>();
                             if (!meleeWeaponAttack)
                                 break;
-                            meleeWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalAttackSpeed);
+                            meleeWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalAttackSpeed, totalKnockback);
 
                             Vector3 weaponOffset = (mousePosition - transform.position).normalized * (weapon.getRange() / 2 + 0.5f * playerOffset);
                             activeWeapon.transform.position = transform.position + weaponOffset;
@@ -102,7 +110,7 @@ public class PlayerWeapon : MonoBehaviour
                                 mousePosition.x - transform.position.x,
                                 mousePosition.y - transform.position.y, 0).normalized;
 
-                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalBulletSpeed, totalBulletSize, direction);
+                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalKnockback, totalBulletSpeed, totalBulletSize, direction);
 
                             currentMagazineSize--; // Reduce magazine size by 1
                             CallMagazineChangedEvent();

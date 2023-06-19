@@ -6,11 +6,6 @@ using TMPro;
 [CreateAssetMenu(fileName = "New Player Data", menuName = "Player Data")]
 public class PlayerData : ScriptableObject
 {
-    public struct PlayerStats
-    {
-        public float health, attack, defence, attackSpeed, movementSpeed;
-        public float maxHealth;
-    }
     private static PlayerData instance;
     public static PlayerData Instance
     {
@@ -67,9 +62,11 @@ public class PlayerData : ScriptableObject
         items[item]--;
         InventoryChangedEvent?.Invoke();
     }
-    void OnInventoryChanged()
+    void OnInventoryChanged() // Maybe change it to a system where they detect differences in the inventory? or Added/Removed? If not item effects have to keep resetting.
     {
-        PlayerStats playerStats = ItemEffects.AdjustStats(baseStats);
+        PlayerStats playerStats = baseStats; 
+        playerStats.health = activeStats.health; // Keep current health
+        playerStats = ItemEffects.AdjustStats(playerStats);
         ChangeStats(playerStats);
     }
 
