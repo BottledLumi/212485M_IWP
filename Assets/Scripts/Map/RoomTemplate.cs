@@ -22,31 +22,31 @@ public class RoomTemplate : ScriptableObject
     [SerializeField] private RoomType roomType;
     public RoomType getRoomType() { return roomType; }
 
-    [SerializeField] private Sprite roomIcon;
-    public Sprite getRoomIcon() { return roomIcon; }
+    //[SerializeField] private Sprite roomIcon;
+    //public Sprite getRoomIcon() { return roomIcon; }
 
-    private void Awake()
-    {
-        switch (roomType)
-        {
-            case RoomType.STARTING:
-                roomIcon = null;
-                break;
-            case RoomType.COMBAT:
-                roomIcon = null;
-                break;
-            case RoomType.TREASURE:
-                roomIcon = null;
-                break;
-            case RoomType.CAULDRON:
-                roomIcon = null;
-                break;
-            case RoomType.BOSS:
-                roomIcon = null;
-                break;
-            default:
-                Debug.LogError("Invalid room type");
-                break;
-        }
-    }
+    //private void Awake()
+    //{
+    //    switch (roomType)
+    //    {
+    //        case RoomType.STARTING:
+    //            roomIcon = null;
+    //            break;
+    //        case RoomType.COMBAT:
+    //            roomIcon = null;
+    //            break;
+    //        case RoomType.TREASURE:
+    //            roomIcon = null;
+    //            break;
+    //        case RoomType.CAULDRON:
+    //            roomIcon = null;
+    //            break;
+    //        case RoomType.BOSS:
+    //            roomIcon = null;
+    //            break;
+    //        default:
+    //            Debug.LogError("Invalid room type");
+    //            break;
+    //    }
+    //}
 }

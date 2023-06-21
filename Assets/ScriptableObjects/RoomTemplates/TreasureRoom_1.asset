@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4a296283142b2419eaa94dc87f12be, type: 3}
   m_Name: TreasureRoom_1
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 5192640063505386111, guid: 7cfdaaa583df3a6438fd31da6e74a64f, type: 3}
+  roomPrefab: {fileID: 5192640063505386111, guid: 631716daca3eb5a488cf65ee3a136468, type: 3}
   roomType: 2
-  roomIcon: {fileID: 0}

@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4a296283142b2419eaa94dc87f12be, type: 3}
   m_Name: CauldronRoom
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 5192640063505386111, guid: b4065334d7bb7d149ad79b15a91a8db2, type: 3}
+  roomPrefab: {fileID: 5192640063505386111, guid: 5296393a3ca5b794793fddab9e74f627, type: 3}
   roomType: 3
-  roomIcon: {fileID: 0}

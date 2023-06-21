@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4a296283142b2419eaa94dc87f12be, type: 3}
   m_Name: CombatRoom_2
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 5192640063505386111, guid: cd52551826d2352428d2b40c0b325684, type: 3}
+  roomPrefab: {fileID: 5192640063505386111, guid: 376bce9d7602a8043858363bdcd62b7e, type: 3}
   roomType: 1
-  roomIcon: {fileID: 0}
