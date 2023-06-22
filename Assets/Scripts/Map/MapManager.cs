@@ -106,7 +106,7 @@ public class MapManager : MonoBehaviour
                 Tilemap tilemap = room.transform.Find("Walls").GetComponent<Tilemap>();
                 if (tilemap && roomComponent)
                 {
-                    int roomWidthInTiles = tilemap.size.x; int roomHeightInTiles = tilemap.size.y+1; // +1 to y to solve odd-even discrepancy
+                    int roomWidthInTiles = tilemap.size.x; int roomHeightInTiles = tilemap.size.y;
                     if (row + 1 < floorRooms.GetLength(0) && floorRooms[row + 1, col])
                         CreateDoor(roomComponent, room.transform.position + new Vector3(roomWidthInTiles / 2, 0, 0), rightDoor);
 

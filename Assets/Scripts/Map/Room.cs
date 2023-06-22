@@ -108,6 +108,12 @@ public class Room : MonoBehaviour
             door.SetOpen(false);
     }
 
+    void OpenDoors()
+    {
+        foreach (Door door in doors)
+            door.SetOpen(true);
+    }
+
     private void OnRoomEntered()
     {
         status.active = true; status.explored = true;
@@ -119,7 +125,6 @@ public class Room : MonoBehaviour
     void RoomCleared()
     {
         status.cleared = true;
-        foreach (Door door in doors)
-            door.SetOpen(true);
+        OpenDoors();
     }
 }

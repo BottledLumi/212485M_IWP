@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private bool open;
+    private bool open = true;
     [HideInInspector] public Door linkedDoor = null;
+    [SerializeField] Animator animator;
     public enum DIRECTION
     {
         LEFT,
@@ -22,6 +23,10 @@ public class Door : MonoBehaviour
 
     public void SetOpen(bool _open)
     {
+        if (_open)
+            animator.SetTrigger("Open");
+        else
+            animator.SetTrigger("Close");
         open = _open;
     }
 
@@ -29,7 +34,7 @@ public class Door : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player") || !open)
             return;
-        Vector3 newPos = linkedDoor.transform.Find("Door").position;
+        Vector3 newPos = linkedDoor.transform.position;
         switch (direction)
         {
             case DIRECTION.LEFT:
