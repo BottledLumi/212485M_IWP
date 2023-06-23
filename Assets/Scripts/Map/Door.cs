@@ -24,9 +24,15 @@ public class Door : MonoBehaviour
     public void SetOpen(bool _open)
     {
         if (_open)
+        {
             animator.SetTrigger("Open");
+            animator.ResetTrigger("Close");
+        }
         else
+        {
             animator.SetTrigger("Close");
+            animator.ResetTrigger("Open");
+        }
         open = _open;
     }
 
