@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class MeleeWeaponAttack : MonoBehaviour
 {
+    GameObject player;
     [SerializeField] bool mobile;
     List<Enemy> hitEnemies = new List<Enemy>();
     private float totalAttack, totalRange, totalAttackSpeed, totalKnockback;
-    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalAttackSpeed, float _totalKnockback)
+
+    Vector3 mousePosition;
+    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalAttackSpeed, float _totalKnockback, GameObject _player)
     {
         totalAttack = _totalAttack;
         totalRange = _totalRange;
         totalAttackSpeed = _totalAttackSpeed;
         totalKnockback = _totalKnockback;
+
+        player = _player;
     }
 
     [HideInInspector] public Animator animator;
@@ -20,6 +25,17 @@ public class MeleeWeaponAttack : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+    }
+    private void LateUpdate()
+    {
+        mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); mousePosition.z = 0;
+
+        float playerOffset = player.transform.localScale.y; // degree of weapon offset from player
+
+        Vector3 weaponOffset = (mousePosition - player.transform.position).normalized * (totalRange / 2 + 0.5f * playerOffset);
+        gameObject.transform.position = player.transform.position + weaponOffset;
+        gameObject.transform.rotation = player.transform.rotation;
     }
     IEnumerator AttackCoroutine()
     {

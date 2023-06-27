@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] PlayerWeapon playerWeapon;
 
     [SerializeField] private TMP_Text inventoryText;
+    [SerializeField] private GameObject inventoryDisplay;
 
     PlayerData playerData;
     private void Awake()
@@ -36,6 +37,13 @@ public class UIManager : MonoBehaviour
             playerWeapon.ReloadEvent += OnReload;
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+            inventoryDisplay.SetActive(!inventoryDisplay.activeInHierarchy);
+    }
+
     private void LateUpdate() // Late update for UI
     {
         if (reloadSlider.gameObject.activeInHierarchy)

@@ -68,9 +68,6 @@ public class PlayerWeapon : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && canAttack && currentMagazineSize > 0)
             {
-                Vector3 mousePosition = Input.mousePosition;
-                mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); mousePosition.z = 0;
-
                 // Register item effects, weapon base stats, etc.
                 totalAttack = weapon.getAttack() * playerData.Attack;
                 totalRange = weapon.getRange();
@@ -87,11 +84,8 @@ public class PlayerWeapon : MonoBehaviour
                             MeleeWeaponAttack meleeWeaponAttack = activeWeapon.GetComponent<MeleeWeaponAttack>();
                             if (!meleeWeaponAttack)
                                 break;
-                            meleeWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalAttackSpeed, totalKnockback);
+                            meleeWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalAttackSpeed, totalKnockback, gameObject);
 
-                            Vector3 weaponOffset = (mousePosition - transform.position).normalized * (weapon.getRange() / 2 + 0.5f * playerOffset);
-                            activeWeapon.transform.position = transform.position + weaponOffset;
-                            activeWeapon.transform.rotation = transform.rotation;
                             activeWeapon.SetActive(true);
                             break;
                         }
@@ -106,6 +100,9 @@ public class PlayerWeapon : MonoBehaviour
                                 totalBulletSpeed = rangedWeapon.getBulletSpeed();
                                 totalBulletSize = rangedWeapon.getBulletSize();
                             }
+                            Vector3 mousePosition = Input.mousePosition;
+                            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); mousePosition.z = 0;
+
                             Vector3 direction = new Vector3(
                                 mousePosition.x - transform.position.x,
                                 mousePosition.y - transform.position.y, 0).normalized;
