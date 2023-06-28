@@ -1310,7 +1310,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 8f5c628df30eeb145979bfbcfdae7b97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2084,7 +2084,7 @@ MonoBehaviour:
   unexploredNode: {fileID: 21300000, guid: b14bddc771f6a744899c5bb37de97ab8, type: 3}
   bossIcon: {fileID: 21300000, guid: 64a5ae0ff9f7f584fa91a8ae2caaec26, type: 3}
   treasureIcon: {fileID: 21300000, guid: f966290569aecce4a936c6b422bddd3a, type: 3}
-  cauldronIcon: {fileID: 0}
+  cauldronIcon: {fileID: 21300000, guid: 14f6354ce77db944d9242a981f2fd4a1, type: 3}
   size: 2.5
 --- !u!1 &1197029357
 GameObject:
@@ -2607,7 +2607,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 35}
-  m_SizeDelta: {x: 300, y: 150}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1429875013
 GameObject:
