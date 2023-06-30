@@ -16,12 +16,12 @@ MonoBehaviour:
   itemName: 
   description: 
   icon: {fileID: 21300000, guid: 50366eef9849c2f49948ea2fcb33f315, type: 3}
-  rarity: 0
-  weaponAttack: {fileID: 0}
-  attack: 0
-  attackSpeed: 0
-  magazineSize: 0
-  range: 0
-  knockback: 0
-  bulletSpeed: 0
-  bulletSize: 0
+  rarity: 1
+  weaponAttack: {fileID: 1317443994989195078, guid: 1b7a1b2426e4f65449a6a090ccd410eb, type: 3}
+  attack: 2
+  attackSpeed: 1.6
+  magazineSize: 10
+  range: 30
+  knockback: 2
+  bulletSpeed: 60
+  bulletSize: 2

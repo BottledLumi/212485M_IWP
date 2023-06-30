@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: 
   description: 
   icon: {fileID: 21300000, guid: b2e5fc2b15c17364b8af4f517d7c1d1f, type: 3}
-  rarity: 0
+  rarity: 2
   weaponAttack: {fileID: 0}
   attack: 0
   attackSpeed: 0
