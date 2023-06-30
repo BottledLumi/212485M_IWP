@@ -19,9 +19,9 @@ MonoBehaviour:
   rarity: 1
   weaponAttack: {fileID: 1317443994989195078, guid: 1b7a1b2426e4f65449a6a090ccd410eb, type: 3}
   attack: 2
-  attackSpeed: 1.6
-  magazineSize: 10
+  attackSpeed: 1.5
+  magazineSize: 5
   range: 30
   knockback: 2
-  bulletSpeed: 60
-  bulletSize: 2
+  bulletSpeed: 110
+  bulletSize: 1.5

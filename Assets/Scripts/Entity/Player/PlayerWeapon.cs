@@ -66,7 +66,7 @@ public class PlayerWeapon : MonoBehaviour
         }
         if (activeWeapon != null)
         {
-            if (Input.GetMouseButtonDown(0) && canAttack && currentMagazineSize > 0)
+            if (Input.GetMouseButtonDown(0) && canAttack && currentMagazineSize > 0 && !isReloading)
             {
                 // Register item effects, weapon base stats, etc.
                 totalAttack = weapon.getAttack() * playerData.Attack;
