@@ -52,21 +52,25 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!weapon)
             return;
-        // Attack input
-        GameObject activeWeapon = getInactiveWeapon();
 
         // Reload
-        if (currentMagazineSize == 0 || (currentMagazineSize < totalMagazineSize && timeElapsed > 3) || (currentMagazineSize < totalMagazineSize && Input.GetKey(KeyCode.R)))
+        if (weapon.weaponType == Weapon.WEAPON_TYPE.RANGED)
         {
-            if (!isReloading) // Reload
+            if (currentMagazineSize == 0 || (currentMagazineSize < totalMagazineSize && timeElapsed > 3) || (currentMagazineSize < totalMagazineSize && Input.GetKey(KeyCode.R)))
             {
-                ReloadEvent?.Invoke(totalReloadTime);
-                StartCoroutine(ReloadCoroutine());
+                if (!isReloading) // Reload
+                {
+                    ReloadEvent?.Invoke(totalReloadTime);
+                    StartCoroutine(ReloadCoroutine());
+                }
             }
         }
-        if (activeWeapon != null)
+        
+        // Attack input
+        if (Input.GetMouseButtonDown(0) && canAttack && currentMagazineSize > 0 && !isReloading)
         {
-            if (Input.GetMouseButtonDown(0) && canAttack && currentMagazineSize > 0 && !isReloading)
+            GameObject activeWeapon = getInactiveWeapon();
+            if (activeWeapon != null)
             {
                 // Register item effects, weapon base stats, etc.
                 totalAttack = weapon.getAttack() * playerData.Attack;
@@ -120,7 +124,6 @@ public class PlayerWeapon : MonoBehaviour
                         }
                 }
                 canAttack = false;
-                
             }
         }
     }

@@ -1388,7 +1388,7 @@ MonoBehaviour:
   initialAttackSpeed: 1
   initialMovementSpeed: 10
   initialMaxHealth: 100
-  initialWeapon: {fileID: 11400000, guid: 42dbb751368fdac4d93f4d8cde7a88df, type: 2}
+  initialWeapon: {fileID: 11400000, guid: a56d4335d66faf5439da3f73640482ab, type: 2}
 --- !u!114 &720542228
 MonoBehaviour:
   m_ObjectHideFlags: 0
