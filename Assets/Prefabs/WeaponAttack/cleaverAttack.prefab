@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7717234458600636118}
   - component: {fileID: 7582552083497022757}
   m_Layer: 0
-  m_Name: knifeAttack
+  m_Name: cleaverAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 1827022578, guid: 7a52a9ea82c91ff43b1638536294c3ad, type: 3}
+  m_Sprite: {fileID: -1790560596, guid: 0cce6b03b8f6a9d46af8de5215a06dd0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -113,7 +113,7 @@ Animator:
   m_GameObject: {fileID: 2666802197143146413}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 48859084312a164478a1c27a1f8a61e5, type: 2}
+  m_Controller: {fileID: 9100000, guid: f6660e8b3b4a1a24aa027e37ddd16d15, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

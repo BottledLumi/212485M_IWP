@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeleeWeaponAttack : MonoBehaviour
 {
     GameObject player;
+
     [SerializeField] bool mobile;
     List<Enemy> hitEnemies = new List<Enemy>();
     private float totalAttack, totalRange, totalAttackSpeed, totalKnockback;
@@ -92,7 +93,7 @@ public class MeleeWeaponAttack : MonoBehaviour
             {
                 enemy.TakeDamage(totalAttack);
                 // Knockback
-                Vector2 knockbackDirection = other.transform.position - transform.position; // Calculate the knockback direction
+                Vector2 knockbackDirection = other.transform.position - player.transform.position; // Calculate the knockback direction
                 knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
                 enemy.ApplyKnockback(knockbackDirection, totalKnockback);
 

@@ -54,6 +54,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74a6cf3bcd13a4e47b3f6910c8abec96, type: 2}
   - {fileID: 11400000, guid: d86580c23e1242a4c8b313bac0504a46, type: 2}
   - {fileID: 11400000, guid: e7c201f02c024f74498541e2d28f8ed2, type: 2}
+  - {fileID: 11400000, guid: a56d4335d66faf5439da3f73640482ab, type: 2}
+  - {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
+  - {fileID: 11400000, guid: 42dbb751368fdac4d93f4d8cde7a88df, type: 2}
+  - {fileID: 11400000, guid: 44dfc1c05ffd2064082be09975b10499, type: 2}
   item: {fileID: 0}
   commonChance: 50
   uncommonChance: 30
@@ -86,7 +90,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.15}
-  m_Size: {x: 0.8, y: 0.3}
+  m_Size: {x: 0.8, y: 0.4}
   m_Direction: 1
 --- !u!1 &1494983027431612436
 GameObject:

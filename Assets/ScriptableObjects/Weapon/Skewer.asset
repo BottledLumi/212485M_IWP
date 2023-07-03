@@ -22,4 +22,4 @@ MonoBehaviour:
   attackSpeed: 1.2
   magazineSize: 1
   range: 7
-  knockback: 4
+  knockback: 16

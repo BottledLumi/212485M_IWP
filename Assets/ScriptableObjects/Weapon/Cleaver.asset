@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bd080252dd81c45828034c20c0be9b, type: 3}
   m_Name: Cleaver
   m_EditorClassIdentifier: 
-  index: 0
-  itemName: 
+  index: 103
+  itemName: Cleaver
   description: 
   icon: {fileID: 21300000, guid: fc6f2d21bfe39e248b27b596cdfb83f8, type: 3}
   rarity: 1
-  weaponAttack: {fileID: 0}
-  attack: 0
-  attackSpeed: 0
-  magazineSize: 0
-  range: 0
-  knockback: 0
+  weaponAttack: {fileID: 2666802197143146413, guid: b2f9119fcf6db9a418627afe987eb230, type: 3}
+  attack: 2.5
+  attackSpeed: 1.7
+  magazineSize: 1
+  range: 5
+  knockback: 12

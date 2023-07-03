@@ -24,11 +24,11 @@ public class WetGoopAttack : MonoBehaviour
     {
         if (enemy.target)
         {
-            //// Calculate the direction from the enemy to the player
-            //Vector2 direction = enemy.target.transform.position - transform.position;
-            //direction.Normalize(); // Normalize the direction vector to have a magnitude of 1
+            // Calculate the direction from the enemy to the player
+            Vector2 direction = enemy.target.transform.position - transform.position;
+            direction.Normalize(); // Normalize the direction vector to have a magnitude of 1
 
-            //transform.rotation = Quaternion.LookRotation(Vector3.forward, direction); //Rotate the enemy towards player
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, direction); //Rotate the enemy towards player
 
             // Move the enemy towards the player if enemy can attack
             //if (canAttack)
@@ -41,10 +41,10 @@ public class WetGoopAttack : MonoBehaviour
             //    transform.position = Vector2.MoveTowards(transform.position, -enemy.target.transform.position, enemy.getMovementSpeed() / 2 * Time.deltaTime);
             //}
 
-            //if (canAttack)
-            //    transform.position = Vector2.MoveTowards(transform.position, enemy.target.transform.position, enemy.getMovementSpeed() * Time.deltaTime);
-            //else
-            //    transform.position = Vector2.MoveTowards(transform.position, -enemy.target.transform.position, enemy.getMovementSpeed() / 2 * Time.deltaTime); //Run away if enemy can't attack
+            if (canAttack)
+                transform.position = Vector2.MoveTowards(transform.position, enemy.target.transform.position, enemy.getMovementSpeed() * Time.deltaTime);
+            else
+                transform.position = Vector2.MoveTowards(transform.position, -enemy.target.transform.position, enemy.getMovementSpeed() / 2 * Time.deltaTime); //Run away if enemy can't attack
         }
     }
 

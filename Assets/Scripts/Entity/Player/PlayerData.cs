@@ -36,42 +36,6 @@ public class PlayerData : ScriptableObject
     }
 
     Weapon weapon;
-    private Dictionary<Item, int> items;
-    public event System.Action InventoryChangedEvent;
-    public Dictionary<Item, int> Items
-    {
-        get { return items; }
-        set { items = value; InventoryChangedEvent?.Invoke(); }
-    }
-    public void AddItem(Item item)
-    {
-        if (items == null)
-            items = new Dictionary<Item, int>();
-
-        if (items.ContainsKey(item))
-            items[item]++;
-        else
-            items.Add(item, 1);
-        InventoryChangedEvent?.Invoke();
-    }
-
-    public void RemoveItem(Item item)
-    {
-        if (!items.ContainsKey(item))
-            return;
-        items[item]--;
-        InventoryChangedEvent?.Invoke();
-    }
-    void OnInventoryChanged() // Maybe change it to a system where they detect differences in the inventory? or Added/Removed? If not item effects have to keep resetting.
-    {
-        PlayerStats playerStats = baseStats; 
-        playerStats.health = activeStats.health; // Keep current health
-        playerStats = ItemEffects.AdjustStats(playerStats);
-        ChangeStats(playerStats);
-    }
-
-    public event System.Action<float> AttackChangedEvent, DefenceChangedEvent, AttackSpeedChangedEvent, MovementSpeedChangedEvent;
-    public event System.Action<float, float> HealthChangedEvent;
     public event System.Action<Weapon> WeaponChangedEvent;
     public Weapon Weapon
     {
@@ -85,6 +49,43 @@ public class PlayerData : ScriptableObject
             }
         }
     }
+
+    private Dictionary<Item, int> items;
+    public event System.Action InventoryChangedEvent;
+    public event System.Action<Item> ItemAddedEvent, ItemRemovedEvent;
+    public Dictionary<Item, int> Items
+    {
+        get { return items; }
+    }
+    public void AddItem(Item item)
+    {
+        if (items == null)
+            items = new Dictionary<Item, int>();
+
+        if (items.ContainsKey(item))
+            items[item]++;
+        else
+            items.Add(item, 1);
+        ItemAddedEvent?.Invoke(item);
+    }
+
+    public void RemoveItem(Item item)
+    {
+        if (!items.ContainsKey(item))
+            return;
+        items[item]--;
+        ItemRemovedEvent?.Invoke(item);
+    }
+    void OnInventoryChanged() // Maybe change it to a system where they detect differences in the inventory? or Added/Removed? If not item effects have to keep resetting.
+    {
+        PlayerStats playerStats = baseStats; 
+        playerStats.health = activeStats.health; // Keep current health
+        playerStats = ItemEffects.AdjustStats(playerStats);
+        ChangeStats(playerStats);
+    }
+
+    public event System.Action<float> AttackChangedEvent, DefenceChangedEvent, AttackSpeedChangedEvent, MovementSpeedChangedEvent;
+    public event System.Action<float, float> HealthChangedEvent;
     public float Health
     {
         get { return activeStats.health; }

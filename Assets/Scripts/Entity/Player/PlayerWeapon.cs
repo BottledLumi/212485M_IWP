@@ -111,7 +111,7 @@ public class PlayerWeapon : MonoBehaviour
                                 mousePosition.x - transform.position.x,
                                 mousePosition.y - transform.position.y, 0).normalized;
 
-                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalKnockback, totalBulletSpeed, totalBulletSize, direction);
+                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalKnockback, totalBulletSpeed, totalBulletSize, direction, gameObject);
 
                             currentMagazineSize--; // Reduce magazine size by 1
                             CallMagazineChangedEvent();

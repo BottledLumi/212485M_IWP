@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ItemEffects
+public class ItemEffects : MonoBehaviour
 {
     public static PlayerStats AdjustStats(PlayerStats basePlayerStats) // For whole inventory
     {
