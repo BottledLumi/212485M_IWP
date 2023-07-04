@@ -23,7 +23,7 @@ public class PlayerData : ScriptableObject
     private PlayerStats activeStats;
     public void InitBaseStats(PlayerStats _baseStats)
     {
-        baseStats = _baseStats; InventoryChangedEvent += OnInventoryChanged;
+        baseStats = _baseStats; /*InventoryChangedEvent += OnInventoryChanged;*/
         ChangeStats(baseStats);
     }
     void ChangeStats(PlayerStats stats)
@@ -67,6 +67,7 @@ public class PlayerData : ScriptableObject
         else
             items.Add(item, 1);
         ItemAddedEvent?.Invoke(item);
+        InventoryChangedEvent?.Invoke();
     }
 
     public void RemoveItem(Item item)
@@ -75,13 +76,17 @@ public class PlayerData : ScriptableObject
             return;
         items[item]--;
         ItemRemovedEvent?.Invoke(item);
+        InventoryChangedEvent?.Invoke();
     }
-    void OnInventoryChanged() // Maybe change it to a system where they detect differences in the inventory? or Added/Removed? If not item effects have to keep resetting.
+
+    public Item SearchForItem(string name) // By name
     {
-        PlayerStats playerStats = baseStats; 
-        playerStats.health = activeStats.health; // Keep current health
-        playerStats = ItemEffects.AdjustStats(playerStats);
-        ChangeStats(playerStats);
+        foreach (Item item in items.Keys)
+        {
+            if (item.name == name)
+                return item;
+        }
+        return null;
     }
 
     public event System.Action<float> AttackChangedEvent, DefenceChangedEvent, AttackSpeedChangedEvent, MovementSpeedChangedEvent;

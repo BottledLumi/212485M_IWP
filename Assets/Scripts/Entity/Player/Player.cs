@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour // Temporary script to handle some functionality
@@ -5,10 +7,15 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
     [SerializeField] private float initialHealth, initialAttack, initialDefence, initialAttackSpeed, initialMovementSpeed;
     [SerializeField] private float initialMaxHealth;
     [SerializeField] Weapon initialWeapon;
+    [SerializeField] List<Item> initialItems;
+
+    ItemsManager itemsManager;
+
     PlayerData playerData;
     private void Awake()
     {
         playerData = PlayerData.Instance;
+        itemsManager = ItemsManager.Instance;
     }
     private void Start()
     {
@@ -22,11 +29,28 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
 
     public void TakeDamage(float amount)
     {
+        if (CheckInvulnerable())
+            return;
         playerData.Health -= amount - playerData.Defence; // Reduce damage by defence
         if (playerData.Health <= 0)
             PlayerDeath();
     }
 
+    bool CheckInvulnerable()
+    {
+        Item olive = playerData.SearchForItem("Olive");
+        if (olive)
+        {
+            OliveEffect oliveEffect = itemsManager.ActiveItems[olive].GetComponent<OliveEffect>();
+            if (oliveEffect && oliveEffect.BarrierActive)
+            {
+                oliveEffect.BarrierActive = false;
+                Debug.Log("Barrier hit!");
+                return true;
+            }
+        }
+        return false;
+    }
     
     private void PlayerDeath()
     {
@@ -39,5 +63,7 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
         playerData.InitBaseStats(playerStats);
 
         playerData.Weapon = initialWeapon;
+        foreach (Item item in initialItems)
+            playerData.AddItem(item);
     }
 }

@@ -1,11 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Buff
-{
-
-}
-
 public struct PlayerStats
 {
     public float health, attack, defence, attackSpeed, movementSpeed;
