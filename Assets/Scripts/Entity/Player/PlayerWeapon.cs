@@ -12,7 +12,7 @@ public class PlayerWeapon : MonoBehaviour
     float totalBulletSpeed, totalBulletSize; // For ranged weapons only
     int totalMagazineSize, currentMagazineSize;
     float totalReloadTime = 1.4f;
-    float autoAttackSpeed = 0.6f;
+    float autoAttackSpeed = 0.55f;
     bool isReloading = false;
 
     public event System.Action<int, int> MagazineChangedEvent;

@@ -314,7 +314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198668955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 860.6048, y: 619.4537, z: -8.358905}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   initialAttackSpeed: 1
   initialMovementSpeed: 10
   initialMaxHealth: 100
-  initialWeapon: {fileID: 11400000, guid: 418998e810e18c8409d0ae4bc2ba5533, type: 2}
+  initialWeapon: {fileID: 11400000, guid: 7f6868f7710987d408d524d0eb1833d6, type: 2}
   initialItems:
   - {fileID: 11400000, guid: 32ba82a8f297d4147887c5f9f9b205b5, type: 2}
 --- !u!114 &720542228

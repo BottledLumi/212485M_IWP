@@ -45,7 +45,7 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
             if (oliveEffect && oliveEffect.BarrierActive)
             {
                 oliveEffect.BarrierActive = false;
-                Debug.Log("Barrier hit!");
+                //Debug.Log("Barrier hit!");
                 return true;
             }
         }

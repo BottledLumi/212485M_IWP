@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemsManager : MonoBehaviour // To manage item effects
 {
     [SerializeField] GameObject items;
+
     private static ItemsManager instance;
     public static ItemsManager Instance
     {
@@ -23,7 +24,13 @@ public class ItemsManager : MonoBehaviour // To manage item effects
             return instance;
         }
     }
+
     PlayerData playerData;
+
+    GameObject owner;
+    public GameObject Owner{
+        get { return owner; }
+    }
 
     Dictionary<Item, GameObject> activeItems = new Dictionary<Item, GameObject>();
     public Dictionary<Item, GameObject> ActiveItems
@@ -34,6 +41,8 @@ public class ItemsManager : MonoBehaviour // To manage item effects
     private void Awake()
     {
         playerData = PlayerData.Instance;
+
+        owner = GameObject.Find("Player");
 
         playerData.ItemAddedEvent += OnItemAdded;
         playerData.ItemRemovedEvent += OnItemRemoved;
@@ -56,6 +65,7 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         {
             // Alter existing item effect
             ItemEffect itemEffect = activeItems[item].GetComponentInChildren<ItemEffect>();
+            itemEffect.Value++;
         }
     }
 
@@ -72,6 +82,7 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         {
             // Reduce item effect
             ItemEffect itemEffect = activeItems[item].GetComponentInChildren<ItemEffect>();
+            itemEffect.Value--;
         }
     }
 

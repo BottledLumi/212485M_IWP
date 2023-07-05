@@ -31,7 +31,6 @@ public class ItemPool : MonoBehaviour
             {
                 int randomIndex = Random.Range(0, itemsOfRarity.Count); // Generate a random index
                 item = itemsOfRarity[randomIndex]; // Access the element at the random index
-                Debug.Log("item found: " + item.name);
             }
         }
     }
