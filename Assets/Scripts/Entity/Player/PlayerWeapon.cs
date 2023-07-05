@@ -12,6 +12,7 @@ public class PlayerWeapon : MonoBehaviour
     float totalBulletSpeed, totalBulletSize; // For ranged weapons only
     int totalMagazineSize, currentMagazineSize;
     float totalReloadTime = 1.4f;
+    float autoAttackSpeed = 0.6f;
     bool isReloading = false;
 
     public event System.Action<int, int> MagazineChangedEvent;
@@ -65,9 +66,10 @@ public class PlayerWeapon : MonoBehaviour
                 }
             }
         }
-        
+
         // Attack input
-        if (Input.GetMouseButtonDown(0) && canAttack && currentMagazineSize > 0 && !isReloading)
+        if (Input.GetMouseButton(0) && canAttack && currentMagazineSize > 0 && !isReloading
+            && !(weapon.getAttackSpeed() > autoAttackSpeed && !Input.GetMouseButtonDown(0))) // Attack speed check for if weapon is automatic
         {
             GameObject activeWeapon = getInactiveWeapon();
             if (activeWeapon != null)
