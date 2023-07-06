@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91f5e0ab2ce349f4cbc43c700d421dca, type: 3}
-  m_Name: Cream
+  m_Name: Mango
   m_EditorClassIdentifier: 
-  index: 414
-  itemName: Cream
-  description: Increases ATK based on DEF.
-  icon: {fileID: 21300000, guid: 5000680a44cdd7f47bc9ba7428ebfcd2, type: 3}
-  rarity: 1
+  index: 405
+  itemName: Mango
+  description: 
+  icon: {fileID: 21300000, guid: e09cdbc337ada094d9be7e231aa195df, type: 3}
+  rarity: 0

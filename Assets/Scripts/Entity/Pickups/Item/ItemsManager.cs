@@ -92,19 +92,34 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         // Attach relevant item effect script
         switch (item.Index)
         {
-            case 401: // Olive
+            case 401: // Carrot
+                gameObject.AddComponent<CarrotEffect>();
+                gameObject.name = "Carrot";
+                break;
+            case 402: // Cheese
+                gameObject.AddComponent<CheeseEffect>();
+                gameObject.name = "Cheese";
+                break;
+            case 403: // Egg
+                gameObject.AddComponent<EggEffect>();
+                gameObject.name = "Egg";
+                break;
+            case 404: // Flour
+                gameObject.AddComponent<EggEffect>();
+                gameObject.name = "Flour";
+                break;
+            case 407: // Olive
                 gameObject.AddComponent<OliveEffect>();
                 gameObject.name = "Olive";
-                // Recharges a barrier after 50s, barrier strength scales with amount of olives (every 3 is 1 hit)
                 break;
-            case 402: // Cream
-                // Increase attack according to defence, ratio scales with amount of cream
-                //playerStats.attack += (playerStats.defence * 1.5f);
+            case 414: // Cream
+                gameObject.AddComponent<CreamEffect>();
+                gameObject.name = "Cream";
                 break;
-            case 403: // Mashed Potato
+            case 410: // Mashed Potato
                 // Gain a stack of “Hot Potato” every 3 seconds of not taking DMG. Maximum of 4 stacks. Resets upon hit. Hot Potato: Increase ATK
                 break;
-            case 404: // Alfredo
+            case 420: // Alfredo
                 // Revive to full HP on death, removes an Alfredo
                 break;
         }

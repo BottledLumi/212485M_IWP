@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f5e0ab2ce349f4cbc43c700d421dca, type: 3}
   m_Name: Olive
   m_EditorClassIdentifier: 
-  index: 401
+  index: 407
   itemName: Olive
-  description: It's an olive.
+  description: Grants a rechargeable barrier.
   icon: {fileID: 21300000, guid: a402b2065198d1d46808076d0c86dd1f, type: 3}
   rarity: 0

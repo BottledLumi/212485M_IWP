@@ -6,7 +6,8 @@ public class OliveEffect : ItemEffect
     GameObject owner;
 
     bool barrierActive = false;
-    float timeToActive = 40f;
+    float baseTimeToActive = 40f;
+    float timeToActive;
     float barrierAlpha = 40f / 255f;
 
     SpriteRenderer spriteRenderer;
@@ -28,7 +29,7 @@ public class OliveEffect : ItemEffect
     public event System.Action BarrierActiveEvent, BarrierInactiveEvent;
     private void Awake()
     {
-        barrierActive = true;
+        barrierActive = true; timeToActive = baseTimeToActive;
         AddBarrier(); owner = ItemsManager.Instance.Owner;
 
         ValueChangedEvent += OnValueChanged;
@@ -36,8 +37,8 @@ public class OliveEffect : ItemEffect
     }
     private void OnValueChanged()
     {
-        timeToActive = timeToActive * 0.85f; // Reduces barrier's time to active by 15%
-        //Debug.Log(timeToActive);
+        timeToActive = baseTimeToActive * Mathf.Pow(0.85f, Value-1); // Reduces barrier's time to active by 15%
+        Debug.Log(timeToActive);
     }
 
     private void OnBarrierActive()
