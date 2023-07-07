@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91f5e0ab2ce349f4cbc43c700d421dca, type: 3}
-  m_Name: Alfredo
+  m_Name: Water
   m_EditorClassIdentifier: 
-  index: 422
-  itemName: Alfredo
+  index: 411
+  itemName: Water
   description: 
-  icon: {fileID: 21300000, guid: 6e093a34beb971445ae263ef67769683, type: 3}
-  rarity: 3
+  icon: {fileID: 0}
+  rarity: 0

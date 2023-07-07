@@ -9,4 +9,5 @@ public class RangedWeapon : Weapon
     public readonly float reloadSpeed = 1.4f;
     [SerializeField] private float bulletSpeed; public float getBulletSpeed() { return bulletSpeed; }
     [SerializeField] private float bulletSize; public float getBulletSize() { return bulletSize; }
+    [SerializeField] private int piercing; public int getPiercing() { return piercing; }
 }

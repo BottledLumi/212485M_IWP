@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 405
   itemName: Mango
-  description: 
+  description: Increases MAX HP.
   icon: {fileID: 21300000, guid: e09cdbc337ada094d9be7e231aa195df, type: 3}
   rarity: 0

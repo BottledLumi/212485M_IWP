@@ -10,6 +10,7 @@ public class PlayerWeapon : MonoBehaviour
     bool canAttack = true;
     float totalAttack, totalRange, totalAttackSpeed, totalKnockback;
     float totalBulletSpeed, totalBulletSize; // For ranged weapons only
+    int totalPiercing;
     int totalMagazineSize, currentMagazineSize;
     float totalReloadTime = 1.4f;
     float autoAttackSpeed = 0.55f;
@@ -105,6 +106,7 @@ public class PlayerWeapon : MonoBehaviour
                             {
                                 totalBulletSpeed = rangedWeapon.getBulletSpeed();
                                 totalBulletSize = rangedWeapon.getBulletSize();
+                                totalPiercing = rangedWeapon.getPiercing();
                             }
                             Vector3 mousePosition = Input.mousePosition;
                             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); mousePosition.z = 0;
@@ -113,7 +115,7 @@ public class PlayerWeapon : MonoBehaviour
                                 mousePosition.x - transform.position.x,
                                 mousePosition.y - transform.position.y, 0).normalized;
 
-                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalKnockback, totalBulletSpeed, totalBulletSize, direction, gameObject);
+                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalKnockback, totalBulletSpeed, totalBulletSize, totalPiercing, direction, gameObject);
 
                             currentMagazineSize--; // Reduce magazine size by 1
                             CallMagazineChangedEvent();

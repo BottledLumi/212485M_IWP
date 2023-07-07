@@ -94,35 +94,49 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         {
             case 401: // Carrot
                 gameObject.AddComponent<CarrotEffect>();
-                gameObject.name = "Carrot";
                 break;
             case 402: // Cheese
                 gameObject.AddComponent<CheeseEffect>();
-                gameObject.name = "Cheese";
                 break;
             case 403: // Egg
                 gameObject.AddComponent<EggEffect>();
-                gameObject.name = "Egg";
                 break;
             case 404: // Flour
                 gameObject.AddComponent<EggEffect>();
-                gameObject.name = "Flour";
+                break;
+            case 405: // Mango
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 406: // Milk
+                gameObject.AddComponent<MangoEffect>();
                 break;
             case 407: // Olive
                 gameObject.AddComponent<OliveEffect>();
-                gameObject.name = "Olive";
+                break;
+            case 408: // Potato
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 409: // Steak
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 410: // Sugar
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 411: // Water
+                gameObject.AddComponent<MangoEffect>();
                 break;
             case 414: // Cream
                 gameObject.AddComponent<CreamEffect>();
-                gameObject.name = "Cream";
                 break;
-            case 410: // Mashed Potato
+            case 421: // Mashed Potato
                 // Gain a stack of “Hot Potato” every 3 seconds of not taking DMG. Maximum of 4 stacks. Resets upon hit. Hot Potato: Increase ATK
                 break;
-            case 420: // Alfredo
+            case 422: // Alfredo
                 // Revive to full HP on death, removes an Alfredo
                 break;
         }
+        gameObject.name = item.name;
+
         gameObject.transform.SetParent(items.transform);
         return gameObject;
     }
