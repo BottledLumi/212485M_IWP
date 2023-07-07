@@ -102,13 +102,13 @@ public class ItemsManager : MonoBehaviour // To manage item effects
                 gameObject.AddComponent<EggEffect>();
                 break;
             case 404: // Flour
-                gameObject.AddComponent<EggEffect>();
+                gameObject.AddComponent<FlourEffect>();
                 break;
             case 405: // Mango
                 gameObject.AddComponent<MangoEffect>();
                 break;
             case 406: // Milk
-                gameObject.AddComponent<MangoEffect>();
+                gameObject.AddComponent<MilkEffect>();
                 break;
             case 407: // Olive
                 gameObject.AddComponent<OliveEffect>();
@@ -125,7 +125,31 @@ public class ItemsManager : MonoBehaviour // To manage item effects
             case 411: // Water
                 gameObject.AddComponent<MangoEffect>();
                 break;
+            case 412: // Bread
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 413: // Cake
+                gameObject.AddComponent<MangoEffect>();
+                break;
             case 414: // Cream
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 415: // Pasta
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 416: // Carrot Cake
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 417: // French Toast
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 418: // Hamburger
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 419: // Mac & Cheese
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 420: // Mango Cake
                 gameObject.AddComponent<CreamEffect>();
                 break;
             case 421: // Mashed Potato
@@ -133,6 +157,9 @@ public class ItemsManager : MonoBehaviour // To manage item effects
                 break;
             case 422: // Alfredo
                 // Revive to full HP on death, removes an Alfredo
+                break;
+            case 423: // Cheeseburger
+                gameObject.AddComponent<CreamEffect>();
                 break;
         }
         gameObject.name = item.name;

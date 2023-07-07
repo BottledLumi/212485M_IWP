@@ -38,7 +38,7 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
 
     bool CheckInvulnerable()
     {
-        Item olive = playerData.SearchForItem("Olive");
+        Item olive = playerData.SearchForItem(407); // Olive
         if (olive)
         {
             OliveEffect oliveEffect = itemsManager.ActiveItems[olive].GetComponent<OliveEffect>();

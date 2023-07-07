@@ -89,6 +89,16 @@ public class PlayerData : ScriptableObject
         return null;
     }
 
+    public Item SearchForItem(int index) // By name
+    {
+        foreach (Item item in items.Keys)
+        {
+            if (item.Index == index)
+                return item;
+        }
+        return null;
+    }
+
     public event System.Action<float> AttackChangedEvent, DefenceChangedEvent, AttackSpeedChangedEvent, MovementSpeedChangedEvent;
     public event System.Action<float, float> HealthChangedEvent;
     public float Health
