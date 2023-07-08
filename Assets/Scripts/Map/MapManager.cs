@@ -36,6 +36,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private uint tilesBetweenRooms;
     [SerializeField] private uint roomWidth, roomHeight; // Manual input of room size for now
 
+    [SerializeField] private PathFindManager pathFindManager;
+
     public Dictionary<int, RoomTemplate[,]> floorLayouts = new Dictionary<int, RoomTemplate[,]>(); // Floor layouts
     private Dictionary<int, GameObject[,]> floors = new Dictionary<int, GameObject[,]>();
     public GameObject[,] getFloor(int floorNum)
@@ -80,6 +82,8 @@ public class MapManager : MonoBehaviour
                     
                     GameObject newRoom = Instantiate(floor[row, col].getRoomPrefab(), roomPos.position, Quaternion.identity);
                     newRoom.transform.SetParent(rooms.transform);
+                    newRoom.GetComponent<Room>().width = roomWidth;
+                    newRoom.GetComponent<Room>().height = roomHeight;
 
                     floorRooms[row, col] = newRoom;
                 }

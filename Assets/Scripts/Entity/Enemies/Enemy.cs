@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,9 +9,14 @@ public class Enemy : MonoBehaviour
     private int level;
     private float health, attack, defence, attackSpeed, movementSpeed;
     private bool isDead = false;
+    private bool damageTaken = false;
+
+    [HideInInspector] public bool canAttack = false;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Rigidbody2D rigidbody2D;
+
+    private AIPath aiPath;
     public float getHealth()
     {
         return health;
@@ -30,6 +36,10 @@ public class Enemy : MonoBehaviour
     public float getMovementSpeed()
     {
         return movementSpeed;
+    }
+    public bool DamageTaken()
+    {
+        return damageTaken;
     }
 
     public GameObject target = null;
@@ -65,10 +75,13 @@ public class Enemy : MonoBehaviour
     private IEnumerator DamageTakenIndicator()
     {
         spriteRenderer.color = Color.red;
+        damageTaken = true;
 
         yield return new WaitForSeconds(0.25f);
 
         spriteRenderer.color = Color.white;
+        damageTaken = false;
+        rigidbody2D.velocity = Vector2.zero;
     }
 
     private void OnEnable()
@@ -79,5 +92,10 @@ public class Enemy : MonoBehaviour
         defence = enemyAttributes.getDefence() * Mathf.Pow(1.2f, level-1);
         attackSpeed = enemyAttributes.getAttackSpeed();
         movementSpeed = enemyAttributes.getMovementSpeed();
+
+        if (aiPath = GetComponent<AIPath>())
+        {
+            aiPath.maxSpeed = movementSpeed;
+        }
     }
 }
