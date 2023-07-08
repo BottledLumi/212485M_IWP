@@ -58,11 +58,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
   - {fileID: 11400000, guid: 42dbb751368fdac4d93f4d8cde7a88df, type: 2}
   - {fileID: 11400000, guid: 44dfc1c05ffd2064082be09975b10499, type: 2}
+  - {fileID: 11400000, guid: 418998e810e18c8409d0ae4bc2ba5533, type: 2}
+  - {fileID: 11400000, guid: 7f6868f7710987d408d524d0eb1833d6, type: 2}
+  - {fileID: 11400000, guid: 7315f0ced40115040887ab3a3bbd5149, type: 2}
+  - {fileID: 11400000, guid: d1268dc13173b3a4786f9e49b987b26f, type: 2}
+  - {fileID: 11400000, guid: a874a9363f815a34386d481674c052ab, type: 2}
+  - {fileID: 11400000, guid: 042823507fc0ced45922eca33352eaee, type: 2}
   item: {fileID: 0}
-  commonChance: 50
-  uncommonChance: 30
-  rareChance: 16
-  mythicChance: 4
+  commonChance: 58
+  uncommonChance: 25
+  rareChance: 15
+  mythicChance: 2
 --- !u!114 &7588501870039772894
 MonoBehaviour:
   m_ObjectHideFlags: 0

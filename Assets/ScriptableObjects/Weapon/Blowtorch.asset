@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6199b5efa81b29d4d90d6065077c1596, type: 3}
   m_Name: Blowtorch
   m_EditorClassIdentifier: 
-  index: 0
-  itemName: 
+  index: 203
+  itemName: Blowtorch
   description: 
   icon: {fileID: 21300000, guid: 2a514f183c4d9cf47972cc0c738d578a, type: 3}
   rarity: 3
-  weaponAttack: {fileID: 0}
-  attack: 0
-  attackSpeed: 0
-  magazineSize: 0
-  range: 0
-  knockback: 0
-  bulletSpeed: 0
-  bulletSize: 0
+  weaponAttack: {fileID: 1317443994989195078, guid: 7d3d7837a1c3c7540a794c8c62923b89, type: 3}
+  attack: 0.2
+  attackSpeed: 0.2
+  magazineSize: 25
+  range: 3
+  knockback: 1.5
+  bulletSpeed: 6
+  bulletSize: 5

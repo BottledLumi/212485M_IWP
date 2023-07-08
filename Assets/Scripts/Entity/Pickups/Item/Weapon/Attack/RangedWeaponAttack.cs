@@ -10,17 +10,20 @@ public class RangedWeaponAttack : MonoBehaviour
     private float expireTime = 6;
     private float totalAttack, totalRange, totalKnockback;
     float totalBulletSpeed, totalBulletSize;
+    int totalPiercing;
     Vector3 direction;
 
     float distanceTravelled = 0;
 
-    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalKnockback, float _totalBulletSpeed, float _totalBulletSize, Vector3 _direction, GameObject _player)
+    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalKnockback, float _totalBulletSpeed, float _totalBulletSize, int _totalPiercing, Vector3 _direction, GameObject _player)
     {
         totalAttack = _totalAttack;
         totalRange = _totalRange;
         totalKnockback = _totalKnockback;
         totalBulletSpeed = _totalBulletSpeed;
         totalBulletSize = _totalBulletSize;
+        totalPiercing = _totalPiercing;
+
         direction = _direction;
 
         player = _player;
@@ -46,19 +49,26 @@ public class RangedWeaponAttack : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        switch (other.gameObject.tag)
         {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if (enemy && !hitEnemies.Contains(enemy))
-            {
-                enemy.TakeDamage(totalAttack);
-                // Knockback
-                Vector2 knockbackDirection = other.transform.position - player.transform.position; // Calculate the knockback direction
-                knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
-                enemy.ApplyKnockback(knockbackDirection, totalKnockback);
+            case "Enemy":
+                Enemy enemy = other.gameObject.GetComponent<Enemy>();
+                if (enemy && !hitEnemies.Contains(enemy))
+                {
+                    enemy.TakeDamage(totalAttack);
+                    // Knockback
+                    Vector2 knockbackDirection = other.transform.position - player.transform.position; // Calculate the knockback direction
+                    knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
+                    enemy.ApplyKnockback(knockbackDirection, totalKnockback);
 
-                hitEnemies.Add(enemy);
-            }
+                    hitEnemies.Add(enemy);
+                }
+                if (totalPiercing > 0 && hitEnemies.Count >= totalPiercing)
+                    gameObject.SetActive(false);
+                break;
+            case "Wall":
+                gameObject.SetActive(false);
+                break;
         }
     }
 

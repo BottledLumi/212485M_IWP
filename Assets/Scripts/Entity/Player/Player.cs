@@ -38,14 +38,14 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
 
     bool CheckInvulnerable()
     {
-        Item olive = playerData.SearchForItem("Olive");
+        Item olive = playerData.SearchForItem(407); // Olive
         if (olive)
         {
             OliveEffect oliveEffect = itemsManager.ActiveItems[olive].GetComponent<OliveEffect>();
             if (oliveEffect && oliveEffect.BarrierActive)
             {
                 oliveEffect.BarrierActive = false;
-                Debug.Log("Barrier hit!");
+                //Debug.Log("Barrier hit!");
                 return true;
             }
         }

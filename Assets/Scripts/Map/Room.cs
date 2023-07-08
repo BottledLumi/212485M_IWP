@@ -66,7 +66,7 @@ public class Room : MonoBehaviour
             return;
 
         OnRoomEntered();
-        Debug.Log("Player has entered room");
+        //Debug.Log("Player has entered room");
         MapManager.Instance.RoomEntered();
     }
 
@@ -75,7 +75,7 @@ public class Room : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player"))
             return;
         status.active = false;
-        Debug.Log("Player has left the room");
+        //Debug.Log("Player has left the room");
     }
 
     private void Update() // Temporary non-event based check for cleared enemies

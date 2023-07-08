@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemsManager : MonoBehaviour // To manage item effects
 {
     [SerializeField] GameObject items;
+
     private static ItemsManager instance;
     public static ItemsManager Instance
     {
@@ -23,7 +24,13 @@ public class ItemsManager : MonoBehaviour // To manage item effects
             return instance;
         }
     }
+
     PlayerData playerData;
+
+    GameObject owner;
+    public GameObject Owner{
+        get { return owner; }
+    }
 
     Dictionary<Item, GameObject> activeItems = new Dictionary<Item, GameObject>();
     public Dictionary<Item, GameObject> ActiveItems
@@ -34,6 +41,8 @@ public class ItemsManager : MonoBehaviour // To manage item effects
     private void Awake()
     {
         playerData = PlayerData.Instance;
+
+        owner = GameObject.Find("Player");
 
         playerData.ItemAddedEvent += OnItemAdded;
         playerData.ItemRemovedEvent += OnItemRemoved;
@@ -56,6 +65,7 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         {
             // Alter existing item effect
             ItemEffect itemEffect = activeItems[item].GetComponentInChildren<ItemEffect>();
+            itemEffect.Value++;
         }
     }
 
@@ -72,6 +82,7 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         {
             // Reduce item effect
             ItemEffect itemEffect = activeItems[item].GetComponentInChildren<ItemEffect>();
+            itemEffect.Value--;
         }
     }
 
@@ -81,22 +92,78 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         // Attach relevant item effect script
         switch (item.Index)
         {
-            case 401: // Olive
+            case 401: // Carrot
+                gameObject.AddComponent<CarrotEffect>();
+                break;
+            case 402: // Cheese
+                gameObject.AddComponent<CheeseEffect>();
+                break;
+            case 403: // Egg
+                gameObject.AddComponent<EggEffect>();
+                break;
+            case 404: // Flour
+                gameObject.AddComponent<FlourEffect>();
+                break;
+            case 405: // Mango
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 406: // Milk
+                gameObject.AddComponent<MilkEffect>();
+                break;
+            case 407: // Olive
                 gameObject.AddComponent<OliveEffect>();
-                gameObject.name = "Olive";
-                // Recharges a barrier after 50s, barrier strength scales with amount of olives (every 3 is 1 hit)
                 break;
-            case 402: // Cream
-                // Increase attack according to defence, ratio scales with amount of cream
-                //playerStats.attack += (playerStats.defence * 1.5f);
+            case 408: // Potato
+                gameObject.AddComponent<MangoEffect>();
                 break;
-            case 403: // Mashed Potato
+            case 409: // Steak
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 410: // Sugar
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 411: // Water
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 412: // Bread
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 413: // Cake
+                gameObject.AddComponent<MangoEffect>();
+                break;
+            case 414: // Cream
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 415: // Pasta
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 416: // Carrot Cake
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 417: // French Toast
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 418: // Hamburger
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 419: // Mac & Cheese
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 420: // Mango Cake
+                gameObject.AddComponent<CreamEffect>();
+                break;
+            case 421: // Mashed Potato
                 // Gain a stack of “Hot Potato” every 3 seconds of not taking DMG. Maximum of 4 stacks. Resets upon hit. Hot Potato: Increase ATK
                 break;
-            case 404: // Alfredo
+            case 422: // Alfredo
                 // Revive to full HP on death, removes an Alfredo
                 break;
+            case 423: // Cheeseburger
+                gameObject.AddComponent<CreamEffect>();
+                break;
         }
+        gameObject.name = item.name;
+
         gameObject.transform.SetParent(items.transform);
         return gameObject;
     }

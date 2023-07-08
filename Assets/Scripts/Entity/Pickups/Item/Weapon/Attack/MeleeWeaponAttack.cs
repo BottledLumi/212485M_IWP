@@ -86,19 +86,21 @@ public class MeleeWeaponAttack : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        switch (other.gameObject.tag)
         {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if (enemy && !hitEnemies.Contains(enemy))
-            {
-                enemy.TakeDamage(totalAttack);
-                // Knockback
-                Vector2 knockbackDirection = other.transform.position - player.transform.position; // Calculate the knockback direction
-                knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
-                enemy.ApplyKnockback(knockbackDirection, totalKnockback);
+            case "Enemy":
+                Enemy enemy = other.gameObject.GetComponent<Enemy>();
+                if (enemy && !hitEnemies.Contains(enemy))
+                {
+                    enemy.TakeDamage(totalAttack);
+                    // Knockback
+                    Vector2 knockbackDirection = other.transform.position - player.transform.position; // Calculate the knockback direction
+                    knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
+                    enemy.ApplyKnockback(knockbackDirection, totalKnockback);
 
-                hitEnemies.Add(enemy);
-            }
+                    hitEnemies.Add(enemy);
+                }
+                break;
         }
     }
 
