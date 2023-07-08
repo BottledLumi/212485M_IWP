@@ -23,6 +23,6 @@ MonoBehaviour:
   magazineSize: 5
   range: 20
   knockback: 8
-  bulletSpeed: 110
+  bulletSpeed: 80
   bulletSize: 1.5
   piercing: 2

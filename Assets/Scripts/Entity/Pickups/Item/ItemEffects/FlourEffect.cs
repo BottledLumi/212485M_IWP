@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class FlourEffect : ItemEffect
 {
-    float baseRangeValue = 3;
+    float baseRangeValue = 0.5f;
     float totalRangeValue;
 
-    float baseBulletSizeValue = 3;
+    float baseBulletSizeValue = 0.5f;
     float totalBulletSizeValue;
 
-    float baseBulletSpeedValue = 3;
+    float baseBulletSpeedValue = 10f;
     float totalBulletSpeedValue;
 
     Weapon weapon;

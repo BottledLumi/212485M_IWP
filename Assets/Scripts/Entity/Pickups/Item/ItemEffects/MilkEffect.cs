@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class MilkEffect : ItemEffect
 {
-    float baseRangeValue = 3;
+    float baseRangeValue = 0.7f;
     float totalRangeValue;
 
     Weapon weapon;
+    RangedWeapon rangedWeapon;
 
     PlayerData playerData;
     private void Awake()
@@ -17,6 +18,7 @@ public class MilkEffect : ItemEffect
         ValueChangedEvent += OnValueChanged; playerData.WeaponChangedEvent += OnWeaponChanged;
 
         weapon = playerData.Weapon;
+        rangedWeapon = weapon as RangedWeapon;
         if (weapon)
         {
             totalRangeValue = baseRangeValue;
@@ -31,6 +33,8 @@ public class MilkEffect : ItemEffect
         totalRangeValue = baseRangeValue * Value;
         rangeToAdd = totalRangeValue - rangeToAdd;
 
+        if (rangedWeapon)
+            rangeToAdd *= 6;
         weapon.addRange(rangeToAdd);
     }
     private void OnWeaponChanged(Weapon _weapon)
@@ -38,6 +42,7 @@ public class MilkEffect : ItemEffect
         SwapStats(false);
 
         weapon = _weapon;
+        rangedWeapon = weapon as RangedWeapon;
 
         SwapStats(true);
     }
@@ -49,6 +54,8 @@ public class MilkEffect : ItemEffect
         {
             range = -range;
         }
+        if (rangedWeapon)
+            range *= 6;
         weapon.addRange(range);
     }
 
