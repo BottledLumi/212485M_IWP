@@ -15,5 +15,5 @@ MonoBehaviour:
   index: 406
   itemName: Milk
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c42875100fb65bd4b88a3f28d8b12931, type: 3}
   rarity: 0

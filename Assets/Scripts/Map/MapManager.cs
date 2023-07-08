@@ -82,6 +82,8 @@ public class MapManager : MonoBehaviour
                     
                     GameObject newRoom = Instantiate(floor[row, col].getRoomPrefab(), roomPos.position, Quaternion.identity);
                     newRoom.transform.SetParent(rooms.transform);
+                    newRoom.GetComponent<Room>().width = roomWidth;
+                    newRoom.GetComponent<Room>().height = roomHeight;
 
                     floorRooms[row, col] = newRoom;
                 }
@@ -90,7 +92,6 @@ public class MapManager : MonoBehaviour
 
         // Assign floorRooms to floorNum
         floors.Add(floorNum, floorRooms);
-        pathFindManager.GeneratePath();
     }
 
     void GenerateDoors(int floorNum) // Generate doors for floor

@@ -6,58 +6,55 @@ using Pathfinding;
 public class WetGoopAttack : MonoBehaviour
 {
     Enemy enemy;
-    bool canAttack = true;
     AIDestinationSetter destinationSetter;
-
+    AIPath aiPath;
     private void Awake()
     {
         destinationSetter = GetComponent<AIDestinationSetter>();
+        aiPath = GetComponent<AIPath>();
     }
 
     void Start()
     {
         enemy = GetComponent<Enemy>();
+        enemy.canAttack = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemy.target)
+        if (enemy.target && !enemy.DamageTaken())
         {
-            // Calculate the direction from the enemy to the player
-            Vector2 direction = enemy.target.transform.position - transform.position;
-            direction.Normalize(); // Normalize the direction vector to have a magnitude of 1
-
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, direction); //Rotate the enemy towards player
-
-            // Move the enemy towards the player if enemy can attack
-            //if (canAttack)
-            //{
-            //    destinationSetter.target = enemy.target.transform;
-            //}
-            //else
-            //{
-            //    destinationSetter.target = null;
-            //    transform.position = Vector2.MoveTowards(transform.position, -enemy.target.transform.position, enemy.getMovementSpeed() / 2 * Time.deltaTime);
-            //}
-
-            if (canAttack)
-                transform.position = Vector2.MoveTowards(transform.position, enemy.target.transform.position, enemy.getMovementSpeed() * Time.deltaTime);
+            aiPath.enabled = true;
+           // Move the enemy towards the player if enemy can attack
+            if (enemy.canAttack)
+            {
+                destinationSetter.target = enemy.target.transform;
+            }
             else
-                transform.position = Vector2.MoveTowards(transform.position, -enemy.target.transform.position, enemy.getMovementSpeed() / 2 * Time.deltaTime); //Run away if enemy can't attack
+            {
+                Vector2 direction = transform.position - enemy.target.transform.position;
+                direction.Normalize();
+                transform.position = Vector2.MoveTowards(transform.position, transform.position + new Vector3(direction.x, direction.y, 0), enemy.getMovementSpeed() / 2 * Time.deltaTime);
+                destinationSetter.target = transform;
+            }
+        }
+        else
+        {
+            aiPath.enabled = false;
         }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player") || !canAttack)
+        if (!collision.gameObject.CompareTag("Player") || !enemy.canAttack)
             return;
         
         Player player = collision.gameObject.GetComponent<Player>();
         if (player)
         {
             player.TakeDamage(enemy.getAttack());
-            canAttack = false;
+            enemy.canAttack = false;
         }
         if (gameObject.activeInHierarchy)
             StartCoroutine(AttackCoroutine());
@@ -69,6 +66,6 @@ public class WetGoopAttack : MonoBehaviour
             yield break;
         // theres some shyt bug where if i spam the goddamn attack too much eventually you can see a frame's worth of animation that shouldn't be there
         yield return new WaitForSeconds(enemy.getAttackSpeed());
-        canAttack = true;
+        enemy.canAttack = true;
     }
 }

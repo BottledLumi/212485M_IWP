@@ -47,6 +47,7 @@ public class Room : MonoBehaviour
         }
     }
 
+    public uint width, height;
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     private List<Door> doors = new List<Door>();
     ROOM_STATUS status;
@@ -119,12 +120,18 @@ public class Room : MonoBehaviour
         status.active = true; status.explored = true;
         SetEnemiesActive(true);
         if (EnemiesActive())
+        {
+            PathFindManager.GeneratePath(gameObject, width,height);
             CloseDoors();
+        }
     }
 
     void RoomCleared()
     {
         status.cleared = true;
+        AstarPath astarPath = GetComponent<AstarPath>();
+        if (astarPath)
+            astarPath.enabled = false;
         OpenDoors();
     }
 }
