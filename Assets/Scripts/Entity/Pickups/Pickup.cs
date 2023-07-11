@@ -10,12 +10,22 @@ public class Pickup : ScriptableObject
     {
         get { return index; }
     }
+
+
     [SerializeField] string itemName;
     public string ItemName
     {
         get { return itemName; }
     }
+
+
     [SerializeField] string description;
+    public string Description
+    {
+        get { return description; }
+    }
+
+
     [SerializeField] Sprite icon;
     public Sprite Icon
     {

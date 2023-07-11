@@ -2361,6 +2361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991084eda2d434146ae02316ba79bd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI: {fileID: 1055726168}
   reloadSlider: {fileID: 766063563}
   healthSlider: {fileID: 76155730}
   healthText: {fileID: 1429875015}
@@ -2374,6 +2375,7 @@ MonoBehaviour:
   playerWeapon: {fileID: 720542228}
   inventoryText: {fileID: 1286007127}
   inventoryDisplay: {fileID: 716440786}
+  itemPickupDisplay: {fileID: 6535619473243484517, guid: 681d67ba12b95844fb92d7115ee97555, type: 3}
 --- !u!1 &1216039767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,7 +2589,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aee32ba9a3859d24c9634c4b70e9863e, type: 2}
   - {fileID: 11400000, guid: 77999c46fc36a1349b9c537f1bf39584, type: 2}
   numPaths: 4
-  numRooms: 24
+  numRooms: 17
   numCauldronRooms: 1
   numTreasureRooms: 3
   numBossRooms: 1

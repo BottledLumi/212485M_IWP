@@ -71,7 +71,7 @@ public class MapGenerator : MonoBehaviour
             for (int i = 0; i < pathList.Count && numGeneratedRooms < numRooms - numSpecialRooms; i++)
             {
                 Path path = pathList[i];
-                while (floorLayout[path.coord.x, path.coord.y] && CheckNumOfNeighbours(floorLayout, path.coord.x, path.coord.y) < 3)
+                while (floorLayout[path.coord.x, path.coord.y] || CheckNumOfNeighbours(floorLayout, path.coord.x, path.coord.y) > 1 || CheckNumOfNeighbours(floorLayout, path.coord.x, path.coord.y) < 1)
                     RandomisePathDirection(path);
                 floorLayout[path.coord.x, path.coord.y] = RandomiseRoomOfType(RoomType.COMBAT);
                 numGeneratedRooms++;
@@ -85,11 +85,14 @@ public class MapGenerator : MonoBehaviour
         {
             for (int col = 0; col < floorHeight; col++)
             {
-                int numOfNeighbours = CheckNumOfNeighbours(floorLayout, row, col);
-                if (numOfNeighbours == 1)
+                if (floorLayout[row, col])
                 {
-                    Path newPath = new(new Coord2D(row, col), Path.DIRECTION.NONE);
-                    isolatedRooms.Add(newPath);
+                    int numOfNeighbours = CheckNumOfNeighbours(floorLayout, row, col);
+                    if (numOfNeighbours == 1)
+                    {
+                        Path newPath = new(new Coord2D(row, col), Path.DIRECTION.NONE);
+                        isolatedRooms.Add(newPath);
+                    }
                 }
             }
         }
@@ -101,7 +104,7 @@ public class MapGenerator : MonoBehaviour
                 break;
             System.Random random = new System.Random();
             Path randomPath = isolatedRooms[random.Next(isolatedRooms.Count)];
-            while (floorLayout[randomPath.coord.x, randomPath.coord.y])
+            while (floorLayout[randomPath.coord.x, randomPath.coord.y] || CheckNumOfNeighbours(floorLayout, randomPath.coord.x, randomPath.coord.y) != 1)
                 RandomisePathDirection(randomPath);
             floorLayout[randomPath.coord.x, randomPath.coord.y] = RandomiseRoomOfType(RoomType.CAULDRON);
             numGeneratedRooms++;
@@ -171,7 +174,7 @@ public class MapGenerator : MonoBehaviour
 
         // Higher chance to continue in the same direction
         int proceed = UnityEngine.Random.Range(0, 10);
-        if (path.lastDirection == Path.DIRECTION.NONE || proceed > 4)
+        if (path.lastDirection == Path.DIRECTION.NONE || proceed > 3)
         {
             int rand1 = UnityEngine.Random.Range(0, 1);
             if (rand1 == 1)

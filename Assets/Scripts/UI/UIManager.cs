@@ -7,6 +7,8 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private GameObject UI;
+
     [SerializeField] private Slider reloadSlider;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TMP_Text healthText, attackText, defenceText, attackSpeedText, movementSpeedText;
@@ -16,6 +18,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TMP_Text inventoryText;
     [SerializeField] private GameObject inventoryDisplay;
+
+    [SerializeField] private GameObject itemPickupDisplay;
 
     PlayerData playerData;
     private void Awake()
@@ -36,6 +40,8 @@ public class UIManager : MonoBehaviour
             playerWeapon.MagazineChangedEvent += OnMagazineChanged;
             playerWeapon.ReloadEvent += OnReload;
         }
+
+        playerData.ItemAddedEvent += OnItemAdded;
     }
 
     private void Update()
@@ -109,5 +115,24 @@ public class UIManager : MonoBehaviour
     {
         weaponText.text = weapon.name;
         weaponImage.sprite = weapon.Icon;
+
+        OnItemAdded(weapon);
+    }
+
+    private void OnItemAdded(Item item)
+    {
+        GameObject display = GameObject.Instantiate(itemPickupDisplay);
+
+        Image image = display.transform.Find("ItemImage").GetComponent<Image>();
+        TMP_Text text = display.transform.Find("ItemDescription").GetComponent<TMP_Text>();
+
+        if (image && text)
+        {
+            image.sprite = item.Icon;
+            text.text = item.Description;
+        }
+
+        display.transform.SetParent(UI.transform);
+        display.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -120);
     }
 }

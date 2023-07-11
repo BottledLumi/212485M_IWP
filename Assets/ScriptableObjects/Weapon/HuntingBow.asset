@@ -22,7 +22,7 @@ MonoBehaviour:
   attackSpeed: 0
   magazineSize: 1
   range: 15
-  knockback: 6
+  knockback: 4
   bulletSpeed: 30
   bulletSize: 2
   piercing: 1
