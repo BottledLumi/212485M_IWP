@@ -9,6 +9,10 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] EnemyAttributes enemyAttributes;
     private int level;
+    public int Level
+    {
+        get { return level; }
+    }
     private float health, attack, defence, attackSpeed, movementSpeed;
     private bool isDead = false;
     private bool damageTaken = false;

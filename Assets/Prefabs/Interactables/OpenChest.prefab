@@ -70,6 +70,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5d4c4c01916ddb442a5fc9b90349bef5, type: 2}
   - {fileID: 11400000, guid: 9ea8cd3f0d9575c4bb839c95f77308f9, type: 2}
   - {fileID: 11400000, guid: af17245622f45364dae1a44c11a803e4, type: 2}
+  - {fileID: 11400000, guid: a39c5b48ad07889439f048cde09a8d35, type: 2}
+  - {fileID: 11400000, guid: fc58e6ad685d98a43bf6517d21a837be, type: 2}
   item: {fileID: 0}
   commonChance: 58
   uncommonChance: 25

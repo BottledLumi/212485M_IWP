@@ -72,7 +72,6 @@ public class OliveEffect : ItemEffect
     {
         yield return new WaitForSeconds(timeToActive);
         BarrierActive = true;
-        //Debug.Log("Barrier active");
     }
 
     private void OnDestroy()

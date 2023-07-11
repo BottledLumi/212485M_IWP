@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RangedWeaponAttack : MonoBehaviour
 {
+    ItemsManager itemsManager;
+
     GameObject player;
 
     List<Enemy> hitEnemies = new List<Enemy>();
@@ -14,6 +16,11 @@ public class RangedWeaponAttack : MonoBehaviour
     Vector3 direction;
 
     float distanceTravelled = 0;
+
+    private void Awake()
+    {
+        itemsManager = ItemsManager.Instance;
+    }
 
     public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalKnockback, float _totalBulletSpeed, float _totalBulletSize, int _totalPiercing, Vector3 _direction, GameObject _player)
     {
@@ -61,6 +68,8 @@ public class RangedWeaponAttack : MonoBehaviour
                     knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
                     enemy.ApplyKnockback(knockbackDirection, totalKnockback);
 
+                    ItemEffectsOnEnemies(enemy);
+
                     hitEnemies.Add(enemy);
                 }
                 if (totalPiercing > 0 && hitEnemies.Count >= totalPiercing)
@@ -82,7 +91,31 @@ public class RangedWeaponAttack : MonoBehaviour
 
     public void OnDisable()
     {
+        ItemEffects();
+
         distanceTravelled = 0;
         hitEnemies.Clear();
+    }
+
+    void ItemEffectsOnEnemies(Enemy enemy)
+    {
+        BreadEffect breadEffect = itemsManager.SearchForItemEffect(412) as BreadEffect; // Bread
+        if (breadEffect)
+        {
+            float extraDamage = breadEffect.ExtraDamage() * enemy.Level;
+            enemy.TakeDamage(extraDamage);
+            Debug.Log(extraDamage);
+        }
+    }
+
+    void ItemEffects()
+    {
+        CakeEffect cakeEffect = itemsManager.SearchForItemEffect(413) as CakeEffect; // Bread
+        if (cakeEffect && hitEnemies.Count > 0)
+        {
+            float randomPercentage = Random.Range(0f, 1f);
+            if (randomPercentage < cakeEffect.ProcChance())
+                cakeEffect.CakeProc();
+        }
     }
 }

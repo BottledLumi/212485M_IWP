@@ -48,36 +48,6 @@ public class MeleeWeaponAttack : MonoBehaviour
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length / animator.speed);
         gameObject.SetActive(false);
     }
-    //private void Hit()
-    //{
-    //    //// Hitbox + SFX + VFX
-
-    //    // Set up the parameters for the overlap check
-    //    ContactFilter2D filter = new ContactFilter2D();
-    //    filter.SetLayerMask(LayerMask.GetMask("Enemy")); // Set the layer mask to include only the enemy layer
-    //    filter.useLayerMask = true;
-
-    //    // Perform the overlap check
-    //    Collider2D[] results = new Collider2D[10]; // Adjust the size based on the maximum number of expected enemies
-    //    int numColliders = Physics2D.OverlapCollider(weaponCollider, filter, results);
-
-    //    // Iterate through the colliders and check if they belong to enemy objects
-    //    for (int i = 0; i < numColliders; i++)
-    //    {
-    //        Enemy enemy = results[i].GetComponent<Enemy>();
-    //        if (enemy != null && !hitEnemies.Contains(enemy))
-    //        {
-    //            // Enemy detected, add it to the list
-    //            hitEnemies.Add(enemy);
-    //        }
-    //    }
-
-    //    // TODO: Perform actions on the detected enemies (e.g., deal damage, play sound effects, etc.)
-    //    foreach (Enemy enemy in hitEnemies)
-    //    {
-    //        enemy.TakeDamage(totalAttack);
-    //    }
-    //}
 
     private void OnEnable()
     {
@@ -97,6 +67,8 @@ public class MeleeWeaponAttack : MonoBehaviour
                 if (enemy && !hitEnemies.Contains(enemy))
                 {
                     enemy.TakeDamage(totalAttack);
+                    ItemEffectsOnEnemies(enemy);
+
                     // Knockback
                     Vector2 knockbackDirection = other.transform.position - player.transform.position; // Calculate the knockback direction
                     knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
@@ -110,15 +82,39 @@ public class MeleeWeaponAttack : MonoBehaviour
 
     public void OnDisable()
     {
+        ItemEffects();
+        
+        hitEnemies.Clear();
+    }
+
+    void ItemEffectsOnEnemies(Enemy enemy)
+    {
+        BreadEffect breadEffect = itemsManager.SearchForItemEffect(412) as BreadEffect; // Bread
+        if (breadEffect && hitEnemies.Count > 0)
+        {
+            float extraDamage = breadEffect.ExtraDamage() * enemy.Level;
+            enemy.TakeDamage(extraDamage);
+        }
+    }
+
+    void ItemEffects()
+    {
         SteakEffect steakEffect = itemsManager.SearchForItemEffect(409) as SteakEffect; // Steak
         if (steakEffect && hitEnemies.Count > 1)
         {
             foreach (Enemy enemy in hitEnemies)
             {
-                float extraDamage = steakEffect.ExtraMeleeDamage() * (hitEnemies.Count-1);
+                float extraDamage = steakEffect.ExtraMeleeDamage() * (hitEnemies.Count - 1);
                 enemy.TakeDamage(extraDamage);
             }
         }
-        hitEnemies.Clear();
+
+        CakeEffect cakeEffect = itemsManager.SearchForItemEffect(413) as CakeEffect; // Cake
+        if (cakeEffect && hitEnemies.Count > 0)
+        {
+            float randomPercentage = Random.Range(0f, 1f);
+            if (randomPercentage < cakeEffect.ProcChance())
+                cakeEffect.CakeProc();
+        }
     }
 }

@@ -1561,6 +1561,8 @@ MonoBehaviour:
   initialWeapon: {fileID: 11400000, guid: ceb55e2ef6fadcc40bddffd67d139aa4, type: 2}
   initialItems:
   - {fileID: 11400000, guid: 32ba82a8f297d4147887c5f9f9b205b5, type: 2}
+  - {fileID: 11400000, guid: a39c5b48ad07889439f048cde09a8d35, type: 2}
+  - {fileID: 11400000, guid: 042823507fc0ced45922eca33352eaee, type: 2}
 --- !u!114 &720542228
 MonoBehaviour:
   m_ObjectHideFlags: 0

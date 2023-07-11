@@ -149,7 +149,7 @@ public class ItemsManager : MonoBehaviour // To manage item effects
                 gameObject.AddComponent<MangoEffect>();
                 break;
             case 413: // Cake
-                gameObject.AddComponent<MangoEffect>();
+                gameObject.AddComponent<CakeEffect>();
                 break;
             case 414: // Cream
                 gameObject.AddComponent<CreamEffect>();

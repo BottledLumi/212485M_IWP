@@ -15,5 +15,5 @@ MonoBehaviour:
   index: 408
   itemName: Potato
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 99c12fc16005c584c8c838739b5adf04, type: 3}
   rarity: 0

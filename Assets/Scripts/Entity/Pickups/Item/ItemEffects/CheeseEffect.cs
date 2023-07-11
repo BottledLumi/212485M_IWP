@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 public class CheeseEffect : ItemEffect
 {
-    float baseAtkSpdValue = 0.1f;
+    float baseAtkSpdMultiplier = 0.9f;
     float totalAtkSpdValue;
+
     PlayerData playerData;
     private void Awake()
     {
         playerData = PlayerData.Instance;
-        totalAtkSpdValue = baseAtkSpdValue;
+        totalAtkSpdValue = baseAtkSpdMultiplier;
 
         ValueChangedEvent += OnValueChanged;
 
-        totalAtkSpdValue = baseAtkSpdValue * Value;
-        playerData.AttackSpeed += totalAtkSpdValue;
+        totalAtkSpdValue = Mathf.Pow(baseAtkSpdMultiplier, Value);
+        playerData.AttackSpeed *= totalAtkSpdValue;
     }
     private void OnValueChanged()
     {
-        float AtkSpdToAdd = totalAtkSpdValue;
-        totalAtkSpdValue = baseAtkSpdValue * Value;
-        AtkSpdToAdd = totalAtkSpdValue - AtkSpdToAdd;
+        playerData.AttackSpeed /= totalAtkSpdValue;
+        totalAtkSpdValue = Mathf.Pow(baseAtkSpdMultiplier, Value);
 
-        playerData.AttackSpeed += AtkSpdToAdd;
+        playerData.AttackSpeed *= totalAtkSpdValue;
     }
 
     private void OnDestroy()
     {
-        playerData.AttackSpeed -= totalAtkSpdValue;
+        playerData.AttackSpeed /= totalAtkSpdValue;
     }
 }
