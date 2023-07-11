@@ -157,13 +157,13 @@ public class ItemsManager : MonoBehaviour // To manage item effects
             case 415: // Pasta
                 gameObject.AddComponent<CreamEffect>();
                 break;
-            case 416: // Carrot Cake (x)
+            case 416: // Carrot Cake
                 gameObject.AddComponent<CreamEffect>();
                 break;
             case 417: // French Toast
                 gameObject.AddComponent<CreamEffect>();
                 break;
-            case 418: // Hamburger (x)
+            case 418: // Hamburger
                 gameObject.AddComponent<CreamEffect>();
                 break;
             case 419: // Mac & Cheese
@@ -178,7 +178,7 @@ public class ItemsManager : MonoBehaviour // To manage item effects
             case 422: // Alfredo
                 // Revive to full HP on death, removes an Alfredo
                 break;
-            case 423: // Cheeseburger (x)
+            case 423: // Cheeseburger
                 gameObject.AddComponent<CreamEffect>();
                 break;
         }

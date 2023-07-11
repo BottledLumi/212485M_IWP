@@ -71,7 +71,7 @@ public class MapGenerator : MonoBehaviour
             for (int i = 0; i < pathList.Count && numGeneratedRooms < numRooms - numSpecialRooms; i++)
             {
                 Path path = pathList[i];
-                while (floorLayout[path.coord.x, path.coord.y])
+                while (floorLayout[path.coord.x, path.coord.y] && CheckNumOfNeighbours(floorLayout, path.coord.x, path.coord.y) < 3)
                     RandomisePathDirection(path);
                 floorLayout[path.coord.x, path.coord.y] = RandomiseRoomOfType(RoomType.COMBAT);
                 numGeneratedRooms++;
@@ -116,7 +116,7 @@ public class MapGenerator : MonoBehaviour
                 break;
             System.Random random = new System.Random();
             Path randomPath = isolatedRooms[random.Next(isolatedRooms.Count)];
-            while (floorLayout[randomPath.coord.x, randomPath.coord.y])
+            while (floorLayout[randomPath.coord.x, randomPath.coord.y] || CheckNumOfNeighbours(floorLayout, randomPath.coord.x, randomPath.coord.y) != 1)
                 RandomisePathDirection(randomPath);
             floorLayout[randomPath.coord.x, randomPath.coord.y] = RandomiseRoomOfType(RoomType.TREASURE);
             numGeneratedRooms++;
@@ -130,9 +130,13 @@ public class MapGenerator : MonoBehaviour
             if (isolatedRooms.Count < 1)
                 break;
 
-            System.Random random = new System.Random();
-            Path randomPath = isolatedRooms[random.Next(isolatedRooms.Count)];
-            while (floorLayout[randomPath.coord.x, randomPath.coord.y])
+            Path randomPath = new(new Coord2D(0, 0), Path.DIRECTION.NONE);
+            while (DistanceFromStart(randomPath.coord) < numRooms/5)
+            {
+                System.Random random = new System.Random();
+                randomPath = isolatedRooms[random.Next(isolatedRooms.Count)];
+            }
+            while (floorLayout[randomPath.coord.x, randomPath.coord.y] || CheckNumOfNeighbours(floorLayout, randomPath.coord.x, randomPath.coord.y) != 1)
                 RandomisePathDirection(randomPath);
             floorLayout[randomPath.coord.x, randomPath.coord.y] = RandomiseRoomOfType(RoomType.BOSS);
             numGeneratedRooms++;
@@ -167,14 +171,38 @@ public class MapGenerator : MonoBehaviour
 
         // Higher chance to continue in the same direction
         int proceed = UnityEngine.Random.Range(0, 10);
-        if (path.lastDirection == Path.DIRECTION.NONE || proceed > 5)
+        if (path.lastDirection == Path.DIRECTION.NONE || proceed > 4)
         {
-            // Convert enum into array
-            Path.DIRECTION[] directions = (Path.DIRECTION[])Enum.GetValues(typeof(Path.DIRECTION));
+            int rand1 = UnityEngine.Random.Range(0, 1);
+            if (rand1 == 1)
+            {
+                List<Path.DIRECTION> awayDirections = new List<Path.DIRECTION>();
+                if (path.coord.x != 0 || path.coord.y != 0)
+                {
+                    if (path.coord.x > 0)
+                        awayDirections.Add(Path.DIRECTION.RIGHT);
+                    else if (path.coord.x < 0)
+                        awayDirections.Add(Path.DIRECTION.LEFT);
 
-            // Randomise from Path.DIRECTION enum
-            int rand = UnityEngine.Random.Range(0, directions.Length);
-            direction = directions[rand];
+                    if (path.coord.y > 0)
+                        awayDirections.Add(Path.DIRECTION.UP);
+                    else if (path.coord.y < 0)
+                        awayDirections.Add(Path.DIRECTION.DOWN);
+                }
+
+                // Randomise from awayDirections
+                int rand2 = UnityEngine.Random.Range(0, awayDirections.Count);
+                direction = awayDirections[rand2];
+            }
+            else
+            {
+                // Convert enum into array
+                Path.DIRECTION[] directions = (Path.DIRECTION[])Enum.GetValues(typeof(Path.DIRECTION));
+
+                // Randomise from Path.DIRECTION enum
+                int rand2 = UnityEngine.Random.Range(0, directions.Length);
+                direction = directions[rand2];
+            }
         }
 
         switch (direction)
@@ -215,5 +243,10 @@ public class MapGenerator : MonoBehaviour
         }
 
         return numOfNeighbours;
+    }
+
+    private int DistanceFromStart(Coord2D coord)
+    {
+        return Mathf.Abs(coord.x) + Mathf.Abs(coord.y);
     }
 }
