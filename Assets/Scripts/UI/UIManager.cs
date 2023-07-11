@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
         string newText = "Inventory:";
         Dictionary<Item, int> items = playerData.Items;
         foreach (Item item in items.Keys)
-            newText += "\n" + item.name + ":" + items[item];
+            newText += "\n" + item.ItemName + ":" + items[item];
         inventoryText.text = newText;
     }
     private void OnHealthChanged(float health, float maxHealth)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemEffect : MonoBehaviour
 {
-    int value = 1;
+    protected int value = 1;
     public event System.Action ValueChangedEvent;
     public int Value
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MeleeWeaponAttack : MonoBehaviour
 {
+    ItemsManager itemsManager;
+
     GameObject player;
 
     [SerializeField] bool mobile;
@@ -25,6 +27,8 @@ public class MeleeWeaponAttack : MonoBehaviour
 
     private void Awake()
     {
+        itemsManager = ItemsManager.Instance;
+
         animator = GetComponent<Animator>();
     }
     private void LateUpdate()
@@ -106,6 +110,15 @@ public class MeleeWeaponAttack : MonoBehaviour
 
     public void OnDisable()
     {
+        SteakEffect steakEffect = itemsManager.SearchForItemEffect(409) as SteakEffect; // Steak
+        if (steakEffect && hitEnemies.Count > 1)
+        {
+            foreach (Enemy enemy in hitEnemies)
+            {
+                float extraDamage = steakEffect.ExtraMeleeDamage() * (hitEnemies.Count-1);
+                enemy.TakeDamage(extraDamage);
+            }
+        }
         hitEnemies.Clear();
     }
 }

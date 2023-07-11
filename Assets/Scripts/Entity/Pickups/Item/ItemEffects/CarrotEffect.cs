@@ -5,6 +5,7 @@ public class CarrotEffect : ItemEffect
 {
     float baseAtkValue = 3;
     float totalAtkValue;
+
     PlayerData playerData;
     private void Awake()
     {

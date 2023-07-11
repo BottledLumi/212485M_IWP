@@ -15,5 +15,5 @@ MonoBehaviour:
   index: 411
   itemName: Water
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fc877005a1f9bc441879e8838ba8cd4a, type: 3}
   rarity: 0

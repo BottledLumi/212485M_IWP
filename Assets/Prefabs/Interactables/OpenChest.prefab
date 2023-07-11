@@ -64,6 +64,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1268dc13173b3a4786f9e49b987b26f, type: 2}
   - {fileID: 11400000, guid: a874a9363f815a34386d481674c052ab, type: 2}
   - {fileID: 11400000, guid: 042823507fc0ced45922eca33352eaee, type: 2}
+  - {fileID: 11400000, guid: 603344ddf826da04fb5f125a5649c49d, type: 2}
+  - {fileID: 11400000, guid: b23730d1e6d187c45872fca29e98d04d, type: 2}
+  - {fileID: 11400000, guid: 3a63f6bf7bb459645bcbdd79cd66395a, type: 2}
+  - {fileID: 11400000, guid: 5d4c4c01916ddb442a5fc9b90349bef5, type: 2}
+  - {fileID: 11400000, guid: 9ea8cd3f0d9575c4bb839c95f77308f9, type: 2}
+  - {fileID: 11400000, guid: af17245622f45364dae1a44c11a803e4, type: 2}
   item: {fileID: 0}
   commonChance: 58
   uncommonChance: 25

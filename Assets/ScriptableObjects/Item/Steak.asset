@@ -15,5 +15,5 @@ MonoBehaviour:
   index: 409
   itemName: Steak
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a8fb190b58e7a8f459cc16699f85d988, type: 3}
   rarity: 0

@@ -131,7 +131,7 @@ public class Room : MonoBehaviour
         status.cleared = true;
         AstarPath astarPath = GetComponent<AstarPath>();
         if (astarPath)
-            astarPath.enabled = false;
+            Destroy(astarPath);
         OpenDoors();
     }
 }

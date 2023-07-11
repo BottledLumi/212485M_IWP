@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sugar
   m_EditorClassIdentifier: 
   index: 410
-  itemName: 
-  description: 
-  icon: {fileID: 0}
+  itemName: Sugar
+  description: Increases MS.
+  icon: {fileID: 21300000, guid: 97d3af46e9d5db1449e6c443420a6b30, type: 3}
   rarity: 0

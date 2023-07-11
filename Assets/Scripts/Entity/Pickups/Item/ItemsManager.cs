@@ -48,6 +48,26 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         playerData.ItemRemovedEvent += OnItemRemoved;
     }
 
+    public ItemEffect SearchForItemEffect(string name)
+    {
+        foreach (Item item in activeItems.Keys)
+        {
+            if (item.ItemName == name)
+                return activeItems[item].GetComponentInChildren<ItemEffect>();
+        }
+        return null;
+    }
+
+    public ItemEffect SearchForItemEffect(int index)
+    {
+        foreach (Item item in activeItems.Keys)
+        {
+            if (item.Index == index)
+                return activeItems[item].GetComponentInChildren<ItemEffect>();
+        }
+        return null;
+    }
+
     private int CheckQuantity(Item item)
     {
         return playerData.Items[item];
@@ -114,16 +134,16 @@ public class ItemsManager : MonoBehaviour // To manage item effects
                 gameObject.AddComponent<OliveEffect>();
                 break;
             case 408: // Potato
-                gameObject.AddComponent<MangoEffect>();
+                gameObject.AddComponent<PotatoEffect>();
                 break;
             case 409: // Steak
-                gameObject.AddComponent<MangoEffect>();
+                gameObject.AddComponent<SteakEffect>();
                 break;
             case 410: // Sugar
-                gameObject.AddComponent<MangoEffect>();
+                gameObject.AddComponent<SugarEffect>();
                 break;
             case 411: // Water
-                gameObject.AddComponent<MangoEffect>();
+                gameObject.AddComponent<WaterEffect>();
                 break;
             case 412: // Bread
                 gameObject.AddComponent<MangoEffect>();
@@ -137,13 +157,13 @@ public class ItemsManager : MonoBehaviour // To manage item effects
             case 415: // Pasta
                 gameObject.AddComponent<CreamEffect>();
                 break;
-            case 416: // Carrot Cake
+            case 416: // Carrot Cake (x)
                 gameObject.AddComponent<CreamEffect>();
                 break;
             case 417: // French Toast
                 gameObject.AddComponent<CreamEffect>();
                 break;
-            case 418: // Hamburger
+            case 418: // Hamburger (x)
                 gameObject.AddComponent<CreamEffect>();
                 break;
             case 419: // Mac & Cheese
@@ -158,11 +178,11 @@ public class ItemsManager : MonoBehaviour // To manage item effects
             case 422: // Alfredo
                 // Revive to full HP on death, removes an Alfredo
                 break;
-            case 423: // Cheeseburger
+            case 423: // Cheeseburger (x)
                 gameObject.AddComponent<CreamEffect>();
                 break;
         }
-        gameObject.name = item.name;
+        gameObject.name = item.ItemName;
 
         gameObject.transform.SetParent(items.transform);
         return gameObject;

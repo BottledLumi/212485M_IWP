@@ -83,7 +83,7 @@ public class PlayerData : ScriptableObject
     {
         foreach (Item item in items.Keys)
         {
-            if (item.name == name)
+            if (item.ItemName == name)
                 return item;
         }
         return null;

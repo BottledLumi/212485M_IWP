@@ -5,6 +5,8 @@ using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
+    ItemsManager itemsManager;
+
     [SerializeField] EnemyAttributes enemyAttributes;
     private int level;
     private float health, attack, defence, attackSpeed, movementSpeed;
@@ -40,6 +42,11 @@ public class Enemy : MonoBehaviour
     public bool DamageTaken()
     {
         return damageTaken;
+    }
+
+    private void Awake()
+    {
+        itemsManager = ItemsManager.Instance;   
     }
 
     public GameObject target = null;
@@ -92,6 +99,12 @@ public class Enemy : MonoBehaviour
         defence = enemyAttributes.getDefence() * Mathf.Pow(1.2f, level-1);
         attackSpeed = enemyAttributes.getAttackSpeed();
         movementSpeed = enemyAttributes.getMovementSpeed();
+
+        WaterEffect waterEffect = itemsManager.SearchForItemEffect(411) as WaterEffect;
+        if (waterEffect) // Water
+        {
+            movementSpeed *= waterEffect.MovementSpeedMultiplier();
+        }
 
         if (aiPath = GetComponent<AIPath>())
         {
