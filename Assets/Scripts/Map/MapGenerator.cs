@@ -131,7 +131,7 @@ public class MapGenerator : MonoBehaviour
                 break;
 
             Path randomPath = new(new Coord2D(0, 0), Path.DIRECTION.NONE);
-            while (DistanceFromStart(randomPath.coord) < numRooms/5)
+            while (DistanceFromStart(randomPath.coord) < numRooms/4)
             {
                 System.Random random = new System.Random();
                 randomPath = isolatedRooms[random.Next(isolatedRooms.Count)];
