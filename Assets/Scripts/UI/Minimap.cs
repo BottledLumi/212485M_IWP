@@ -18,7 +18,9 @@ public class Minimap : MonoBehaviour
 
     [SerializeField] float size;
 
-    private void Start()
+    [SerializeField] private bool initialRender;
+
+    private void Awake()
     {
         mapManager = MapManager.Instance;
         mapManager.RoomEnteredEvent += RenderMinimap;
@@ -110,18 +112,15 @@ public class Minimap : MonoBehaviour
             if (image != null && image.transform != null)
                 image.transform.localPosition += offset;
         }
+
+        if (!initialRender) initialRender = true;
     }
 
-    //void ClearMinimap()
-    //{
-    //    for (int row = 0; row < minimap.GetLength(0); row++)
-    //    {
-    //        for (int col = 0; col < minimap.GetLength(1); col++)
-    //        {
-    //            minimap[row, col] = null;
-    //        }
-    //    }
-    //}
+    private void OnEnable()
+    {
+        if (initialRender)
+            RenderMinimap();
+    }
 
     bool CheckSurroundingRoomsExplored(int row, int col)
     {

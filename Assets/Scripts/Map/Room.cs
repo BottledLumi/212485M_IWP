@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    MapManager mapManager;
     public struct ROOM_STATUS
     {
         private int status;
@@ -61,11 +60,6 @@ public class Room : MonoBehaviour
         doors.Add(door);
     }
 
-    private void Awake()
-    {
-        mapManager = MapManager.Instance;
-    }
-
     // Player has entered the room
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -74,7 +68,7 @@ public class Room : MonoBehaviour
 
         OnRoomEntered();
         //Debug.Log("Player has entered room");
-        mapManager.RoomEntered();
+        MapManager.Instance.RoomEntered();
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -44,10 +44,9 @@ public class UIManager : MonoBehaviour
         playerData.ItemAddedEvent += OnItemAdded;
     }
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-            inventoryDisplay.SetActive(!inventoryDisplay.activeInHierarchy);
+        weaponImage.preserveAspect = true;
     }
 
     private void LateUpdate() // Late update for UI
@@ -115,8 +114,6 @@ public class UIManager : MonoBehaviour
     {
         weaponText.text = weapon.name;
         weaponImage.sprite = weapon.Icon;
-
-        OnItemAdded(weapon);
     }
 
     private void OnItemAdded(Item item)

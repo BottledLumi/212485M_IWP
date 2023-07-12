@@ -43,6 +43,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private ushort numRooms;
     [SerializeField] private ushort numCauldronRooms, numTreasureRooms, numBossRooms;
 
+    [SerializeField] private ushort minConnectingRooms, maxConnectingRooms;
+
     // Return randomly-generated floor layout
     public RoomTemplate[,] GenerateFloorLayout()
     {
@@ -71,7 +73,9 @@ public class MapGenerator : MonoBehaviour
             for (int i = 0; i < pathList.Count && numGeneratedRooms < numRooms - numSpecialRooms; i++)
             {
                 Path path = pathList[i];
-                while (floorLayout[path.coord.x, path.coord.y] || CheckNumOfNeighbours(floorLayout, path.coord.x, path.coord.y) > 1 || CheckNumOfNeighbours(floorLayout, path.coord.x, path.coord.y) < 1)
+                while (floorLayout[path.coord.x, path.coord.y] 
+                   || CheckNumOfNeighbours(floorLayout, path.coord.x, path.coord.y) < minConnectingRooms 
+                   || CheckNumOfNeighbours(floorLayout, path.coord.x, path.coord.y) > maxConnectingRooms)
                     RandomisePathDirection(path);
                 floorLayout[path.coord.x, path.coord.y] = RandomiseRoomOfType(RoomType.COMBAT);
                 numGeneratedRooms++;
@@ -80,18 +84,17 @@ public class MapGenerator : MonoBehaviour
         //TO DO: Generate more isolated paths
 
         // Add special rooms
-        List<Path> isolatedRooms = new();
+        List<Coord2D> isolatedRooms = new();
         for (int row = 0; row < floorWidth; row++)
         {
             for (int col = 0; col < floorHeight; col++)
             {
-                if (floorLayout[row, col])
+                if (!floorLayout[row, col])
                 {
                     int numOfNeighbours = CheckNumOfNeighbours(floorLayout, row, col);
                     if (numOfNeighbours == 1)
                     {
-                        Path newPath = new(new Coord2D(row, col), Path.DIRECTION.NONE);
-                        isolatedRooms.Add(newPath);
+                        isolatedRooms.Add(new Coord2D(row, col));
                     }
                 }
             }
@@ -103,13 +106,11 @@ public class MapGenerator : MonoBehaviour
             if (isolatedRooms.Count < 1)
                 break;
             System.Random random = new System.Random();
-            Path randomPath = isolatedRooms[random.Next(isolatedRooms.Count)];
-            while (floorLayout[randomPath.coord.x, randomPath.coord.y] || CheckNumOfNeighbours(floorLayout, randomPath.coord.x, randomPath.coord.y) != 1)
-                RandomisePathDirection(randomPath);
-            floorLayout[randomPath.coord.x, randomPath.coord.y] = RandomiseRoomOfType(RoomType.CAULDRON);
+            Coord2D randomCoord = isolatedRooms[random.Next(isolatedRooms.Count)];
+            floorLayout[randomCoord.x, randomCoord.y] = RandomiseRoomOfType(RoomType.CAULDRON);
             numGeneratedRooms++;
 
-            isolatedRooms.Remove(randomPath);
+            isolatedRooms.Remove(randomCoord);
         }
 
         // Treasure rooms
@@ -118,13 +119,11 @@ public class MapGenerator : MonoBehaviour
             if (isolatedRooms.Count < 1)
                 break;
             System.Random random = new System.Random();
-            Path randomPath = isolatedRooms[random.Next(isolatedRooms.Count)];
-            while (floorLayout[randomPath.coord.x, randomPath.coord.y] || CheckNumOfNeighbours(floorLayout, randomPath.coord.x, randomPath.coord.y) != 1)
-                RandomisePathDirection(randomPath);
-            floorLayout[randomPath.coord.x, randomPath.coord.y] = RandomiseRoomOfType(RoomType.TREASURE);
+            Coord2D randomCoord = isolatedRooms[random.Next(isolatedRooms.Count)];
+            floorLayout[randomCoord.x, randomCoord.y] = RandomiseRoomOfType(RoomType.TREASURE);
             numGeneratedRooms++;
-            
-            isolatedRooms.Remove(randomPath);
+
+            isolatedRooms.Remove(randomCoord);
         }
 
         // Boss rooms
@@ -132,19 +131,16 @@ public class MapGenerator : MonoBehaviour
         {
             if (isolatedRooms.Count < 1)
                 break;
-
-            Path randomPath = new(new Coord2D(0, 0), Path.DIRECTION.NONE);
-            while (DistanceFromStart(randomPath.coord) < numRooms/4)
+            Coord2D randomCoord = new Coord2D(0,0);
+            while (DistanceFromStart(randomCoord) < numRooms/4 || CheckNumOfNeighbours(floorLayout, randomCoord.x, randomCoord.y) != 1) 
             {
                 System.Random random = new System.Random();
-                randomPath = isolatedRooms[random.Next(isolatedRooms.Count)];
+                randomCoord = isolatedRooms[random.Next(isolatedRooms.Count)];
             }
-            while (floorLayout[randomPath.coord.x, randomPath.coord.y] || CheckNumOfNeighbours(floorLayout, randomPath.coord.x, randomPath.coord.y) != 1)
-                RandomisePathDirection(randomPath);
-            floorLayout[randomPath.coord.x, randomPath.coord.y] = RandomiseRoomOfType(RoomType.BOSS);
+            floorLayout[randomCoord.x, randomCoord.y] = RandomiseRoomOfType(RoomType.BOSS);
             numGeneratedRooms++;
 
-            isolatedRooms.Remove(randomPath);
+            isolatedRooms.Remove(randomCoord);
         }
 
         return floorLayout;

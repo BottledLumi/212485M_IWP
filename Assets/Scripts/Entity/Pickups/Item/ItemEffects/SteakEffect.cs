@@ -11,11 +11,9 @@ public class SteakEffect : ItemEffect
 
     Weapon weapon;
     RangedWeapon rangedWeapon;
-
-    PlayerData playerData;
     private void Awake()
     {
-        playerData = PlayerData.Instance;
+        PlayerData playerData = PlayerData.Instance;
 
         ValueChangedEvent += OnValueChanged; playerData.WeaponChangedEvent += OnWeaponChanged;
 
