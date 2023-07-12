@@ -14,7 +14,6 @@ public class CreamEffect : ItemEffect
 
         totalAtkValue = (int)(playerData.Defence * baseMultiplier);
         playerData.Attack += totalAtkValue;
-        Debug.Log(totalAtkValue);
     }
     private void OnValueChanged()
     {

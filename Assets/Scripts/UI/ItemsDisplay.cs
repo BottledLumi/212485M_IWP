@@ -7,11 +7,10 @@ public class ItemsDisplay : MonoBehaviour
 {
     PlayerData playerData;
 
+    [SerializeField] GameObject content;
     [SerializeField] RectTransform rectTransform;
 
-    [SerializeField] float size;
-
-    [SerializeField] float padding;
+    [SerializeField] float size, padding;
 
     [SerializeField] bool attachDescription;
 
@@ -46,9 +45,8 @@ public class ItemsDisplay : MonoBehaviour
     private void InstantiateItems()
     {
         float contentWidth = rectTransform.rect.width;
-        float distance = contentWidth - (padding * 2) / size;
 
-        Vector2 pos = new Vector2(padding + size / 2, padding + size / 2);
+        Vector2 pos = new Vector2(padding + size/2, -(padding + size/2));
         Dictionary<Item, int> items = playerData.Items;
         foreach (Item item in items.Keys)
         {
@@ -56,20 +54,20 @@ public class ItemsDisplay : MonoBehaviour
 
             itemNode.GetComponent<Image>().sprite = item.Icon;
 
+            itemNodes.Add(itemNode);
+            itemNode.transform.SetParent(content.transform);
+
             RectTransform itemRect = itemNode.GetComponent<RectTransform>();
             itemRect.anchoredPosition = pos;
-            itemRect.sizeDelta = new Vector2(size,size);
-
-            itemNodes.Add(itemNode);
-            itemNode.transform.SetParent(gameObject.transform);
+            itemRect.sizeDelta = new Vector2(size, size);
 
             if (pos.x + size > contentWidth-padding-size/2)
             {
-                pos.x = padding + size / 2;
-                pos.y += size;
+                pos.x = padding + size/2;
+                pos.y -= padding + size;
             }
             else
-                pos.x += distance;
+                pos.x += padding + size;
         }
     }
 }

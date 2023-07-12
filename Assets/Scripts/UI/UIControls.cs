@@ -19,7 +19,7 @@ public class UIControls : MonoBehaviour
         if (Input.GetKey(KeyCode.Tab))
         {
             timer += Time.deltaTime;
-            if (timer > 0.25f)
+            if (timer > 0.2f)
             {
                 inventoryDisplay.SetActive(true);
                 minimapDisplay.SetActive(false);
@@ -28,7 +28,7 @@ public class UIControls : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Tab))
         {
-            if (timer > 0.25f)
+            if (timer > 0.2f)
             {
                 inventoryDisplay.SetActive(false);
                 minimapDisplay.SetActive(minimapActive);

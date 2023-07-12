@@ -122,14 +122,15 @@ public class UIManager : MonoBehaviour
 
         Image image = display.transform.Find("ItemImage").GetComponent<Image>();
         TMP_Text text = display.transform.Find("ItemDescription").GetComponent<TMP_Text>();
+        RectTransform rectTransform = display.GetComponent<RectTransform>();
 
-        if (image && text)
+        if (image && text && display)
         {
             image.sprite = item.Icon;
             text.text = item.Description;
         }
 
         display.transform.SetParent(UI.transform);
-        display.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -120);
+        display.GetComponent<RectTransform>().anchoredPosition = new Vector2(rectTransform.rect.width/2 + 20, rectTransform.rect.height/2 + 20);
     }
 }
