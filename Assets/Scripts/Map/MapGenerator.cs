@@ -45,20 +45,24 @@ public class MapGenerator : MonoBehaviour
 
     [SerializeField] private ushort minConnectingRooms, maxConnectingRooms;
 
+    Coord2D startCoord;
+
     // Return randomly-generated floor layout
     public RoomTemplate[,] GenerateFloorLayout()
     {
-        int x, y;
         int numSpecialRooms = numCauldronRooms + numTreasureRooms + numBossRooms;
         RoomTemplate[,] floorLayout = new RoomTemplate[floorWidth, floorHeight];
 
-        x = floorWidth / 2 - 1; y = floorHeight / 2 - 1;
-        floorLayout[x, y] = RandomiseRoomOfType(RoomType.STARTING);
+
+        startCoord.x = floorWidth / 2 - 1; startCoord.y = floorHeight / 2 - 1;
+        floorLayout[startCoord.x, startCoord.y] = RandomiseRoomOfType(RoomType.STARTING);
         int numGeneratedRooms = 1;
 
         //*****Modified random walk *****
         if (numPaths < 1)
             return null;
+
+        int x = startCoord.x, y = startCoord.y;
 
         List<Path> pathList = new();
         for (int i = 0; i < numPaths; i++)
@@ -131,9 +135,10 @@ public class MapGenerator : MonoBehaviour
         {
             if (isolatedRooms.Count < 1)
                 break;
-            Coord2D randomCoord = new Coord2D(0,0);
+            Coord2D randomCoord = new Coord2D(startCoord.x, startCoord.y);
             while (DistanceFromStart(randomCoord) < numRooms/4 || CheckNumOfNeighbours(floorLayout, randomCoord.x, randomCoord.y) != 1) 
             {
+                Debug.Log("Required distance" + numRooms/3);
                 System.Random random = new System.Random();
                 randomCoord = isolatedRooms[random.Next(isolatedRooms.Count)];
             }
@@ -246,6 +251,6 @@ public class MapGenerator : MonoBehaviour
 
     private int DistanceFromStart(Coord2D coord)
     {
-        return Mathf.Abs(coord.x) + Mathf.Abs(coord.y);
+        return Mathf.Abs(coord.x - startCoord.x) + Mathf.Abs(coord.y - startCoord.y);
     }
 }

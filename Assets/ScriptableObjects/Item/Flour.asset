@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 404
   itemName: Flour
-  description: 
+  description: Increases bullet size & speed for ranged weapons, and range for melee
+    weapons.
   icon: {fileID: 21300000, guid: 4a69a954a817bf941b233c8ec4ae4c9a, type: 3}
   rarity: 0

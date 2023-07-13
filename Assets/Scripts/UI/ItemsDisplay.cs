@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class ItemsDisplay : MonoBehaviour
 {
     PlayerData playerData;
@@ -53,6 +53,7 @@ public class ItemsDisplay : MonoBehaviour
             GameObject itemNode = Instantiate(itemNodePrefab);
 
             itemNode.GetComponent<Image>().sprite = item.Icon;
+            itemNode.transform.Find("QuantityText").GetComponent<TMP_Text>().text = "x"+items[item];
 
             itemNodes.Add(itemNode);
             itemNode.transform.SetParent(content.transform);

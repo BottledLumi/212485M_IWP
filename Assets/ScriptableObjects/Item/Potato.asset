@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 408
   itemName: Potato
-  description: 
+  description: Not implemented yet.
   icon: {fileID: 21300000, guid: 99c12fc16005c584c8c838739b5adf04, type: 3}
   rarity: 0
