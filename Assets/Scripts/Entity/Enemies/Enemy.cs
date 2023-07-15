@@ -5,8 +5,6 @@ using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
-    ItemsManager itemsManager;
-
     [SerializeField] EnemyAttributes enemyAttributes;
     private int level;
     public int Level
@@ -95,6 +93,7 @@ public class Enemy : MonoBehaviour
         rigidbody2D.velocity = Vector2.zero;
     }
 
+    ItemsManager itemsManager;
     private void OnEnable()
     {
         level = 1;
