@@ -7,7 +7,7 @@ public class WetGoopAttack : MonoBehaviour
 {
     Enemy enemy;
     AIDestinationSetter destinationSetter;
-    AIPath aiPath;
+    AIPath aiPath; 
     private void Awake()
     {
         destinationSetter = GetComponent<AIDestinationSetter>();
@@ -26,7 +26,7 @@ public class WetGoopAttack : MonoBehaviour
         if (enemy.target && !enemy.DamageTaken())
         {
             aiPath.enabled = true;
-           // Move the enemy towards the player if enemy can attack
+            // Move the enemy towards the player if enemy can attack
             if (enemy.canAttack)
             {
                 destinationSetter.target = enemy.target.transform;

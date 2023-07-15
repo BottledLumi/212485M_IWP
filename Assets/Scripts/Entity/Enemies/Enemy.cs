@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Rigidbody2D rigidbody2D;
 
-    private AIPath aiPath;
+    AIPath aiPath;
     public float getHealth()
     {
         return health;
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        itemsManager = ItemsManager.Instance;   
+        itemsManager = ItemsManager.Instance;
     }
 
     public GameObject target = null;
