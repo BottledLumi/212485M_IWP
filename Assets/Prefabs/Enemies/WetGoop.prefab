@@ -162,8 +162,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAttributes: {fileID: 11400000, guid: d3e78b67f87aac44ba82f5e550315891, type: 2}
+  canAttack: 0
   spriteRenderer: {fileID: 1776172831780914465}
   rigidbody2D: {fileID: 515020401183623930}
+  destinationSetter: {fileID: 0}
+  aiPath: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &697024694752802608
 MonoBehaviour:
@@ -177,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d87882a7c09714ba8e1247235482f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyAttack: {fileID: 11400000, guid: 51854cb98a1d9824386eac58a9b65625, type: 2}
 --- !u!114 &474168163581612889
 MonoBehaviour:
   m_ObjectHideFlags: 0
