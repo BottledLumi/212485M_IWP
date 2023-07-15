@@ -5,10 +5,10 @@ using UnityEngine;
 abstract public class Transition : ScriptableObject
 {
     [SerializeField] BaseState targetState;
+    [SerializeField] Decision decision;
     public void Execute(BaseStateMachine baseStateMachine)
     {
-        if (Condition())
+        if (decision.Decide())
             baseStateMachine.currentState = targetState;
     }
-    abstract public bool Condition();
 }
