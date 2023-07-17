@@ -4,5 +4,5 @@ using UnityEngine;
 
 abstract public class Decision : ScriptableObject
 {
-    public abstract bool Decide();
+    public abstract bool Decide(BaseStateMachine bsm);
 }

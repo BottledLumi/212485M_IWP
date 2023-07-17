@@ -4,5 +4,5 @@ using UnityEngine;
 
 abstract public class Action : ScriptableObject
 {
-    abstract public void Execute();
+    abstract public void Execute(BaseStateMachine bsm);
 }

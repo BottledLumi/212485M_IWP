@@ -6,9 +6,9 @@ abstract public class Transition : ScriptableObject
 {
     [SerializeField] BaseState targetState;
     [SerializeField] Decision decision;
-    public void Execute(BaseStateMachine baseStateMachine)
+    public void Execute(BaseStateMachine bsm)
     {
-        if (decision.Decide())
-            baseStateMachine.currentState = targetState;
+        if (decision.Decide(bsm))
+            bsm.currentState = targetState;
     }
 }
