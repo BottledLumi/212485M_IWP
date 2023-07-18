@@ -11,9 +11,35 @@ public class Enemy : MonoBehaviour
     {
         get { return level; }
     }
-    private float health, attack, defence, attackSpeed, movementSpeed;
-    private bool isDead = false;
-    private bool damageTaken = false;
+    public float health { private set; get; }
+
+    private float attack;
+    public event System.Action<float> AttackChangedEvent;
+    public float Attack
+    {
+        get { return attack; }
+        private set {
+            if (value != attack)
+            {
+                attack = value;
+                AttackChangedEvent?.Invoke(attack);
+            }
+        }
+    }
+    public float defence { private set; get; }
+    public float attackSpeed { private set; get; }
+    public float movementSpeed { private set; get; }
+
+    public bool isDead = false;
+    public bool IsDead
+    {
+        get { return isDead; }
+    }
+    public bool damageTaken = false;
+    public bool DamageTaken
+    {
+        get { return damageTaken; }
+    }
 
     [HideInInspector] public bool canAttack = false;
 
@@ -21,30 +47,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Rigidbody2D rigidbody2D;
 
     AIPath aiPath;
-    public float getHealth()
-    {
-        return health;
-    }
-    public float getAttack()
-    {
-        return attack;
-    }
-    public float getDefence()
-    {
-        return defence;
-    }
-    public float getAttackSpeed()
-    {
-        return attackSpeed;
-    }
-    public float getMovementSpeed()
-    {
-        return movementSpeed;
-    }
-    public bool DamageTaken()
-    {
-        return damageTaken;
-    }
 
     private void Awake()
     {
@@ -74,11 +76,6 @@ public class Enemy : MonoBehaviour
     public void ApplyKnockback(Vector2 direction, float force)
     {
         rigidbody2D.AddForce(direction * force, ForceMode2D.Impulse);
-    }
-
-    public bool IsDead()
-    {
-        return isDead;
     }
 
     private IEnumerator DamageTakenIndicator()

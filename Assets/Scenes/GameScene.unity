@@ -1639,6 +1639,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b23730d1e6d187c45872fca29e98d04d, type: 2}
   - {fileID: 11400000, guid: fc58e6ad685d98a43bf6517d21a837be, type: 2}
   - {fileID: 11400000, guid: fc58e6ad685d98a43bf6517d21a837be, type: 2}
+  invincibilityTimer: 1
 --- !u!114 &720542228
 MonoBehaviour:
   m_ObjectHideFlags: 0

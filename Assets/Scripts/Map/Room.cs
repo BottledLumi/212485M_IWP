@@ -89,7 +89,7 @@ public class Room : MonoBehaviour
     {
         foreach (GameObject enemy in enemies)
         {
-            if (!enemy.GetComponent<Enemy>().IsDead())
+            if (!enemy.GetComponent<Enemy>().IsDead)
                 enemy.SetActive(_active);
         }
     }

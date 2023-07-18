@@ -138,7 +138,6 @@ public class MapGenerator : MonoBehaviour
             Coord2D randomCoord = new Coord2D(startCoord.x, startCoord.y);
             while (DistanceFromStart(randomCoord) < numRooms/4 || CheckNumOfNeighbours(floorLayout, randomCoord.x, randomCoord.y) != 1) 
             {
-                Debug.Log("Required distance" + numRooms/3);
                 System.Random random = new System.Random();
                 randomCoord = isolatedRooms[random.Next(isolatedRooms.Count)];
             }

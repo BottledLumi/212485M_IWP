@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-[CreateAssetMenu(menuName = "FSM/MoveToTarget Action")]
-public class MoveToTargetAction : Action
+[CreateAssetMenu(menuName = "FSM/Action/MoveToTarget Action")]
+public class MoveToTargetAction : FSMAction
 {
     [SerializeField] float distance;
 
-    AIDestinationSetter destinationSetter;
-    AIPath aiPath;
     public override void Execute(BaseStateMachine bsm)
     {
+        AIDestinationSetter destinationSetter = bsm.GetComponent<AIDestinationSetter>();
+        AIPath aiPath = bsm.GetComponent<AIPath>();
+
         if (!bsm.enemy.target)
         {
             if (destinationSetter && destinationSetter.target) destinationSetter.target = null;
             if (aiPath) aiPath.enabled = false;
             return;
         }
-        
-        if (!destinationSetter || !aiPath)
+
+        if (bsm.enemy.DamageTaken)
         {
-            destinationSetter = bsm.GetComponent<AIDestinationSetter>();
-            aiPath = bsm.GetComponent<AIPath>();
+            aiPath.enabled = false;
+            return;
         }
 
         if (Vector3.Distance(bsm.enemy.transform.position, bsm.enemy.target.transform.position) > distance)
@@ -32,8 +33,5 @@ public class MoveToTargetAction : Action
         }
         else
             destinationSetter.target = null;
-
-        if (bsm.enemy.DamageTaken())
-            aiPath.enabled = false;
     }
 }
