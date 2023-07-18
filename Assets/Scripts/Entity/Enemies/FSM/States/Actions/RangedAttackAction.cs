@@ -10,11 +10,19 @@ public class RangedAttackAction : FSMAction
     [SerializeField] 
     public override void Execute(BaseStateMachine bsm)
     {
-        if (!bsm.enemy.canAttack)
+        if (!bsm.enemy.CanAttack)
             return;
 
+        GameObject projectile = GameObject.Instantiate(bulletPrefab);
+        projectile.GetComponent<EnemyProjectile>().SetOwner(bsm.enemy);
 
+        // Face target
+        {
+            Vector3 direction = bsm.enemy.target.transform.position - bsm.transform.position;
+            direction.Normalize();
+            bsm.transform.up = direction;
+        }
 
-        bsm.enemy.canAttack = false;
+        bsm.enemy.CanAttack = false;
     }
 }

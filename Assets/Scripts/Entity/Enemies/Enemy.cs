@@ -30,18 +30,25 @@ public class Enemy : MonoBehaviour
     public float attackSpeed { private set; get; }
     public float movementSpeed { private set; get; }
 
-    public bool isDead = false;
+    [HideInInspector] public bool isDead = false;
     public bool IsDead
     {
         get { return isDead; }
     }
-    public bool damageTaken = false;
+    [HideInInspector] public bool damageTaken = false;
     public bool DamageTaken
     {
         get { return damageTaken; }
     }
 
-    [HideInInspector] public bool canAttack = false;
+    [HideInInspector] private bool canAttack = true;
+
+    public event System.Action<bool> CanAttackChangedEvent;
+    public bool CanAttack
+    {
+        get { return canAttack; }
+        set { canAttack = value; CanAttackChangedEvent?.Invoke(canAttack); }
+    }
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Rigidbody2D rigidbody2D;
@@ -51,6 +58,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         itemsManager = ItemsManager.Instance;
+        CanAttackChangedEvent += OnCanAttackChanged;
     }
 
     public GameObject target = null;
@@ -71,6 +79,18 @@ public class Enemy : MonoBehaviour
             isDead = true;
             gameObject.SetActive(false);
         }
+    }
+
+    void OnCanAttackChanged(bool _canAttack)
+    {
+        if (!_canAttack)
+            StartCoroutine(AttackSpeedCoroutine());
+    }
+
+    IEnumerator AttackSpeedCoroutine()
+    {
+        yield return new WaitForSeconds(attackSpeed);
+        CanAttack = true;
     }
 
     public void ApplyKnockback(Vector2 direction, float force)

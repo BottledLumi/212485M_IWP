@@ -7,7 +7,7 @@ public class CanAttackDecision : Decision
 {
     public override bool Decide(BaseStateMachine bsm)
     {
-        if (bsm.enemy.canAttack)
+        if (bsm.enemy.CanAttack)
             return true;
         return false;
     }

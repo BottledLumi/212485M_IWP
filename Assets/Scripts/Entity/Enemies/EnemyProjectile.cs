@@ -4,15 +4,58 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject target;
+    [SerializeField] float speed;
+
+    [SerializeField] bool nonOwnerTarget;
+
+    Vector3 direction;
+    List<GameObject> subProjectiles = new List<GameObject>();
+
+    Enemy owner;
+    float damage;
+
+    private void Start()
     {
-        
+        if (!owner)
+            return;
+        transform.position = owner.transform.position;
+
+        if (!nonOwnerTarget)
+            target = owner.target;
+        direction = target.transform.position - transform.position;
+        direction.Normalize();
+        transform.up = direction;
+
+        damage = owner.Attack;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.position += direction * speed * Time.deltaTime;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Player":
+                other.gameObject.GetComponent<Player>().TakeDamage(damage);
+                gameObject.SetActive(false);
+                break;
+            case "Wall":
+                gameObject.SetActive(false);
+                break;
+        }
+    }
+
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
+    }
+
+    public void SetOwner(Enemy owner)
+    {
+        this.owner = owner;
     }
 }

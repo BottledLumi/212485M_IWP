@@ -31,6 +31,9 @@ public class MoveToTargetAction : FSMAction
             destinationSetter.target = bsm.enemy.target.transform;
         }
         else
+        {
+            aiPath.enabled = false;
             destinationSetter.target = null;
+        }
     }
 }
