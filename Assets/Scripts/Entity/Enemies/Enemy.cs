@@ -70,6 +70,7 @@ public class Enemy : MonoBehaviour
         {
             isDead = true;
             gameObject.SetActive(false);
+            GameSceneManager.instance.enemyKilled++;
         }
     }
 
