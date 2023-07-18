@@ -7,7 +7,6 @@ using Pathfinding;
 public class MoveToTargetAction : FSMAction
 {
     [SerializeField] float distance;
-
     public override void Execute(BaseStateMachine bsm)
     {
         AIDestinationSetter destinationSetter = bsm.GetComponent<AIDestinationSetter>();
