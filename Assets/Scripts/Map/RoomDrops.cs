@@ -11,7 +11,7 @@ public class RoomDrops : MonoBehaviour
     public void ChanceDrop()
     {
         float randomPercentage = Random.Range(0f, 1f) * 100f;
-        if (randomPercentage < dropRate)
+        if (randomPercentage <= dropRate)
         {
             int rand = UnityEngine.Random.Range(0, dropPool.Count);
             Drop(dropPool[rand]);
