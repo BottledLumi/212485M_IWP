@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager instance;
-    
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     [SerializeField] GameScene gameScene;
+
     [HideInInspector] public uint enemyKilled = 0;
     [HideInInspector] public uint roomsCleared = 0;
 
@@ -43,6 +44,7 @@ public class GameStateManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        SceneManager.UnloadSceneAsync("GameScene");
         SceneManager.LoadScene("MenuScene");
     }
 }

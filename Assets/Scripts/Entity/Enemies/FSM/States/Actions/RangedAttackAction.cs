@@ -7,7 +7,6 @@ public class RangedAttackAction : FSMAction
 {
     [SerializeField] GameObject bulletPrefab;
 
-    [SerializeField] 
     public override void Execute(BaseStateMachine bsm)
     {
         if (!bsm.enemy.CanAttack)
@@ -15,7 +14,7 @@ public class RangedAttackAction : FSMAction
 
         GameObject projectile = GameObject.Instantiate(bulletPrefab);
         projectile.GetComponent<EnemyProjectile>().SetOwner(bsm.enemy);
-
+        
         bsm.enemy.CanAttack = false;
     }
 }
