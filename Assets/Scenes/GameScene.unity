@@ -1619,26 +1619,8 @@ MonoBehaviour:
   initialAttackSpeed: 1
   initialMovementSpeed: 10
   initialMaxHealth: 100
-  initialWeapon: {fileID: 11400000, guid: ceb55e2ef6fadcc40bddffd67d139aa4, type: 2}
-  initialItems:
-  - {fileID: 11400000, guid: 9ea8cd3f0d9575c4bb839c95f77308f9, type: 2}
-  - {fileID: 11400000, guid: e7c201f02c024f74498541e2d28f8ed2, type: 2}
-  - {fileID: 11400000, guid: fc58e6ad685d98a43bf6517d21a837be, type: 2}
-  - {fileID: 11400000, guid: a39c5b48ad07889439f048cde09a8d35, type: 2}
-  - {fileID: 11400000, guid: 7315f0ced40115040887ab3a3bbd5149, type: 2}
-  - {fileID: 11400000, guid: 042823507fc0ced45922eca33352eaee, type: 2}
-  - {fileID: 11400000, guid: d86580c23e1242a4c8b313bac0504a46, type: 2}
-  - {fileID: 11400000, guid: af17245622f45364dae1a44c11a803e4, type: 2}
-  - {fileID: 11400000, guid: a874a9363f815a34386d481674c052ab, type: 2}
-  - {fileID: 11400000, guid: d1268dc13173b3a4786f9e49b987b26f, type: 2}
-  - {fileID: 11400000, guid: 74a6cf3bcd13a4e47b3f6910c8abec96, type: 2}
-  - {fileID: 11400000, guid: 32ba82a8f297d4147887c5f9f9b205b5, type: 2}
-  - {fileID: 11400000, guid: 5d4c4c01916ddb442a5fc9b90349bef5, type: 2}
-  - {fileID: 11400000, guid: 3a63f6bf7bb459645bcbdd79cd66395a, type: 2}
-  - {fileID: 11400000, guid: 603344ddf826da04fb5f125a5649c49d, type: 2}
-  - {fileID: 11400000, guid: b23730d1e6d187c45872fca29e98d04d, type: 2}
-  - {fileID: 11400000, guid: fc58e6ad685d98a43bf6517d21a837be, type: 2}
-  - {fileID: 11400000, guid: fc58e6ad685d98a43bf6517d21a837be, type: 2}
+  initialWeapon: {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
+  initialItems: []
   invincibilityTimer: 1
 --- !u!114 &720542228
 MonoBehaviour:
@@ -3408,7 +3390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScene: {fileID: 11400000, guid: 85d8ee06abbf1b24e960724b7cfad6c7, type: 2}
-  uiCanvas: {fileID: 1055726171}
+  enemyKilled: 0
 --- !u!4 &1522827643
 Transform:
   m_ObjectHideFlags: 0

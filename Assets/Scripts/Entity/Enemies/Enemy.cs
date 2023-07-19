@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         get { return damageTaken; }
     }
 
-    [HideInInspector] private bool canAttack = true;
+    [HideInInspector] private bool canAttack = false;
 
     public event System.Action<bool> CanAttackChangedEvent;
     public bool CanAttack
@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         itemsManager = ItemsManager.Instance;
+
         CanAttackChangedEvent += OnCanAttackChanged;
     }
 
@@ -131,5 +132,7 @@ public class Enemy : MonoBehaviour
         {
             aiPath.maxSpeed = movementSpeed;
         }
+
+        OnCanAttackChanged(canAttack);
     }
 }
