@@ -165,9 +165,8 @@ MonoBehaviour:
   enemyAttributes: {fileID: 11400000, guid: d3e78b67f87aac44ba82f5e550315891, type: 2}
   isDead: 0
   damageTaken: 0
-  canAttack: 0
   spriteRenderer: {fileID: 1776172831780914465}
-  rigidbody2D: {fileID: 515020401183623930}
+  rb2D: {fileID: 515020401183623930}
   target: {fileID: 0}
 --- !u!114 &3249024064731017079
 MonoBehaviour:
@@ -196,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4e8aec01791e244918a0c2bea445fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contactDamage: 0
+  initialContactDamage: 0
   scaleWithAtk: 1
 --- !u!114 &474168163581612889
 MonoBehaviour:

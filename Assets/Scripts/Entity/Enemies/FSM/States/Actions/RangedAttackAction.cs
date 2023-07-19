@@ -16,13 +16,6 @@ public class RangedAttackAction : FSMAction
         GameObject projectile = GameObject.Instantiate(bulletPrefab);
         projectile.GetComponent<EnemyProjectile>().SetOwner(bsm.enemy);
 
-        // Face target
-        {
-            Vector3 direction = bsm.enemy.target.transform.position - bsm.transform.position;
-            direction.Normalize();
-            bsm.transform.up = direction;
-        }
-
         bsm.enemy.CanAttack = false;
     }
 }

@@ -9997,6 +9997,7 @@ GameObject:
   - component: {fileID: 5192640063505386109}
   - component: {fileID: -6156865947926756215}
   - component: {fileID: 7694900322394860813}
+  - component: {fileID: 4848482200400230450}
   m_Layer: 0
   m_Name: CombatRoom_2
   m_TagString: Untagged
@@ -10082,6 +10083,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 37, y: 25}
   m_EdgeRadius: 0
+--- !u!114 &4848482200400230450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5192640063505386111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6374955776cfb240aa517c6bbd4af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropPool:
+  - {fileID: 5972055217787526993, guid: 12d59082dfda96a47becbf4bd89fd0c0, type: 3}
+  dropRate: 15
 --- !u!1 &5192640064232336700
 GameObject:
   m_ObjectHideFlags: 0

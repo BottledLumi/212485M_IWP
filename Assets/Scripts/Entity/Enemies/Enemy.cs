@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using DG.Tweening;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,7 +12,21 @@ public class Enemy : MonoBehaviour
     {
         get { return level; }
     }
-    public float health { private set; get; }
+
+    private float health;
+    public event System.Action<float> HealthChangedEvent;
+    public float Health
+    {
+        get { return health; }
+        private set
+        {
+            if (value != health)
+            {
+                health = value;
+                HealthChangedEvent?.Invoke(health);
+            }
+        }
+    }
 
     private float attack;
     public event System.Action<float> AttackChangedEvent;
@@ -41,7 +56,7 @@ public class Enemy : MonoBehaviour
         get { return damageTaken; }
     }
 
-    [HideInInspector] private bool canAttack = false;
+    [HideInInspector] protected bool canAttack = false;
 
     public event System.Action<bool> CanAttackChangedEvent;
     public bool CanAttack
@@ -51,39 +66,35 @@ public class Enemy : MonoBehaviour
     }
 
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Rigidbody2D rigidbody2D;
+    [SerializeField] private Rigidbody2D rb2D;
 
-    AIPath aiPath;
+    protected AIPath aiPath;
 
     private void Awake()
     {
         itemsManager = ItemsManager.Instance;
 
         CanAttackChangedEvent += OnCanAttackChanged;
-    }
 
-    public GameObject target = null;
-    void Start()
-    {
-        if (!target)
-            target = GameObject.Find("Player");
         gameObject.SetActive(false);
     }
+
+    [HideInInspector] public GameObject target = null;
 
     public void TakeDamage(float amount)
     {
         if (health > 0)
             StartCoroutine(DamageTakenIndicator());
-        health -= amount;
-        if (health <= 0)
+        Health -= amount;
+        if (Health <= 0)
         {
             isDead = true;
             gameObject.SetActive(false);
-            GameSceneManager.instance.enemyKilled++;
+            GameStateManager.instance.enemyKilled++;
         }
     }
 
-    void OnCanAttackChanged(bool _canAttack)
+    protected void OnCanAttackChanged(bool _canAttack)
     {
         if (!_canAttack)
             StartCoroutine(AttackSpeedCoroutine());
@@ -97,28 +108,40 @@ public class Enemy : MonoBehaviour
 
     public void ApplyKnockback(Vector2 direction, float force)
     {
-        rigidbody2D.AddForce(direction * force, ForceMode2D.Impulse);
+        rb2D.AddForce(direction * force, ForceMode2D.Impulse);
     }
 
+    float damageTakenTimer = 0.25f;
     private IEnumerator DamageTakenIndicator()
     {
-        spriteRenderer.color = Color.red;
         damageTaken = true;
-
-        yield return new WaitForSeconds(0.25f);
-
-        spriteRenderer.color = Color.white;
+        spriteRenderer.DOColor(Color.red, damageTakenTimer).SetEase(Ease.InCirc, 1, 2);
+        yield return new WaitForSeconds(damageTakenTimer);
         damageTaken = false;
-        rigidbody2D.velocity = Vector2.zero;
+        spriteRenderer.color = Color.white;
+
+        rb2D.velocity = Vector2.zero;
     }
 
     ItemsManager itemsManager;
     private void OnEnable()
     {
+        InitBaseStats();
+
+        if (aiPath = GetComponent<AIPath>())
+        {
+            aiPath.maxSpeed = movementSpeed;
+        }
+
+        OnCanAttackChanged(canAttack);
+    }
+
+    protected void InitBaseStats()
+    {
         level = 1;
-        health = enemyAttributes.getHealth() * Mathf.Pow(1.2f, level-1);
-        attack = enemyAttributes.getAttack() * Mathf.Pow(1.2f, level-1);
-        defence = enemyAttributes.getDefence() * Mathf.Pow(1.2f, level-1);
+        health = enemyAttributes.getHealth() * Mathf.Pow(1.2f, level - 1);
+        attack = enemyAttributes.getAttack() * Mathf.Pow(1.2f, level - 1);
+        defence = enemyAttributes.getDefence() * Mathf.Pow(1.2f, level - 1);
         attackSpeed = enemyAttributes.getAttackSpeed();
         movementSpeed = enemyAttributes.getMovementSpeed();
 
@@ -127,12 +150,5 @@ public class Enemy : MonoBehaviour
         {
             movementSpeed *= waterEffect.MovementSpeedMultiplier();
         }
-
-        if (aiPath = GetComponent<AIPath>())
-        {
-            aiPath.maxSpeed = movementSpeed;
-        }
-
-        OnCanAttackChanged(canAttack);
     }
 }

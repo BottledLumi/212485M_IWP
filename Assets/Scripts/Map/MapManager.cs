@@ -36,8 +36,6 @@ public class MapManager : MonoBehaviour
     [SerializeField] private uint tilesBetweenRooms;
     [SerializeField] private uint roomWidth, roomHeight; // Manual input of room size for now
 
-    [SerializeField] private PathFindManager pathFindManager;
-
     public Dictionary<int, RoomTemplate[,]> floorLayouts = new Dictionary<int, RoomTemplate[,]>(); // Floor layouts
     private Dictionary<int, GameObject[,]> floors = new Dictionary<int, GameObject[,]>();
     public GameObject[,] getFloor(int floorNum)
@@ -51,7 +49,7 @@ public class MapManager : MonoBehaviour
     {
         get { return activeFloor; }
     }
-    public event System.Action RoomEnteredEvent; // Event for when player enters a room
+    public event System.Action<Room> RoomEnteredEvent; // Event for when player enters a room
     void Start()
     {
         instance = gameObject.GetComponent<MapManager>();
@@ -199,9 +197,9 @@ public class MapManager : MonoBehaviour
         GenerateRooms(floorNum); GenerateDoors(floorNum);
     }
 
-    public void RoomEntered()
+    public void RoomEntered(Room room)
     {
-        RoomEnteredEvent?.Invoke();
+        RoomEnteredEvent?.Invoke(room);
     }
 }
 

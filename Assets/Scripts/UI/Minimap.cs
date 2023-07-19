@@ -23,11 +23,16 @@ public class Minimap : MonoBehaviour
     private void Awake()
     {
         mapManager = MapManager.Instance;
-        mapManager.RoomEnteredEvent += RenderMinimap;
+        mapManager.RoomEnteredEvent += OnRoomEntered;
     }
     public void setMap(GameObject[,] _map)
     {
         map = _map;
+    }
+
+    void OnRoomEntered(Room room)
+    {
+        RenderMinimap();
     }
 
     void RenderMinimap()

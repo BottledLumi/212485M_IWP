@@ -13,7 +13,7 @@ public class GameScene : ScriptableObject
     public GameObject WinState()
     {
         Canvas screen = Instantiate(winScreen);
-        screen.transform.GetChild(0).Find("MainMenuButton").GetComponent<Button>().onClick.AddListener(delegate { GameSceneManager.instance.ReturnToMenu(); });
+        screen.transform.GetChild(0).Find("MainMenuButton").GetComponent<Button>().onClick.AddListener(delegate { GameStateManager.instance.ReturnToMenu(); });
 
         return screen.gameObject;
     }
@@ -21,7 +21,7 @@ public class GameScene : ScriptableObject
     public GameObject LoseState()
     {
         Canvas screen = Instantiate(loseScreen);
-        screen.transform.GetChild(0).Find("MainMenuButton").GetComponent<Button>().onClick.AddListener(delegate { GameSceneManager.instance.ReturnToMenu(); });
+        screen.transform.GetChild(0).Find("MainMenuButton").GetComponent<Button>().onClick.AddListener(delegate { GameStateManager.instance.ReturnToMenu(); });
 
         return screen.gameObject;
     }

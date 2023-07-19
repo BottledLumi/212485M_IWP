@@ -5,24 +5,27 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 
-public class GameSceneManager : MonoBehaviour
+public class GameStateManager : MonoBehaviour
 {
-    public static GameSceneManager instance;
+    public static GameStateManager instance;
     
     private void Awake()
     {
         if (instance != null && instance != this)
-        {
             Destroy(gameObject);
-        }
         else
-        {
             instance = this;
-        }
     }
 
     [SerializeField] GameScene gameScene;
-    public uint enemyKilled = 0;
+    [HideInInspector] public uint enemyKilled = 0;
+    [HideInInspector] public uint roomsCleared = 0;
+
+    public event System.Action<Boss> BossEvent;
+    public void CallBossEvent(Boss boss)
+    {
+        BossEvent?.Invoke(boss);
+    }
 
     private GameObject screen;
     public void SetGameState(bool win)

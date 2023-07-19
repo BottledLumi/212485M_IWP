@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject itemPickupDisplay;
 
+    [SerializeField] private GameObject bossHealthUI;
+
     PlayerData playerData;
     private void Awake()
     {
@@ -47,6 +49,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         weaponImage.preserveAspect = true;
+
+        GameStateManager.instance.BossEvent += OnBoss;
     }
 
     private void LateUpdate() // Late update for UI
@@ -132,5 +136,27 @@ public class UIManager : MonoBehaviour
 
         display.transform.SetParent(UI.transform);
         display.GetComponent<RectTransform>().anchoredPosition = new Vector2(rectTransform.rect.width/2 + 20, rectTransform.rect.height/2 + 20);
+    }
+
+    GameObject bossUI;
+    Slider bossSlider;
+    void OnBoss(Boss boss)
+    {
+        bossUI = Instantiate(bossHealthUI, UI.transform);
+        bossSlider = bossUI.transform.Find("BossHealth_Slider").GetComponent<Slider>();
+
+        bossSlider.maxValue = boss.Health; bossSlider.value = boss.Health;
+            
+        boss.HealthChangedEvent += OnBossHealthChanged;
+    }
+
+    void OnBossHealthChanged(float _health)
+    {
+        bossSlider.value = _health;
+        if (bossSlider.value <= 0)
+        {
+            bossSlider = null;
+            Destroy(bossUI);
+        }
     }
 }

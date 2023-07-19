@@ -41,10 +41,10 @@ public class EnemyProjectile : MonoBehaviour
         {
             case "Player":
                 other.gameObject.GetComponent<Player>().TakeDamage(damage);
-                gameObject.SetActive(false);
+                Destroy(gameObject);
                 break;
             case "Wall":
-                gameObject.SetActive(false);
+                Destroy(gameObject);
                 break;
         }
     }

@@ -68,7 +68,7 @@ public class Room : MonoBehaviour
 
         OnRoomEntered();
         //Debug.Log("Player has entered room");
-        MapManager.Instance.RoomEntered();
+        MapManager.Instance.RoomEntered(this);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -81,7 +81,7 @@ public class Room : MonoBehaviour
 
     private void Update() // Temporary non-event based check for cleared enemies
     {
-        if (!EnemiesActive())
+        if (!EnemiesActive() && status.active)
             RoomCleared();
     }
 
@@ -128,7 +128,15 @@ public class Room : MonoBehaviour
 
     void RoomCleared()
     {
-        status.cleared = true;
+        if (status.cleared)
+            return;
+        status.cleared = true; GameStateManager.instance.roomsCleared++;
+
+        // If the room has room drops, chance an item drop
+        RoomDrops roomDrops = GetComponent<RoomDrops>();
+        if (roomDrops)
+            roomDrops.ChanceDrop();
+
         AstarPath astarPath = GetComponent<AstarPath>();
         if (astarPath)
             Destroy(astarPath);

@@ -1619,7 +1619,7 @@ MonoBehaviour:
   initialAttackSpeed: 1
   initialMovementSpeed: 10
   initialMaxHealth: 100
-  initialWeapon: {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
+  initialWeapon: {fileID: 11400000, guid: ceb55e2ef6fadcc40bddffd67d139aa4, type: 2}
   initialItems: []
   invincibilityTimer: 1
 --- !u!114 &720542228
@@ -2462,6 +2462,7 @@ MonoBehaviour:
   inventoryText: {fileID: 1286007127}
   inventoryDisplay: {fileID: 716440786}
   itemPickupDisplay: {fileID: 6535619473243484517, guid: 681d67ba12b95844fb92d7115ee97555, type: 3}
+  bossHealthUI: {fileID: 8004143394131588714, guid: 9179682954ff812449a307b38a61746e, type: 3}
 --- !u!114 &1197029360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2691,7 +2692,7 @@ MonoBehaviour:
   numPaths: 4
   numRooms: 20
   numCauldronRooms: 1
-  numTreasureRooms: 3
+  numTreasureRooms: 4
   numBossRooms: 1
   minConnectingRooms: 1
   maxConnectingRooms: 1
@@ -2714,7 +2715,6 @@ MonoBehaviour:
   tilesBetweenRooms: 8
   roomWidth: 37
   roomHeight: 25
-  pathFindManager: {fileID: 0}
   leftDoor: {fileID: 1853473122347217151, guid: 07e398f88a5d31742abf5df023395c6a, type: 3}
   rightDoor: {fileID: 1853473122347217151, guid: a1c2fe7666a7fdc469194dcb1ee8179e, type: 3}
   upDoor: {fileID: 1853473122347217151, guid: eadd72cd40459bf42baf698d387b6975, type: 3}
@@ -3371,7 +3371,7 @@ GameObject:
   - component: {fileID: 1522827643}
   - component: {fileID: 1522827642}
   m_Layer: 0
-  m_Name: GameSceneManager
+  m_Name: GameStateManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3391,6 +3391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScene: {fileID: 11400000, guid: 85d8ee06abbf1b24e960724b7cfad6c7, type: 2}
   enemyKilled: 0
+  roomsCleared: 0
 --- !u!4 &1522827643
 Transform:
   m_ObjectHideFlags: 0

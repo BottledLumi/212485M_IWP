@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using DG.Tweening;
 
 [CreateAssetMenu(menuName = "FSM/Action/MoveToTarget Action")]
 public class MoveToTargetAction : FSMAction
@@ -23,6 +24,13 @@ public class MoveToTargetAction : FSMAction
         {
             aiPath.enabled = false;
             return;
+        }
+
+        if (!aiPath.enabled) // Face target
+        {
+            Vector3 direction = bsm.enemy.target.transform.position - bsm.transform.position;
+            direction.Normalize();
+            bsm.transform.up = direction;
         }
 
         if (Vector3.Distance(bsm.enemy.transform.position, bsm.enemy.target.transform.position) > distance)
