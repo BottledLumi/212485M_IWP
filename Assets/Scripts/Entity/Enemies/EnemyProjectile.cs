@@ -10,7 +10,7 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField] bool nonOwnerTarget;
 
     Vector3 direction;
-    List<GameObject> subProjectiles = new List<GameObject>();
+    [SerializeField] List<GameObject> subProjectiles = new List<GameObject>();
 
     Enemy owner;
     float damage;
@@ -28,6 +28,14 @@ public class EnemyProjectile : MonoBehaviour
         transform.up = direction;
 
         damage = owner.Attack;
+
+        foreach (GameObject projectile in subProjectiles)
+        {
+            EnemyProjectile enemyProjectile = projectile.GetComponent<EnemyProjectile>();
+            if (!enemyProjectile.target)
+                enemyProjectile.target = target;
+            enemyProjectile.damage = damage;
+        }
     }
 
     void Update()
