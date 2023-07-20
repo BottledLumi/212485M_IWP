@@ -1619,7 +1619,7 @@ MonoBehaviour:
   initialAttackSpeed: 1
   initialMovementSpeed: 10
   initialMaxHealth: 100
-  initialWeapon: {fileID: 11400000, guid: ceb55e2ef6fadcc40bddffd67d139aa4, type: 2}
+  initialWeapon: {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
   initialItems: []
   invincibilityTimer: 1
 --- !u!114 &720542228
@@ -3390,7 +3390,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScene: {fileID: 11400000, guid: 85d8ee06abbf1b24e960724b7cfad6c7, type: 2}
-  playerData: {fileID: 11400000, guid: 4922578bcc1ca98479f35961822f72de, type: 2}
   enemyKilled: 0
   roomsCleared: 0
 --- !u!4 &1522827643

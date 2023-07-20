@@ -75,6 +75,7 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
     private void PlayerDeath()
     {
         // Lose
+        spriteRenderer.DOKill();
         GameStateManager.instance.SetGameState(false);
     }
 
