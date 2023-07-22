@@ -10,8 +10,17 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField] bool nonOwnerTarget;
 
     Vector3 direction;
+
+    [SerializeField] bool activeProjectile;
     [SerializeField] List<GameObject> subProjectiles = new List<GameObject>();
-    [SerializeField] float burstSpeed = 0;
+    enum PROJECTILE_TYPE
+    {
+        SINGLE,
+        BURST
+    }
+    [SerializeField] PROJECTILE_TYPE projectileType;
+
+    [SerializeField] float burstSpeed;
 
     Enemy owner;
     float damage;
@@ -30,30 +39,13 @@ public class EnemyProjectile : MonoBehaviour
 
         damage = owner.Attack;
 
-        Vector3 initialPos = transform.position;
-        StartCoroutine(StartBurst(initialPos));
-    }
-
-    IEnumerator StartBurst(Vector3 initialPos)
-    {
-        foreach (GameObject projectile in subProjectiles)
+        switch (projectileType)
         {
-            StartCoroutine(Burst(projectile, initialPos));
-            // Wait before starting the next projectile burst
-            yield return new WaitForSeconds(burstSpeed);
+            case PROJECTILE_TYPE.BURST:
+                Vector3 initialPos = transform.position;
+                StartCoroutine(StartBurst(initialPos));
+                break;
         }
-    }
-
-    IEnumerator Burst(GameObject projectile, Vector3 initialPos)
-    {
-        yield return new WaitForSeconds(burstSpeed);
-
-        projectile.SetActive(true);
-        projectile.transform.position = initialPos;
-        EnemyProjectile enemyProjectile = projectile.GetComponent<EnemyProjectile>();
-        if (!enemyProjectile.target)
-            enemyProjectile.target = target;
-        enemyProjectile.damage = damage;
     }
 
     void Update()
@@ -83,5 +75,27 @@ public class EnemyProjectile : MonoBehaviour
     public void SetOwner(Enemy owner)
     {
         this.owner = owner;
+    }
+
+    IEnumerator StartBurst(Vector3 initialPos)
+    {
+        foreach (GameObject projectile in subProjectiles)
+        {
+            StartCoroutine(Burst(projectile, initialPos));
+            // Wait before starting the next projectile burst
+            yield return new WaitForSeconds(burstSpeed);
+        }
+    }
+
+    IEnumerator Burst(GameObject projectile, Vector3 initialPos)
+    {
+        yield return new WaitForSeconds(burstSpeed);
+
+        projectile.SetActive(true);
+        projectile.transform.position = initialPos;
+        EnemyProjectile enemyProjectile = projectile.GetComponent<EnemyProjectile>();
+        if (!enemyProjectile.target)
+            enemyProjectile.target = target;
+        enemyProjectile.damage = damage;
     }
 }

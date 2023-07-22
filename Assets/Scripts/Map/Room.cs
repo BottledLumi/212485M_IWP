@@ -47,7 +47,7 @@ public class Room : MonoBehaviour
         }
     }
 
-    public uint width, height;
+    [HideInInspector] public uint width, height;
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     private List<Door> doors = new List<Door>();
     ROOM_STATUS status;

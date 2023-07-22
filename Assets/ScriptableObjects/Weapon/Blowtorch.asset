@@ -18,10 +18,11 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 2a514f183c4d9cf47972cc0c738d578a, type: 3}
   rarity: 3
   weaponAttack: {fileID: 1317443994989195078, guid: 7d3d7837a1c3c7540a794c8c62923b89, type: 3}
-  attack: 0.2
+  attack: 0.3
   attackSpeed: 0.2
   magazineSize: 25
   range: 3
   knockback: 1.5
   bulletSpeed: 6
   bulletSize: 5
+  piercing: 0

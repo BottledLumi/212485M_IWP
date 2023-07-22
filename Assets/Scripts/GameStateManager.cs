@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -44,7 +45,10 @@ public class GameStateManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        SceneManager.UnloadSceneAsync("GameScene");
+        Destroy(PlayerData.Instance);
+        DOTween.Clear();
+        //SceneManager.UnloadSceneAsync("GameScene");
+
         SceneManager.LoadScene("MenuScene");
     }
 }

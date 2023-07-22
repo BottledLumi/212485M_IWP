@@ -101,7 +101,9 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 12
   nonOwnerTarget: 0
+  activeProjectile: 0
   subProjectiles: []
+  projectileType: 0
   burstSpeed: 0
 --- !u!58 &1977282444469745578
 CircleCollider2D:
@@ -220,7 +222,9 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 12
   nonOwnerTarget: 0
+  activeProjectile: 0
   subProjectiles: []
+  projectileType: 0
   burstSpeed: 0
 --- !u!58 &3145078413795630923
 CircleCollider2D:
@@ -346,6 +350,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 12
   nonOwnerTarget: 0
+  activeProjectile: 0
   subProjectiles:
   - {fileID: 4373702610966751357}
   - {fileID: 6285815887596473232}
@@ -354,6 +359,7 @@ MonoBehaviour:
   - {fileID: 6052557642165142735}
   - {fileID: 2630879827950083530}
   - {fileID: 6457721182896510442}
+  projectileType: 1
   burstSpeed: 0.1
 --- !u!58 &1096688651881215491
 CircleCollider2D:
@@ -472,7 +478,9 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 12
   nonOwnerTarget: 0
+  activeProjectile: 0
   subProjectiles: []
+  projectileType: 0
   burstSpeed: 0
 --- !u!58 &5600176968606381893
 CircleCollider2D:
@@ -591,7 +599,9 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 12
   nonOwnerTarget: 0
+  activeProjectile: 0
   subProjectiles: []
+  projectileType: 0
   burstSpeed: 0
 --- !u!58 &8601263016891648941
 CircleCollider2D:
@@ -710,7 +720,9 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 12
   nonOwnerTarget: 0
+  activeProjectile: 0
   subProjectiles: []
+  projectileType: 0
   burstSpeed: 0
 --- !u!58 &9101983688095300790
 CircleCollider2D:
@@ -829,7 +841,9 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 12
   nonOwnerTarget: 0
+  activeProjectile: 0
   subProjectiles: []
+  projectileType: 0
   burstSpeed: 0
 --- !u!58 &2452453277484077199
 CircleCollider2D:
@@ -948,7 +962,9 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 12
   nonOwnerTarget: 0
+  activeProjectile: 0
   subProjectiles: []
+  projectileType: 0
   burstSpeed: 0
 --- !u!58 &884674876656565928
 CircleCollider2D:

@@ -10087,7 +10087,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropPool:
   - {fileID: 5972055217787526993, guid: 12d59082dfda96a47becbf4bd89fd0c0, type: 3}
-  dropRate: 15
+  - {fileID: 810059176404972933, guid: a751d15f81e3a26438b8c23dedf5d26f, type: 3}
+  dropRate: 20
 --- !u!1 &5192640064232336700
 GameObject:
   m_ObjectHideFlags: 0

@@ -10038,6 +10038,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df730df8313884a4cbad187c47a46ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  width: 0
+  height: 0
   enemies: []
 --- !u!61 &7694900322394860813
 BoxCollider2D:

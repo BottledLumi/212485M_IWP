@@ -1622,6 +1622,7 @@ MonoBehaviour:
   initialWeapon: {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
   initialItems: []
   invincibilityTimer: 1
+  playerData: {fileID: 11400000, guid: 4922578bcc1ca98479f35961822f72de, type: 2}
 --- !u!114 &720542228
 MonoBehaviour:
   m_ObjectHideFlags: 0

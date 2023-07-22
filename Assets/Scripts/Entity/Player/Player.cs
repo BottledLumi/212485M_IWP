@@ -28,6 +28,7 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
     {
         InitialisePlayerStats();
     }
+
     public void Heal(float amount) {
         playerData.Health += amount;
         if (playerData.Health > playerData.MaxHealth)
@@ -75,7 +76,6 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
     private void PlayerDeath()
     {
         // Lose
-        spriteRenderer.DOKill();
         GameStateManager.instance.SetGameState(false);
     }
 

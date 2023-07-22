@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 413
   itemName: Cake
-  description: Successful hits have a chance to increase MS and reduce ATK SPD.
+  description: Successful hits have a chance to increase MS and ATK SPD.
   icon: {fileID: 21300000, guid: 371d9b84410729440b160a84d6aa1ed5, type: 3}
   rarity: 1
