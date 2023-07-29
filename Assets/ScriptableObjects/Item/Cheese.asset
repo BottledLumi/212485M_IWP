@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: Cheese
   description: Increases ATK SPD.
   icon: {fileID: 21300000, guid: eff8fb5dea2e6ce4cbe1a8e7af735570, type: 3}
+  itemEffect: {fileID: 11400000, guid: 4a94f9eae088d7f408947add8b019561, type: 2}
   rarity: 0

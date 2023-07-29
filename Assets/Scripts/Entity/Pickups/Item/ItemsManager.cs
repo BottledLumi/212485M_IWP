@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsManager : MonoBehaviour // To manage item effects
+public class ItemsManager : MonoBehaviour // To manage all item effects
 {
-    [SerializeField] GameObject items;
-
+    // Singleton
     private static ItemsManager instance;
     public static ItemsManager Instance
     {
@@ -25,52 +24,42 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         }
     }
 
-    PlayerData playerData;
+    PlayerData playerData; // PlayerData Singleton
 
-    GameObject owner;
-    public GameObject Owner{
-        get { return owner; }
-    }
+    public Player player { get; private set; } // Player
 
-    Dictionary<Item, GameObject> activeItems = new Dictionary<Item, GameObject>();
-    public Dictionary<Item, GameObject> ActiveItems
+    List<Buff> activeBuffs = new List<Buff>();
+    Dictionary<Item, ItemEffect> activeItemEffects = new Dictionary<Item, ItemEffect>();
+    public Dictionary<Item, ItemEffect> ActiveItemEffects
     {
-        get { return activeItems; }
+        get { return activeItemEffects; }
     }
 
     private void Awake()
     {
         playerData = PlayerData.Instance;
 
-        owner = GameObject.Find("Player");
+        player = GameObject.Find("Player").GetComponent<Player>();
 
         playerData.ItemAddedEvent += OnItemAdded;
         playerData.ItemRemovedEvent += OnItemRemoved;
     }
 
-    public ItemEffect SearchForItemEffect(string name)
+    private void Update()
     {
-        foreach (Item item in activeItems.Keys)
-        {
-            if (item.ItemName == name)
-                return activeItems[item].GetComponentInChildren<ItemEffect>();
-        }
-        return null;
+        foreach (ItemEffect itemEffect in activeItemEffects.Values)
+            itemEffect.Execute();
     }
 
-    public ItemEffect SearchForItemEffect(int index)
+    public void AddBuff(Buff buff)
     {
-        foreach (Item item in activeItems.Keys)
-        {
-            if (item.Index == index)
-                return activeItems[item].GetComponentInChildren<ItemEffect>();
-        }
-        return null;
+        activeBuffs.Add(buff);
+        StartCoroutine(buff.BuffCoroutine());
     }
 
-    private int CheckQuantity(Item item)
+    public void RemoveBuff(Buff buff)
     {
-        return playerData.Items[item];
+        activeBuffs.Remove(buff);
     }
 
     private void OnItemAdded(Item item)
@@ -79,12 +68,13 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         if (itemQuantity == 1) // If it is a new item
         {
             // Add item effect
-            activeItems.Add(item, ItemToGameObject(item));
+            activeItemEffects.Add(item, item.Effect);
+            activeItemEffects[item].OnAdd();
         }
         else
         {
             // Alter existing item effect
-            ItemEffect itemEffect = activeItems[item].GetComponentInChildren<ItemEffect>();
+            ItemEffect itemEffect = activeItemEffects[item];
             itemEffect.Value++;
         }
     }
@@ -95,97 +85,38 @@ public class ItemsManager : MonoBehaviour // To manage item effects
         if (itemQuantity == 0) // If no more of the item
         {
             // Remove item effect
-            GameObject.Destroy(activeItems[item]);
-            activeItems.Remove(item);
+            activeItemEffects[item].OnRemove();
+            activeItemEffects.Remove(item);
         }
         else
         {
             // Reduce item effect
-            ItemEffect itemEffect = activeItems[item].GetComponentInChildren<ItemEffect>();
+            ItemEffect itemEffect = activeItemEffects[item];
             itemEffect.Value--;
         }
     }
-
-    private GameObject ItemToGameObject(Item item)
+    private int CheckQuantity(Item item)
     {
-        GameObject gameObject = new GameObject();
-        // Attach relevant item effect script
-        switch (item.Index)
-        {
-            case 401: // Carrot
-                gameObject.AddComponent<CarrotEffect>();
-                break;
-            case 402: // Cheese
-                gameObject.AddComponent<CheeseEffect>();
-                break;
-            case 403: // Egg
-                gameObject.AddComponent<EggEffect>();
-                break;
-            case 404: // Flour
-                gameObject.AddComponent<FlourEffect>();
-                break;
-            case 405: // Mango
-                gameObject.AddComponent<MangoEffect>();
-                break;
-            case 406: // Milk
-                gameObject.AddComponent<MilkEffect>();
-                break;
-            case 407: // Olive
-                gameObject.AddComponent<OliveEffect>();
-                break;
-            case 408: // Potato
-                gameObject.AddComponent<PotatoEffect>();
-                break;
-            case 409: // Steak
-                gameObject.AddComponent<SteakEffect>();
-                break;
-            case 410: // Sugar
-                gameObject.AddComponent<SugarEffect>();
-                break;
-            case 411: // Water
-                gameObject.AddComponent<WaterEffect>();
-                break;
-            case 412: // Bread
-                gameObject.AddComponent<BreadEffect>();
-                break;
-            case 413: // Cake
-                gameObject.AddComponent<CakeEffect>();
-                break;
-            case 414: // Cream
-                gameObject.AddComponent<CreamEffect>();
-                break;
-            case 415: // Pasta
-                gameObject.AddComponent<CreamEffect>();
-                break;
-            case 416: // Carrot Cake
-                gameObject.AddComponent<CreamEffect>();
-                break;
-            case 417: // French Toast
-                gameObject.AddComponent<CreamEffect>();
-                break;
-            case 418: // Hamburger
-                gameObject.AddComponent<CreamEffect>();
-                break;
-            case 419: // Mac & Cheese
-                gameObject.AddComponent<CreamEffect>();
-                break;
-            case 420: // Mango Cake
-                gameObject.AddComponent<CreamEffect>();
-                break;
-            case 421: // Mashed Potato
-                // Gain a stack of “Hot Potato” every 3 seconds of not taking DMG. Maximum of 4 stacks. Resets upon hit. Hot Potato: Increase ATK
-                break;
-            case 422: // Alfredo
-                // Revive to full HP on death, removes an Alfredo
-                break;
-            case 423: // Cheeseburger
-                gameObject.AddComponent<CreamEffect>();
-                break;
-        }
-        gameObject.name = item.ItemName;
-
-        gameObject.transform.SetParent(items.transform);
-        return gameObject;
+        return playerData.Items[item];
     }
 
+    public ItemEffect SearchForItemEffect(string name)
+    {
+        foreach (Item item in activeItemEffects.Keys)
+        {
+            if (item.ItemName == name)
+                return activeItemEffects[item];
+        }
+        return null;
+    }
+
+    public ItemEffect SearchForItemEffect(int index)
+    {
+        foreach (Item item in activeItemEffects.Keys)
+        {
+            if (item.Index == index)
+                return activeItemEffects[item];
+        }
+        return null;
+    }
 }

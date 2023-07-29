@@ -49,7 +49,13 @@ public class Room : MonoBehaviour
 
     [HideInInspector] public uint width, height;
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> Enemies
+    {
+        get { return enemies; }
+    }
+
     private List<Door> doors = new List<Door>();
+
     ROOM_STATUS status;
     public ROOM_STATUS Status
     {

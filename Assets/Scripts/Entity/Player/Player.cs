@@ -10,10 +10,10 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
     [SerializeField] Weapon initialWeapon;
     [SerializeField] List<Item> initialItems;
 
-    bool invincible;
+    public bool invincible { get; private set; }
+    [HideInInspector] public bool canTakeDamage = true;
     [SerializeField] float invincibilityTimer;
 
-    ItemsManager itemsManager;
     SpriteRenderer spriteRenderer;
 
     PlayerData playerData;
@@ -21,7 +21,6 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
     {
         playerData = PlayerData.Instance;
 
-        itemsManager = ItemsManager.Instance;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Start()
@@ -35,10 +34,21 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
             playerData.Health = playerData.MaxHealth;
     }
 
+
+    public event System.Action DamageTakenEvent;
     public void TakeDamage(float amount)
     {
         if (CheckInvulnerable())
             return;
+
+        DamageTakenEvent?.Invoke();
+
+        if (!canTakeDamage)
+        {
+            StartCoroutine(InvincibilityTimer());
+            canTakeDamage = true;
+            return;
+        }
 
         float damage = amount - playerData.Defence;
         if (damage <= 0)
@@ -54,13 +64,6 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
     {
         if (invincible)
             return true;
-        OliveEffect oliveEffect = itemsManager.SearchForItemEffect(407) as OliveEffect; // Olive
-        if (oliveEffect && oliveEffect.BarrierActive)
-        {
-            oliveEffect.BarrierActive = false;
-            StartCoroutine(InvincibilityTimer());
-            return true;
-        }
         return false;
     }
 
@@ -70,7 +73,6 @@ public class Player : MonoBehaviour // Temporary script to handle some functiona
         spriteRenderer.DOFade(0.1f, invincibilityTimer).SetEase(Ease.Flash, 8, 1);
         yield return new WaitForSeconds(invincibilityTimer);
         invincible = false;
-
     }
     
     private void PlayerDeath()

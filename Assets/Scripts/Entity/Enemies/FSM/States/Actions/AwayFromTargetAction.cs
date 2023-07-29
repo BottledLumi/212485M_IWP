@@ -13,7 +13,7 @@ public class AwayFromTargetAction : FSMAction
     {
         Vector2 direction = bsm.transform.position - bsm.enemy.target.transform.position;
         direction.Normalize();
-        bsm.transform.position = Vector2.MoveTowards(bsm.transform.position, bsm.transform.position + new Vector3(direction.x, direction.y, 0), bsm.enemy.movementSpeed * speed * Time.deltaTime);
+        bsm.transform.position = Vector2.MoveTowards(bsm.transform.position, bsm.transform.position + new Vector3(direction.x, direction.y, 0), bsm.enemy.MovementSpeed * speed * Time.deltaTime);
         
         bsm.GetComponent<AIDestinationSetter>().target = bsm.transform;
     }

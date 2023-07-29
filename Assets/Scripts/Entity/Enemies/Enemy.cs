@@ -43,7 +43,21 @@ public class Enemy : MonoBehaviour
     }
     public float defence { private set; get; }
     public float attackSpeed { private set; get; }
-    public float movementSpeed { private set; get; }
+
+    private float movementSpeed;
+    public event System.Action<float> MovementSpeedChangedEvent;
+    public float MovementSpeed
+    {
+        get { return movementSpeed; }
+        set
+        {
+            if (value != movementSpeed)
+            {
+                movementSpeed = value;
+                MovementSpeedChangedEvent?.Invoke(movementSpeed);
+            }
+        }
+    }
 
     [HideInInspector] public bool isDead = false;
     public bool IsDead
@@ -72,9 +86,8 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        itemsManager = ItemsManager.Instance;
-
         CanAttackChangedEvent += OnCanAttackChanged;
+        MovementSpeedChangedEvent += OnMovementSpeedChanged;
 
         gameObject.SetActive(false);
     }
@@ -123,7 +136,6 @@ public class Enemy : MonoBehaviour
         rb2D.velocity = Vector2.zero;
     }
 
-    ItemsManager itemsManager;
     private void OnEnable()
     {
         InitBaseStats();
@@ -136,6 +148,11 @@ public class Enemy : MonoBehaviour
         OnCanAttackChanged(canAttack);
     }
 
+    private void OnMovementSpeedChanged(float movementSpeed)
+    {
+        aiPath.maxSpeed = movementSpeed;
+    }
+
     protected void InitBaseStats()
     {
         level = 1;
@@ -144,11 +161,5 @@ public class Enemy : MonoBehaviour
         defence = enemyAttributes.getDefence() * Mathf.Pow(1.2f, level - 1);
         attackSpeed = enemyAttributes.getAttackSpeed();
         movementSpeed = enemyAttributes.getMovementSpeed();
-
-        WaterEffect waterEffect = itemsManager.SearchForItemEffect(411) as WaterEffect;
-        if (waterEffect) // Water
-        {
-            movementSpeed *= waterEffect.MovementSpeedMultiplier();
-        }
     }
 }

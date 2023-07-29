@@ -12,6 +12,12 @@ public class Item : Pickup
         Rare,
         Mythic
     }
+    [SerializeField] private ItemEffect itemEffect;
+    public ItemEffect Effect
+    {
+        get { return itemEffect; }
+    }
+
     [SerializeField] Rarity rarity;
     public Rarity itemRarity
     {

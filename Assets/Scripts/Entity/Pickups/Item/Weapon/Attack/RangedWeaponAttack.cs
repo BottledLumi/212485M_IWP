@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class RangedWeaponAttack : MonoBehaviour
 {
-    ItemsManager itemsManager;
+    PlayerWeapon playerWeapon;
 
-    GameObject player;
 
     List<Enemy> hitEnemies = new List<Enemy>();
     private float expireTime = 6;
@@ -17,12 +16,7 @@ public class RangedWeaponAttack : MonoBehaviour
 
     float distanceTravelled = 0;
 
-    private void Awake()
-    {
-        itemsManager = ItemsManager.Instance;
-    }
-
-    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalKnockback, float _totalBulletSpeed, float _totalBulletSize, int _totalPiercing, Vector3 _direction, GameObject _player)
+    public void SetAttackAttributes(float _totalAttack, float _totalRange, float _totalKnockback, float _totalBulletSpeed, float _totalBulletSize, int _totalPiercing, Vector3 _direction, PlayerWeapon _playerWeapon)
     {
         totalAttack = _totalAttack;
         totalRange = _totalRange;
@@ -33,11 +27,8 @@ public class RangedWeaponAttack : MonoBehaviour
 
         direction = _direction;
 
-        player = _player;
+        playerWeapon = _playerWeapon;
     }
-
-    //public Animator animator;
-    //PolygonCollider2D weaponCollider;
 
     private void Update()
     {
@@ -64,11 +55,12 @@ public class RangedWeaponAttack : MonoBehaviour
                 {
                     enemy.TakeDamage(totalAttack);
                     // Knockback
-                    Vector2 knockbackDirection = other.transform.position - player.transform.position; // Calculate the knockback direction
+                    Vector2 knockbackDirection = other.transform.position - playerWeapon.transform.position; // Calculate the knockback direction
                     knockbackDirection.Normalize(); // Normalize the direction vector to ensure consistent knockback speed
                     enemy.ApplyKnockback(knockbackDirection, totalKnockback);
 
-                    ItemEffectsOnEnemies(enemy);
+                    // Call enemy hit event
+                    playerWeapon.CallEnemyHitEvent(enemy);
 
                     hitEnemies.Add(enemy);
                 }
@@ -91,31 +83,10 @@ public class RangedWeaponAttack : MonoBehaviour
 
     public void OnDisable()
     {
-        ItemEffects();
+        if (playerWeapon) // Attack event
+            playerWeapon.CallAttackEvent(hitEnemies);
 
         distanceTravelled = 0;
         hitEnemies.Clear();
-    }
-
-    void ItemEffectsOnEnemies(Enemy enemy)
-    {
-        BreadEffect breadEffect = itemsManager.SearchForItemEffect(412) as BreadEffect; // Bread
-        if (breadEffect)
-        {
-            float extraDamage = breadEffect.ExtraDamage() * enemy.Level;
-            enemy.TakeDamage(extraDamage);
-            Debug.Log(extraDamage);
-        }
-    }
-
-    void ItemEffects()
-    {
-        CakeEffect cakeEffect = itemsManager.SearchForItemEffect(413) as CakeEffect; // Bread
-        if (cakeEffect && hitEnemies.Count > 0)
-        {
-            float randomPercentage = Random.Range(0f, 1f);
-            if (randomPercentage < cakeEffect.ProcChance())
-                cakeEffect.CakeProc();
-        }
     }
 }

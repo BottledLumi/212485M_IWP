@@ -18,6 +18,8 @@ public class PlayerWeapon : MonoBehaviour
 
     public event System.Action<int, int> MagazineChangedEvent;
     public event System.Action<float> ReloadEvent;
+    public event System.Action<Enemy> EnemyHitEvent;
+    public event System.Action<List<Enemy>> AttackEvent;
 
     float timeElapsed; // since last bullet
 
@@ -91,7 +93,7 @@ public class PlayerWeapon : MonoBehaviour
                             MeleeWeaponAttack meleeWeaponAttack = activeWeapon.GetComponent<MeleeWeaponAttack>();
                             if (!meleeWeaponAttack)
                                 break;
-                            meleeWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalAttackSpeed, totalKnockback, gameObject);
+                            meleeWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalAttackSpeed, totalKnockback, this);
 
                             activeWeapon.SetActive(true);
                             break;
@@ -115,7 +117,7 @@ public class PlayerWeapon : MonoBehaviour
                                 mousePosition.x - transform.position.x,
                                 mousePosition.y - transform.position.y, 0).normalized;
 
-                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalKnockback, totalBulletSpeed, totalBulletSize, totalPiercing, direction, gameObject);
+                            rangedWeaponAttack.SetAttackAttributes(totalAttack, totalRange, totalKnockback, totalBulletSpeed, totalBulletSize, totalPiercing, direction, this);
 
                             currentMagazineSize--; // Reduce magazine size by 1
                             CallMagazineChangedEvent();
@@ -174,5 +176,15 @@ public class PlayerWeapon : MonoBehaviour
     void CallMagazineChangedEvent()
     {
         MagazineChangedEvent?.Invoke(currentMagazineSize, totalMagazineSize);
+    }
+
+    public void CallEnemyHitEvent(Enemy enemy)
+    {
+        EnemyHitEvent?.Invoke(enemy);
+    }
+
+    public void CallAttackEvent(List<Enemy> hitEnemies)
+    {
+        AttackEvent?.Invoke(hitEnemies);
     }
 }

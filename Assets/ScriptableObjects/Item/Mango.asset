@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: Mango
   description: Increases MAX HP.
   icon: {fileID: 21300000, guid: e09cdbc337ada094d9be7e231aa195df, type: 3}
+  itemEffect: {fileID: 11400000, guid: e454ca0916f32574581a5c8c5089036d, type: 2}
   rarity: 0

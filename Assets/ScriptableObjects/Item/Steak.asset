@@ -17,4 +17,5 @@ MonoBehaviour:
   description: Increases piercing for ranged weapons, and does additional damage
     the more enemies hit per attack for melee weapons.
   icon: {fileID: 21300000, guid: a8fb190b58e7a8f459cc16699f85d988, type: 3}
+  itemEffect: {fileID: 11400000, guid: fe510c03dfe4d7047b13cf58777fd6a3, type: 2}
   rarity: 0

@@ -391,7 +391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 198668956}
   m_Layer: 0
-  m_Name: Items
+  m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1621,8 +1621,8 @@ MonoBehaviour:
   initialMaxHealth: 100
   initialWeapon: {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
   initialItems: []
+  canTakeDamage: 1
   invincibilityTimer: 1
-  playerData: {fileID: 11400000, guid: 4922578bcc1ca98479f35961822f72de, type: 2}
 --- !u!114 &720542228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2145,7 +2145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b683a120cc418fd4a81a6efa047de889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: {fileID: 198668955}
 --- !u!4 &940779158
 Transform:
   m_ObjectHideFlags: 0
