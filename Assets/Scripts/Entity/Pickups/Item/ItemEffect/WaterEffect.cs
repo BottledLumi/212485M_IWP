@@ -12,6 +12,11 @@ public class WaterEffect : ItemEffect
         MapManager.Instance.RoomEnteredEvent += OnRoomEntered;
     }
 
+    public override void OnRemove()
+    {
+        MapManager.Instance.RoomEnteredEvent -= OnRoomEntered;
+    }
+
     private float MovementSpeedMultiplier()
     {
         return Mathf.Pow(baseMsMultiplier, Value);

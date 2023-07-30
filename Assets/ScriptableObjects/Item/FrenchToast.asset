@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 417
   itemName: French Toast
-  description: 
+  description: Increases DEF based on MS
   icon: {fileID: 21300000, guid: 7a50fa3621c19054c979138757823c38, type: 3}
-  itemEffect: {fileID: 0}
+  itemEffect: {fileID: 11400000, guid: ffac7d3150ff1c54bae4a6dfe39918b2, type: 2}
   rarity: 2

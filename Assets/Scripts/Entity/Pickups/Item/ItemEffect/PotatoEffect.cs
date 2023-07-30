@@ -4,33 +4,33 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "New PotatoEffect", menuName = "ItemEffect/PotatoEffect")]
-// To be added when bosses are implemented
 public class PotatoEffect : ItemEffect
 {
-    //float baseAtkValue = 3;
-    //float totalAtkValue;
-    //PlayerData playerData;
-    private void Awake()
+    float baseMultiplier = 1.1f;
+
+    PlayerData playerData;
+
+    PlayerWeapon playerWeapon;
+    public override void OnAdd()
     {
-        //playerData = PlayerData.Instance;
-        //totalAtkValue = baseAtkValue;
-
-        //ValueChangedEvent += OnValueChanged;
-
-        //totalAtkValue = baseAtkValue * Value;
-        //playerData.Attack += totalAtkValue;
-    }
-    private void OnValueChanged()
-    {
-        //float atkToAdd = totalAtkValue;
-        //totalAtkValue = baseAtkValue * Value;
-        //atkToAdd = totalAtkValue - atkToAdd;
-
-        //playerData.Attack += atkToAdd;
+        playerData = PlayerData.Instance;
+        playerWeapon = ItemsManager.Instance.player.GetComponent<PlayerWeapon>();
+        playerWeapon.EnemyHitEvent += OnEnemyHit;
     }
 
-    private void OnDestroy()
+    public override void OnRemove()
     {
-        //playerData.Attack -= totalAtkValue;
+        playerWeapon.EnemyHitEvent -= OnEnemyHit;
+    }
+
+    void OnEnemyHit(Enemy enemy)
+    {
+        if (enemy is Boss)
+            enemy.TakeDamage(ExtraDamage());
+    }
+
+    private float ExtraDamage()
+    {
+        return (Mathf.Pow(baseMultiplier, Value)-1) * playerData.Attack * playerData.Weapon.getAttack();
     }
 }

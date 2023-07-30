@@ -26,8 +26,13 @@ public class MilkEffect : ItemEffect
 
             SwapStats(true);
         }
-
     }
+
+    public override void OnRemove()
+    {
+        SwapStats(false);
+    }
+
     private void OnValueChanged(int value)
     {
         float rangeToAdd = totalRangeValue;
@@ -58,10 +63,5 @@ public class MilkEffect : ItemEffect
         if (rangedWeapon)
             range *= 6;
         weapon.addRange(range);
-    }
-
-    public override void OnRemove()
-    {
-        SwapStats(false);
     }
 }

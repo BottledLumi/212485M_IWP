@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 416
   itemName: Carrot Cake
-  description: Attacks penetrate 7% DEF.
+  description: Increases ATK SPD based on ATK.
   icon: {fileID: 21300000, guid: 21bb0df176226464fb9d8969f65b3e46, type: 3}
-  itemEffect: {fileID: 0}
+  itemEffect: {fileID: 11400000, guid: 8b7d5ccf9804db845b704f57ec3fdf6e, type: 2}
   rarity: 2

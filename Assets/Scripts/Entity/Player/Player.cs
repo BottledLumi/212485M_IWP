@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Player : MonoBehaviour // Temporary script to handle some functionality
+public class Player : MonoBehaviour
 {
-    [SerializeField] private float initialHealth, initialAttack, initialDefence, initialAttackSpeed, initialMovementSpeed;
+    [SerializeField] private float initialAttack, initialHealth, initialDefence, initialAttackSpeed, initialMovementSpeed;
     [SerializeField] private float initialMaxHealth;
     [SerializeField] Weapon initialWeapon;
     [SerializeField] List<Item> initialItems;

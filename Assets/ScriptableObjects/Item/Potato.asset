@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 408
   itemName: Potato
-  description: Not implemented yet.
+  description: Increases damage against bosses.
   icon: {fileID: 21300000, guid: 99c12fc16005c584c8c838739b5adf04, type: 3}
   itemEffect: {fileID: 11400000, guid: ca5ecc9a1af663e489429f2ccdbedcac, type: 2}
   rarity: 0

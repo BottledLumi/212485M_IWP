@@ -10,13 +10,19 @@ public class SteakEffect : ItemEffect
 
     float baseExtraMeleeDamage = 4f;
 
+    PlayerData playerData;
+    PlayerWeapon playerWeapon;
+
     Weapon weapon;
     RangedWeapon rangedWeapon;
     public override void OnAdd()
     {
-        PlayerData playerData = PlayerData.Instance;
+        playerData = PlayerData.Instance;
 
         ValueChangedEvent += OnValueChanged; playerData.WeaponChangedEvent += OnWeaponChanged;
+
+        playerWeapon = ItemsManager.Instance.player.GetComponent<PlayerWeapon>();
+        playerWeapon.AttackEvent += OnAttack;
 
         weapon = playerData.Weapon;
         if (weapon)
@@ -29,6 +35,13 @@ public class SteakEffect : ItemEffect
         }
         
     }
+
+    public override void OnRemove()
+    {
+        SwapStats(false);
+        playerData.WeaponChangedEvent -= OnWeaponChanged;
+    }
+
     private void OnValueChanged(int value)
     {
         if (rangedWeapon)
@@ -69,13 +82,11 @@ public class SteakEffect : ItemEffect
         return Value * baseExtraMeleeDamage;
     }
 
-    public override void OnRemove()
-    {
-        SwapStats(false);
-    }
 
     private void OnAttack(List<Enemy> hitEnemies)
     {
+        if (rangedWeapon)
+            return;
         if (hitEnemies.Count > 1)
         {
             foreach (Enemy enemy in hitEnemies)

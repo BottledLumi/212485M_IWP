@@ -1613,8 +1613,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b99a9018a872b4090b2db889a39e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 100
   initialAttack: 25
+  initialHealth: 100
   initialDefence: 2
   initialAttackSpeed: 1
   initialMovementSpeed: 10
