@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b431a8ef415f1dd448a4163e00283e26, type: 3}
   m_Name: WetGoop
   m_EditorClassIdentifier: 
-  health: 60
+  maxHealth: 60
   attack: 10
   defence: 3
   attackSpeed: 1

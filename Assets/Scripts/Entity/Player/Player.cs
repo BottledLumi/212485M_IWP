@@ -34,14 +34,14 @@ public class Player : MonoBehaviour
             playerData.Health = playerData.MaxHealth;
     }
 
-
-    public event System.Action DamageTakenEvent;
+    public event System.Action HitEvent;
+    public event System.Action<float> DamageTakenEvent;
     public void TakeDamage(float amount)
     {
         if (CheckInvulnerable())
             return;
 
-        DamageTakenEvent?.Invoke();
+        HitEvent?.Invoke();
 
         if (!canTakeDamage)
         {
@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
             damage = 1;
 
         playerData.Health -= damage; // Reduce damage by defence
+        DamageTakenEvent?.Invoke(damage);
         if (playerData.Health <= 0)
             PlayerDeath();
         StartCoroutine(InvincibilityTimer());

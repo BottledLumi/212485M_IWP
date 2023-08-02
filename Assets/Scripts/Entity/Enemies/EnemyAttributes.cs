@@ -5,10 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy Attributes", menuName = "Enemy Attributes")]
 public class EnemyAttributes : ScriptableObject
 {
-    [SerializeField] private float health, attack, defence, attackSpeed, movementSpeed;
-    public float getHealth()
+    [SerializeField] private float maxHealth, attack, defence, attackSpeed, movementSpeed;
+    public float getMaxHealth()
     {
-        return health;
+        return maxHealth;
     }
     public float getAttack()
     {

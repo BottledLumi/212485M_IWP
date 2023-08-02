@@ -120,6 +120,16 @@ public class UIManager : MonoBehaviour
         weaponImage.sprite = weapon.Icon;
     }
 
+    [Header("Item Display Colours")]
+    [SerializeField] Color commonPanel;
+    [SerializeField] Color commonText;
+    [SerializeField] Color uncommonPanel;
+    [SerializeField] Color uncommonText;
+    [SerializeField] Color rarePanel;
+    [SerializeField] Color rareText;
+    [SerializeField] Color mythicPanel;
+    [SerializeField] Color mythicText;
+
     private void OnItemAdded(Item item)
     {
         GameObject display = GameObject.Instantiate(itemPickupDisplay);
@@ -128,11 +138,33 @@ public class UIManager : MonoBehaviour
         TMP_Text text = display.transform.Find("ItemDescription").GetComponent<TMP_Text>();
         RectTransform rectTransform = display.GetComponent<RectTransform>();
 
+
         if (image && text && display)
         {
             image.sprite = item.Icon;
             text.text = item.Description;
+
+            switch (item.itemRarity)
+            {
+                case Item.Rarity.Common:
+                    display.GetComponent<Image>().color = commonPanel;
+                    text.color = commonText;
+                    break;
+                case Item.Rarity.Uncommon:
+                    display.GetComponent<Image>().color = uncommonPanel;
+                    text.color = uncommonText;
+                    break;
+                case Item.Rarity.Rare:
+                    display.GetComponent<Image>().color = rarePanel;
+                    text.color = rareText;
+                    break;
+                case Item.Rarity.Mythic:
+                    display.GetComponent<Image>().color = mythicPanel;
+                    text.color = mythicText;
+                    break;
+            }
         }
+
 
         display.transform.SetParent(UI.transform);
         display.GetComponent<RectTransform>().anchoredPosition = new Vector2(rectTransform.rect.width/2 + 20, rectTransform.rect.height/2 + 20);

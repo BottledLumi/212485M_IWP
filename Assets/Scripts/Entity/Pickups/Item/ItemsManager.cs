@@ -100,23 +100,33 @@ public class ItemsManager : MonoBehaviour // To manage all item effects
         return playerData.Items[item];
     }
 
-    public ItemEffect SearchForItemEffect(string name)
+    public Item SearchForItem(ItemEffect itemEffect)
     {
         foreach (Item item in activeItemEffects.Keys)
         {
-            if (item.ItemName == name)
-                return activeItemEffects[item];
+            if (activeItemEffects[item] == itemEffect)
+                return item;
         }
         return null;
     }
 
-    public ItemEffect SearchForItemEffect(int index)
-    {
-        foreach (Item item in activeItemEffects.Keys)
-        {
-            if (item.Index == index)
-                return activeItemEffects[item];
-        }
-        return null;
-    }
+    //public ItemEffect SearchForItemEffect(string name)
+    //{
+    //    foreach (Item item in activeItemEffects.Keys)
+    //    {
+    //        if (item.ItemName == name)
+    //            return activeItemEffects[item];
+    //    }
+    //    return null;
+    //}
+
+    //public ItemEffect SearchForItemEffect(int index)
+    //{
+    //    foreach (Item item in activeItemEffects.Keys)
+    //    {
+    //        if (item.Index == index)
+    //            return activeItemEffects[item];
+    //    }
+    //    return null;
+    //}
 }

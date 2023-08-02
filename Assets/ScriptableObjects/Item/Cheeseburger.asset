@@ -17,5 +17,5 @@ MonoBehaviour:
   description: Displays enemies' health; additional stacks increase damage based
     on enemy HP.
   icon: {fileID: 21300000, guid: df23cc2dc6ea93d4ebc838ad971db01c, type: 3}
-  itemEffect: {fileID: 0}
+  itemEffect: {fileID: 11400000, guid: 0ee1cf56882852a46815d7c7e5082e87, type: 2}
   rarity: 3

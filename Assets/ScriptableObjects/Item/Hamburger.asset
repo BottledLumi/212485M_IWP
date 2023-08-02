@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 418
   itemName: Hamburger
-  description: 
+  description: Every 4th attack does more damage.
   icon: {fileID: 21300000, guid: 90fe8c15a468a8f4db6130bd276ba19e, type: 3}
-  itemEffect: {fileID: 0}
+  itemEffect: {fileID: 11400000, guid: 8f134f7a34fe669489ad755929812cc5, type: 2}
   rarity: 2

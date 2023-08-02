@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: Mac & Cheese
   description: Increases DMG proportional to lost HP.
   icon: {fileID: 21300000, guid: 4dfbfc42f25164e40b401c6f5734e30a, type: 3}
-  itemEffect: {fileID: 0}
+  itemEffect: {fileID: 11400000, guid: 338adfdc0b8878142a14202a2408632a, type: 2}
   rarity: 2

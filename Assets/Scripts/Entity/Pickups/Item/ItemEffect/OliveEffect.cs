@@ -25,7 +25,7 @@ public class OliveEffect : ItemEffect
         AddBarrier();
         player = ItemsManager.Instance.player;
 
-        player.DamageTakenEvent += OnDamageTaken;
+        player.HitEvent += OnHit;
 
         ValueChangedEvent += OnValueChanged;
         BarrierActiveEvent += OnBarrierActive; BarrierInactiveEvent += OnBarrierInactive;
@@ -47,7 +47,7 @@ public class OliveEffect : ItemEffect
         spriteRenderer = null;
         Destroy(barrierVFX);
 
-        player.DamageTakenEvent -= OnDamageTaken;
+        player.HitEvent -= OnHit;
     }
 
     public bool BarrierActive
@@ -85,7 +85,7 @@ public class OliveEffect : ItemEffect
         spriteRenderer.color = spriteColor;
     }
 
-    private void OnDamageTaken()
+    private void OnHit()
     {
         if (!player.canTakeDamage || !BarrierActive)
             return;

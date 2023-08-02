@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New FrenchToastEffect", menuName = "ItemEffect/FrenchToastEffect")]
 public class FrenchToastEffect : ItemEffect
 {
-    float baseDefValue = 1f;
+    float baseDefValue = 0.5f;
     int totalDefValue;
     PlayerData playerData;
     public override void OnAdd()

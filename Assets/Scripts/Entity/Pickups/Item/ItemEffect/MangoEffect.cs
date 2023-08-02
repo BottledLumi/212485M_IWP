@@ -6,7 +6,8 @@ using UnityEngine;
 public class MangoEffect : ItemEffect
 {
     float baseMaxHPValue = 10;
-    float totalMaxHPValue;
+    float totalMaxHPValue = 0;
+
     PlayerData playerData;
     public override void OnAdd()
     {

@@ -31,6 +31,5 @@ public class BreadEffect : ItemEffect
     {
         float extraDamage = ExtraDamage() * enemy.Level;
         enemy.TakeDamage(extraDamage);
-        Debug.Log(extraDamage);
     }
 }

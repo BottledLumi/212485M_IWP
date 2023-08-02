@@ -13,6 +13,21 @@ public class Enemy : MonoBehaviour
         get { return level; }
     }
 
+    private float maxHealth;
+    public event System.Action<float> MaxHealthChangedEvent;
+    public float MaxHealth
+    {
+        get { return maxHealth; }
+        private set
+        {
+            if (value != maxHealth)
+            {
+                maxHealth = value;
+                MaxHealthChangedEvent?.Invoke(maxHealth);
+            }
+        }
+    }
+
     private float health;
     public event System.Action<float> HealthChangedEvent;
     public float Health
@@ -156,7 +171,8 @@ public class Enemy : MonoBehaviour
     protected void InitBaseStats()
     {
         level = 1;
-        health = enemyAttributes.getHealth() * Mathf.Pow(1.2f, level - 1);
+        maxHealth = enemyAttributes.getMaxHealth() * Mathf.Pow(1.2f, level - 1);
+        health = maxHealth;
         attack = enemyAttributes.getAttack() * Mathf.Pow(1.2f, level - 1);
         defence = enemyAttributes.getDefence() * Mathf.Pow(1.2f, level - 1);
         attackSpeed = enemyAttributes.getAttackSpeed();
