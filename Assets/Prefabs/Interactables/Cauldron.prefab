@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 930630181146110148}
   - component: {fileID: 7086158176718502557}
+  - component: {fileID: 7807678353253587482}
   m_Layer: 0
   m_Name: Cauldron
   m_TagString: Untagged
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
-  m_Color: {r: 0.051103584, g: 0.31132078, b: 0.11280012, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 34dad1efc20255244bd6da568bd81989, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,3 +85,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7807678353253587482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745006666877600062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c37df7a53df48489bbc7a97362e88e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listOfResults:
+  - {fileID: 11400000, guid: fc58e6ad685d98a43bf6517d21a837be, type: 2}
+  - {fileID: 11400000, guid: a39c5b48ad07889439f048cde09a8d35, type: 2}
+  - {fileID: 11400000, guid: d86580c23e1242a4c8b313bac0504a46, type: 2}
+  - {fileID: 11400000, guid: a22500bd5fd43b145877665c34bfec08, type: 2}
+  - {fileID: 11400000, guid: 17cc6085ab8c8ab41aa3e4ed9fff62c3, type: 2}
+  - {fileID: 11400000, guid: 806f535bde34d9e479c1adec3783585a, type: 2}
+  - {fileID: 11400000, guid: a4fbf8e16c6252d40921e5d4fbd9770b, type: 2}
+  - {fileID: 11400000, guid: 1074eb65467ab8541ba28ff7cea1beee, type: 2}
+  - {fileID: 11400000, guid: ec45f489725b61f478807f2d8e82e14a, type: 2}
+  - {fileID: 11400000, guid: 74a6cf3bcd13a4e47b3f6910c8abec96, type: 2}
+  - {fileID: 11400000, guid: e7c201f02c024f74498541e2d28f8ed2, type: 2}
+  - {fileID: 11400000, guid: af01b813681dec1429a5e47fcb85fdbe, type: 2}
