@@ -23,6 +23,6 @@ public class PastaEffect : ItemEffect
 
     void OnItemAdded(Item item)
     {
-        playerData.Health += baseHealthValue * Value;
+        ItemsManager.Instance.player.Heal(baseHealthValue * Value);
     }
 }

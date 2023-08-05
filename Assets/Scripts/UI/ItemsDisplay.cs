@@ -69,6 +69,8 @@ public class ItemsDisplay : MonoBehaviour
             }
             else
                 pos.x += padding + size;
+
+            itemNode.GetComponent<ItemNode>().SetItem(item);
         }
     }
 }

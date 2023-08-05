@@ -41,7 +41,7 @@ public class Cauldron : MonoBehaviour
         success = false;
         // remove item from inventory
         PlayerData.Instance.RemoveItem(item);
-        if (mixture.Count >= 1)
+        if (mixture.Count > 1)
         {
             Cook();
         }
@@ -173,7 +173,8 @@ public class Cauldron : MonoBehaviour
             {
                 PlayerData.Instance.AddItem(mix);
             }
-        }    
+        }
+        mixture.Clear();
     }
 
     private void SpawnResult(ITEM item)
