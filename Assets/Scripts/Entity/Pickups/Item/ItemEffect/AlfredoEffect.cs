@@ -22,12 +22,10 @@ public class AlfredoEffect : ItemEffect
 
     private void OnDamageTaken(float damage)
     {
-        if (playerData.Health > 0)
+        if (playerData.Health > 0 || Value < 1)
             return;
 
         playerData.Health = playerData.MaxHealth;
-        Value--;
-        if (Value < 1)
-            playerData.RemoveItem(ItemsManager.Instance.SearchForItem(this));
+        playerData.RemoveItem(ItemsManager.Instance.SearchForItem(this));
     }
 }

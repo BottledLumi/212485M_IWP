@@ -30,13 +30,14 @@ public class UIManager : MonoBehaviour
 
         playerData.InventoryChangedEvent += OnInventoryChanged;
 
+        playerData.WeaponChangedEvent += OnWeaponChanged;
+
         playerData.HealthChangedEvent += OnHealthChanged;
         playerData.AttackChangedEvent += OnAttackChanged;
         playerData.DefenceChangedEvent += OnDefenceChanged;
         playerData.AttackSpeedChangedEvent += OnAttackSpeedChanged;
         playerData.MovementSpeedChangedEvent += OnMovementSpeedChanged;
 
-        playerData.WeaponChangedEvent += OnWeaponChanged;
         if (playerWeapon)
         {
             playerWeapon.MagazineChangedEvent += OnMagazineChanged;
@@ -86,7 +87,7 @@ public class UIManager : MonoBehaviour
     }
     private void OnAttackChanged(float attack)
     {
-        attackText.text = "ATK: " + attack.ToString();
+        attackText.text = "ATK: " + (attack * playerData.Weapon.getAttack()).ToString();
     }
     private void OnDefenceChanged(float defence)
     {
@@ -94,7 +95,7 @@ public class UIManager : MonoBehaviour
     }
     private void OnAttackSpeedChanged(float attackSpeed)
     {
-        attackSpeedText.text = "AS: " + attackSpeed.ToString();
+        attackSpeedText.text = "AS: " + (attackSpeed * playerData.Weapon.getAttackSpeed()).ToString() + "s";
     }
     private void OnMovementSpeedChanged(float movementSpeed)
     {
@@ -118,6 +119,8 @@ public class UIManager : MonoBehaviour
     {
         weaponText.text = weapon.name;
         weaponImage.sprite = weapon.Icon;
+
+        OnAttackChanged(playerData.Attack); OnAttackSpeedChanged(playerData.AttackSpeed);
     }
 
     [Header("Item Display Colours")]
@@ -137,7 +140,6 @@ public class UIManager : MonoBehaviour
         Image image = display.transform.Find("ItemImage").GetComponent<Image>();
         TMP_Text text = display.transform.Find("ItemDescription").GetComponent<TMP_Text>();
         RectTransform rectTransform = display.GetComponent<RectTransform>();
-
 
         if (image && text && display)
         {
@@ -164,7 +166,6 @@ public class UIManager : MonoBehaviour
                     break;
             }
         }
-
 
         display.transform.SetParent(UI.transform);
         display.GetComponent<RectTransform>().anchoredPosition = new Vector2(rectTransform.rect.width/2 + 20, rectTransform.rect.height/2 + 20);

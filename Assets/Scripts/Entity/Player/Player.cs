@@ -84,10 +84,11 @@ public class Player : MonoBehaviour
 
     private void InitialisePlayerStats()
     {
+        playerData.Weapon = initialWeapon;
+
         PlayerStats playerStats = new PlayerStats(initialHealth, initialAttack, initialDefence, initialAttackSpeed, initialMovementSpeed, initialMaxHealth);
         playerData.InitBaseStats(playerStats);
 
-        playerData.Weapon = initialWeapon;
         foreach (Item item in initialItems)
             playerData.AddItem(item);
     }

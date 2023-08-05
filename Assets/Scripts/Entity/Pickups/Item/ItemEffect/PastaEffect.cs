@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New PastaEffect", menuName = "ItemEffect/PastaEffect")]
 public class PastaEffect : ItemEffect
 {
-    float baseHealthValue = 10f;
+    float baseHealthValue = 5f;
 
     PlayerData playerData;
 

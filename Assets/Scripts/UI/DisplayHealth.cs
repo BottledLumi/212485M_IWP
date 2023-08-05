@@ -27,7 +27,7 @@ public class DisplayHealth : MonoBehaviour
     void LateUpdate()
     {
         Vector3 newPos = enemy.transform.position;
-        newPos.y += transform.localScale.y * 0.8f;
+        newPos.y += transform.localScale.y * 0.75f;
         healthDisplay.transform.position = Camera.main.WorldToScreenPoint(newPos);
     }
 
@@ -36,6 +36,7 @@ public class DisplayHealth : MonoBehaviour
         healthSlider.value = health;
         if (health <= 0)
         {
+            enemy.HealthChangedEvent -= OnHealthChanged;
             Destroy(healthDisplay);
             healthSlider = null;
         }

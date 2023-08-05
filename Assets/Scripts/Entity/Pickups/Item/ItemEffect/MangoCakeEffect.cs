@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New MangoCakeEffect", menuName = "ItemEffect/MangoCakeEffect")]
 public class MangoCakeEffect : ItemEffect
 {
-    float baseHeal = 3f;
+    float baseHeal = 2f;
 
     PlayerWeapon playerWeapon;
 

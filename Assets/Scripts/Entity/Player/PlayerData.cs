@@ -23,7 +23,7 @@ public class PlayerData : ScriptableObject
     private PlayerStats activeStats;
     public void InitBaseStats(PlayerStats _baseStats)
     {
-        baseStats = _baseStats; /*InventoryChangedEvent += OnInventoryChanged;*/
+        baseStats = _baseStats;
         ChangeStats(baseStats);
     }
     void ChangeStats(PlayerStats stats)
@@ -76,6 +76,8 @@ public class PlayerData : ScriptableObject
             return;
         items[item]--;
         ItemRemovedEvent?.Invoke(item);
+        if (items[item] < 1)
+            items.Remove(item);
         InventoryChangedEvent?.Invoke();
     }
 

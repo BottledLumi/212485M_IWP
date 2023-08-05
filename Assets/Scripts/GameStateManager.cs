@@ -47,7 +47,6 @@ public class GameStateManager : MonoBehaviour
     {
         Destroy(PlayerData.Instance);
         DOTween.Clear();
-        //SceneManager.UnloadSceneAsync("GameScene");
 
         SceneManager.LoadScene("MenuScene");
     }
