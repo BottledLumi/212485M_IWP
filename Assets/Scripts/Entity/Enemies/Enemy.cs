@@ -113,6 +113,7 @@ public class Enemy : MonoBehaviour
     {
         if (health > 0)
             StartCoroutine(DamageTakenIndicator());
+        AudioController.Instance.PlaySound("EnemyHitSFX");
         Health -= amount;
         if (Health <= 0)
         {
