@@ -110,6 +110,12 @@ public class ItemsManager : MonoBehaviour // To manage all item effects
         return null;
     }
 
+    private void OnDestroy()
+    {
+        foreach (ItemEffect itemEffect in activeItemEffects.Values)
+            itemEffect.OnRemove();
+    }
+
     //public ItemEffect SearchForItemEffect(string name)
     //{
     //    foreach (Item item in activeItemEffects.Keys)
