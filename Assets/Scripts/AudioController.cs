@@ -35,12 +35,14 @@ public class AudioController : MonoBehaviour
 
     public void PlaySound(string soundName)
     {
-        sounds[soundName].PlayOneShotSoundManaged(sounds[soundName].clip);
+        SoundManager.PlayOneShotSound(sounds[soundName], sounds[soundName].clip, SoundManager.SoundVolume);
     }
 
     public void LoopSound(string soundName)
     {
-        SoundManager.PlayLoopingMusic(sounds[soundName],sounds[soundName].volume * SoundManager.SoundVolume, 0, false);
+        float volume = sounds[soundName].volume * SoundManager.MusicVolume;
+        SoundManager.PlayLoopingMusic(sounds[soundName], sounds[soundName].volume * SoundManager.MusicVolume, 0, false);
+        sounds[soundName].volume = volume;
     }
 
     public void StopSound(string soundName)
