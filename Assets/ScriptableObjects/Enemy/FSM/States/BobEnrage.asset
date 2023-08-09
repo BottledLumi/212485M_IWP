@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e235a84032efcc4c98162a4bda4078e, type: 3}
-  m_Name: BobAttack
+  m_Name: BobEnrage
   m_EditorClassIdentifier: 
   actions:
   - {fileID: 11400000, guid: 45e75691cfe7dff4488ab8844e21f508, type: 2}
   - {fileID: 11400000, guid: 73c162d5a9725fc49a195eb93d0d8f4a, type: 2}
-  transitions:
-  - {fileID: 11400000, guid: b5ce66575116ec347990019964064905, type: 2}
+  - {fileID: 11400000, guid: 7fdccc28f4dec0d4282dd290c4bd8017, type: 2}
+  - {fileID: 11400000, guid: 0b8254fec32d12e48afa12c4b55e5889, type: 2}
+  transitions: []

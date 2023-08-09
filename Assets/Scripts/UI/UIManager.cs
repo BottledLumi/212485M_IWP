@@ -87,19 +87,19 @@ public class UIManager : MonoBehaviour
     }
     private void OnAttackChanged(float attack)
     {
-        attackText.text = "ATK: " + (attack * playerData.Weapon.getAttack()).ToString();
+        attackText.text = (attack * playerData.Weapon.getAttack()).ToString();
     }
     private void OnDefenceChanged(float defence)
     {
-        defenceText.text = "DEF: " + defence.ToString();
+        defenceText.text = defence.ToString();
     }
     private void OnAttackSpeedChanged(float attackSpeed)
     {
-        attackSpeedText.text = "AS: " + (attackSpeed * playerData.Weapon.getAttackSpeed()).ToString() + "s";
+        attackSpeedText.text = (attackSpeed * playerData.Weapon.getAttackSpeed()).ToString() + "s";
     }
     private void OnMovementSpeedChanged(float movementSpeed)
     {
-        movementSpeedText.text = "MS: " + movementSpeed.ToString();
+        movementSpeedText.text =  movementSpeed.ToString();
     }
     private void OnMagazineChanged(int currentMagazineSize, int totalMagazineSize)
     {

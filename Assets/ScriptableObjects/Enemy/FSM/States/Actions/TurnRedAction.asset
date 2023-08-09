@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b431a8ef415f1dd448a4163e00283e26, type: 3}
-  m_Name: Bob
+  m_Script: {fileID: 11500000, guid: 2b05902de5753954b8a85ca12205a1b5, type: 3}
+  m_Name: TurnRedAction
   m_EditorClassIdentifier: 
-  maxHealth: 622
-  attack: 19
-  defence: 6
-  attackSpeed: 1.2
-  movementSpeed: 0.5
+  color: {r: 1, g: 0.11698109, b: 0.11698109, a: 0.80784315}
