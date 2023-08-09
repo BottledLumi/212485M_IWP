@@ -24,6 +24,7 @@ MonoBehaviour:
   magazineSize: 1
   range: 15
   knockback: 4
+  soundEffect: {fileID: 8300000, guid: e7c4e72d2ce763146b2e6266603b3abf, type: 3}
   bulletSpeed: 30
   bulletSize: 2
   piercing: 1

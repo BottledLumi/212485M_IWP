@@ -17,6 +17,7 @@ public class GameStateManager : MonoBehaviour
         else
             instance = this;
 
+        AudioController.Instance.StopSound("MainMenuBGM");
         AudioController.Instance.LoopSound("BGM");
     }
 

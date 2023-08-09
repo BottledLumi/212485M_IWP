@@ -12,9 +12,11 @@ public class AudioController : MonoBehaviour
     [SerializeField] AudioSource[] soundObjects;
 
     public Slider SoundSlider;
+    public Slider LoopSoundSlider;
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         if (Instance)
         {
             Destroy(gameObject);
@@ -38,7 +40,7 @@ public class AudioController : MonoBehaviour
 
     public void LoopSound(string soundName)
     {
-        sounds[soundName].PlayLoopingMusicManaged(sounds[soundName].volume, 0,false);
+        SoundManager.PlayLoopingMusic(sounds[soundName],sounds[soundName].volume * SoundManager.SoundVolume, 0, false);
     }
 
     public void StopSound(string soundName)
@@ -50,5 +52,10 @@ public class AudioController : MonoBehaviour
     public void SoundVolumeChanged()
     {
         SoundManager.SoundVolume = SoundSlider.value;
+    }
+
+    public void MusicVolumeChanged()
+    {
+        SoundManager.MusicVolume = LoopSoundSlider.value;
     }
 }

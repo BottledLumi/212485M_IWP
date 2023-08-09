@@ -30,4 +30,7 @@ public abstract class Weapon : Item
 
     [SerializeField] protected float knockback; 
     public float getKnockback() { return knockback; } public void addKnockback(float _knockback) { knockback += _knockback; }
+
+    [SerializeField] protected AudioClip soundEffect;
+    public AudioClip getSoundEffect() { return soundEffect; }
 }

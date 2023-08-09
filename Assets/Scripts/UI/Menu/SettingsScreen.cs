@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class SettingsScreen : MonoBehaviour
 {
-    [SerializeField] Button confirmButton;
 
     [Header("Back button properties")]
     [SerializeField] Button backButton;
