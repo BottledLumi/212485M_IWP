@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "FSM/Transition")]
-abstract public class Transition : ScriptableObject
+public class Transition : ScriptableObject
 {
     [SerializeField] BaseState trueState;
     [SerializeField] BaseState falseState;
