@@ -1734,9 +1734,7 @@ MonoBehaviour:
   initialMovementSpeed: 10
   initialMaxHealth: 100
   initialWeapon: {fileID: 11400000, guid: 6f04f2337f04ac94ea2520d315ea9d04, type: 2}
-  initialItems:
-  - {fileID: 11400000, guid: 9ea8cd3f0d9575c4bb839c95f77308f9, type: 2}
-  - {fileID: 11400000, guid: 9ea8cd3f0d9575c4bb839c95f77308f9, type: 2}
+  initialItems: []
   canTakeDamage: 1
   invincibilityTimer: 1
 --- !u!114 &720542228

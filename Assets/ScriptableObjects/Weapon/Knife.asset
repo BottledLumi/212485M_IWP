@@ -24,3 +24,4 @@ MonoBehaviour:
   magazineSize: 1
   range: 3
   knockback: 6
+  soundEffect: {fileID: 8300000, guid: 9994b08425dcb424d8708bce8896e926, type: 3}

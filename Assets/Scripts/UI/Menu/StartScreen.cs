@@ -23,6 +23,8 @@ public class StartScreen : MonoBehaviour
         startButton.onClick.AddListener(delegate { LoadScene(); });
         settingButton.onClick.AddListener(delegate { DisplayPage(settingsPage); });
         quitButton.onClick.AddListener(delegate { QuitGame(); });
+
+        AudioController.Instance.LoopSound("MainMenuBGM");
     }
 
     private void DisplayPage(GameObject page)

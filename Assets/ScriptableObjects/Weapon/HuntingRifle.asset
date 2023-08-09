@@ -16,6 +16,7 @@ MonoBehaviour:
   itemName: Hunting Rifle
   description: 
   icon: {fileID: 21300000, guid: 50366eef9849c2f49948ea2fcb33f315, type: 3}
+  itemEffect: {fileID: 0}
   rarity: 1
   weaponAttack: {fileID: 1317443994989195078, guid: 1b7a1b2426e4f65449a6a090ccd410eb, type: 3}
   attack: 1.5
@@ -23,6 +24,7 @@ MonoBehaviour:
   magazineSize: 5
   range: 20
   knockback: 6
+  soundEffect: {fileID: 8300000, guid: b3a940d6ba390024ea08b56461518cc8, type: 3}
   bulletSpeed: 80
   bulletSize: 1.5
   piercing: 2

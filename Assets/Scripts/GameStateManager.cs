@@ -16,6 +16,9 @@ public class GameStateManager : MonoBehaviour
             Destroy(gameObject);
         else
             instance = this;
+
+        AudioController.Instance.StopSound("MainMenuBGM");
+        AudioController.Instance.LoopSound("BGM");
     }
 
     [SerializeField] GameScene gameScene;

@@ -58,7 +58,7 @@ public class Cauldron : MonoBehaviour
                     {
                         foreach (Item mix2 in mixture)
                         {
-                            if (mix2.Index == (int)ITEM.CAKE)
+                            if (mix2.Index == (int)ITEM.CARROT)
                             {
                                 //item = carrot cake
                                 SpawnResult(ITEM.CARROTCAKE);

@@ -68,6 +68,8 @@ public class PlayerData : ScriptableObject
             items.Add(item, 1);
         ItemAddedEvent?.Invoke(item);
         InventoryChangedEvent?.Invoke();
+
+        AudioController.Instance.PlaySound("ItemPickUpSFX");
     }
 
     public void RemoveItem(Item item)

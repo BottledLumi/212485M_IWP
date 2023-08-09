@@ -82,6 +82,8 @@ public class PlayerWeapon : MonoBehaviour
                 totalRange = weapon.getRange();
                 totalAttackSpeed = weapon.getAttackSpeed() * playerData.AttackSpeed;
                 totalKnockback = weapon.getKnockback();
+                if (weapon.getSoundEffect())
+                    AudioController.Instance.PlaySound(weapon.getSoundEffect().name);
 
                 StartCoroutine(AttackSpeedCoroutine());
 
