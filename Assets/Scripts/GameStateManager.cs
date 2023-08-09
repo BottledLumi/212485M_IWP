@@ -48,6 +48,7 @@ public class GameStateManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        AudioController.Instance.StopSound("BGM");
         Destroy(PlayerData.Instance);
         DOTween.Clear();
 

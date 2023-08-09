@@ -27,12 +27,15 @@ public class MoveToTargetAction : FSMAction
             return;
         }
 
-        if (!aiPath.enabled && !disableRotation) // Face target
+        if (!aiPath.enabled) // Face target
         {
             Vector3 direction = bsm.enemy.target.transform.position - bsm.transform.position;
             direction.Normalize();
             bsm.transform.up = direction;
         }
+
+        if (disableRotation)
+            bsm.transform.rotation = Quaternion.identity;
 
         if (Vector3.Distance(bsm.enemy.transform.position, bsm.enemy.target.transform.position) > distance)
         {
