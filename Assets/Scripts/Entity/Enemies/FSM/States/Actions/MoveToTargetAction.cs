@@ -8,6 +8,7 @@ using DG.Tweening;
 public class MoveToTargetAction : FSMAction
 {
     [SerializeField] float distance;
+    [SerializeField] bool disableRotation;
     public override void Execute(BaseStateMachine bsm)
     {
         AIDestinationSetter destinationSetter = bsm.GetComponent<AIDestinationSetter>();
@@ -26,7 +27,7 @@ public class MoveToTargetAction : FSMAction
             return;
         }
 
-        if (!aiPath.enabled) // Face target
+        if (!aiPath.enabled && !disableRotation) // Face target
         {
             Vector3 direction = bsm.enemy.target.transform.position - bsm.transform.position;
             direction.Normalize();
