@@ -57,6 +57,7 @@ public class MashedPotatoEffect : ItemEffect
     {
         stackCount = 0;
         playerData.Attack -= totalAttackValue;
+        totalAttackValue = 0;
         itemsManager.StopCoroutine(currentCoroutine);
         currentCoroutine = itemsManager.StartCoroutine(StackCoroutine());
     }
