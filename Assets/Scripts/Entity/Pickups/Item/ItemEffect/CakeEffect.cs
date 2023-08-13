@@ -21,6 +21,11 @@ public class CakeEffect : ItemEffect
         ItemsManager.Instance.AddBuff(buff);
     }
 
+    public override void OnRemove()
+    {
+        playerWeapon.AttackEvent -= OnAttack;
+    }
+
     private float ProcChance()
     {
         return procChance;
