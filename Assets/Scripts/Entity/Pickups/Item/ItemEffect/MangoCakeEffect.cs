@@ -24,7 +24,6 @@ public class MangoCakeEffect : ItemEffect
 
     void OnEnemyHit(Enemy enemy)
     {
-        if (!enemy.gameObject.activeInHierarchy)
-            playerWeapon.GetComponent<Player>().Heal(baseHeal * Value);
+        playerWeapon.GetComponent<Player>().Heal(baseHeal * Value);
     }
 }
